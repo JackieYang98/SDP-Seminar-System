@@ -1,0 +1,88 @@
+package com.sdpseminarsystem.dao.impl;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.*;
+import java.util.*;
+
+import com.sdpseminarsystem.dao.IUserDAO;
+import com.sdpseminarsystem.login.PasswordHash;
+import com.sdpseminarsystem.vo.User;
+
+public class UserDAOImpl implements IUserDAO {
+	
+	private Connection conn;
+	private PreparedStatement stmt = null;
+	
+	public UserDAOImpl(Connection conn) {
+		this.conn = conn;
+	} 
+	
+	@Override
+	public boolean create(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+		String sql = "insert into User (UserId, UserFirstName, UserLastName, UserEmail, UserPasswordHashed, UserTypeFlag)"
+				+ " valus (?,?,?,?,?,?);";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, user.getUserId());
+		stmt.setString(2, user.getUserFirstName());
+		stmt.setString(3, user.getUserLastName());
+		stmt.setString(4, user.getUserEmail());
+		stmt.setString(5, PasswordHash.createHash(user.getUserPassword()));
+		stmt.setString(6, user.getUserTypeFlag());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public List<User> findAll() throws SQLException {
+		String sql = "select * from User;";
+		stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		User user = null;
+		List<User> list = new ArrayList<User>();
+		while(rs.next()) {
+			user = new User();
+			user.setUserId(rs.getString("UserId"));
+			user.setUserFirstName(rs.getString("UserFirstName"));
+			user.setUserLastName(rs.getString("UserLastName"));
+			user.setUserEmail(rs.getString("UserEmail"));
+			user.setUserTypeFlag(rs.getString("UserTypeFlag"));
+			list.add(user);
+		}
+		return list;
+	}
+
+	@Override
+	public User findById(String userId) throws SQLException {
+		String sql = "select * from User where UserId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, userId);
+		ResultSet rs = stmt.executeQuery();
+		User user = null;
+		if(rs.next()) {
+			user = new User();
+			user.setUserId(rs.getString("UserId"));
+			user.setUserFirstName(rs.getString("UserFirstName"));
+			user.setUserLastName(rs.getString("UserLastName"));
+			user.setUserEmail(rs.getString("UserEmail"));
+			user.setUserTypeFlag(rs.getString("UserTypeFlag"));
+		}
+		return user;
+	}
+
+	@Override
+	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+		String sql = "select UserPasswordHashed from User where UserId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, user.getUserId());
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next())
+			return PasswordHash.validatePassword(user.getUserPassword(), rs.getString("UserPasswordHashed"));
+		else
+			return false;
+	}
+
+}

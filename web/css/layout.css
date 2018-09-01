@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : jingl
 */
 
-.header{
+.logo{
     padding: 0px 0px 85px 50px;
 }
 
@@ -28,7 +28,7 @@ and open the template in the editor.
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 24px 26px;
+    padding: 20px 50px;
     text-decoration: none;
     font-size: 20px;
     
@@ -46,6 +46,7 @@ and open the template in the editor.
     color: white;
 }
 
-#login{
-    float:right
+.userfeatures{
+    float:right;
+    padding: 0px 0px;
 }

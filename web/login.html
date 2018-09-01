@@ -7,10 +7,20 @@ and open the template in the editor.
 <html>
     <head>
         <title>User Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="script.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/layout.css">
     </head>
     <body>
-        
+        <div class="header"></div>
+        <form action="index.html" method="POST">
+            Username : 
+            <input type="text" name="username" placeholder="Username" required> <br>
+            Password :
+            <input type="text" name="password" placeholder="Password" required> <br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
 </html>

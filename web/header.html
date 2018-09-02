@@ -1,16 +1,44 @@
 <body>
-         <div class="logo">
+       <div class="logo">
             <a href="https://www.uts.edu.au/">
                 <h1><img id="logo" src="image/uts_logo.png" alt="UTS Logo"></h1>
             </a>
         </div>
-        <div class="navbar">
+         <div class="navbar">
             <a id="hometab" href="index.html">Home</a>
-            <script>if (1 == 0){</script><a id="abouttab" href="about.html">About</a><script>}</script>
+            <a id="abouttab" href="about.html">About</a>
             <div class="userfeatures">
-            <a id="login" href="#adduser">Add User </a>
-            <a id="login" href="login.html" >Login</a>
+                <a id="login" href="login.html">Add User</a>
+                <a id="login" href="create-seminar.html">Create Seminar</a>
+                <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login</a>
             </div>
         </div>
+    
+    <div id="loginForm" class="modal">
+        <form class="modal-content animate" action="index.html" method="POST">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('loginForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="email" placeholder="Enter Username" name="uname" required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>  // Get the modal
+    var modal = document.getElementById('loginForm');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }</script>
 </body>
 

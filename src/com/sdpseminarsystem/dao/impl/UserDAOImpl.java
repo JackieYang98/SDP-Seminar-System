@@ -28,7 +28,7 @@ public class UserDAOImpl implements IUserDAO {
 		stmt.setString(3, user.getUserLastName());
 		stmt.setString(4, user.getUserEmail());
 		stmt.setString(5, PasswordHash.createHash(user.getUserPassword()));
-		stmt.setString(6, user.getUserTypeFlag());
+		stmt.setString(6, String.valueOf(user.getUserTypeFlag()));
 		int update = stmt.executeUpdate();
 		if(update > 0)
 			return true;
@@ -49,7 +49,7 @@ public class UserDAOImpl implements IUserDAO {
 			user.setUserFirstName(rs.getString("UserFirstName"));
 			user.setUserLastName(rs.getString("UserLastName"));
 			user.setUserEmail(rs.getString("UserEmail"));
-			user.setUserTypeFlag(rs.getString("UserTypeFlag"));
+			user.setUserTypeFlag(rs.getString("UserTypeFlag").charAt(0));
 			list.add(user);
 		}
 		return list;
@@ -68,7 +68,7 @@ public class UserDAOImpl implements IUserDAO {
 			user.setUserFirstName(rs.getString("UserFirstName"));
 			user.setUserLastName(rs.getString("UserLastName"));
 			user.setUserEmail(rs.getString("UserEmail"));
-			user.setUserTypeFlag(rs.getString("UserTypeFlag"));
+			user.setUserTypeFlag(rs.getString("UserTypeFlag").charAt(0));
 		}
 		return user;
 	}

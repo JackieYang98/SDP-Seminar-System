@@ -6,7 +6,7 @@ public class UserForm {
 	private String userFirstName;
 	private String userLastName;
 	private String userEmail;
-	private String userTypeFlag;
+	private char userTypeFlag;
 	
 	public String getUserId() {
 		return userId;
@@ -32,10 +32,10 @@ public class UserForm {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public String getUserTypeFlag() {
+	public char getUserTypeFlag() {
 		return userTypeFlag;
 	}
-	public void setUserTypeFlag(String userTypeFlag) {
+	public void setUserTypeFlag(char userTypeFlag) {
 		this.userTypeFlag = userTypeFlag;
 	}
 }

@@ -11,7 +11,7 @@ public class User implements Serializable {
 	private String userLastName;
 	private String userEmail;
 	private String userPassword;
-	private String userTypeFlag;
+	private char userTypeFlag;
 	
 	public String getUserId() {
 		return userId;
@@ -43,10 +43,10 @@ public class User implements Serializable {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public String getUserTypeFlag() {
+	public char getUserTypeFlag() {
 		return userTypeFlag;
 	}
-	public void setUserTypeFlag(String userTypeFlag) {
+	public void setUserTypeFlag(char userTypeFlag) {
 		this.userTypeFlag = userTypeFlag;
 	}
 }

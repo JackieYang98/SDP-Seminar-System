@@ -20,7 +20,7 @@ public class UserDAOImpl implements IUserDAO {
 	
 	@Override
 	public boolean create(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
-		String sql = "insert into User (UserId, UserFirstName, UserLastName, UserEmail, UserPasswordHashed, UserTypeFlag)"
+		String sql = "insert into Users (UserId, UserFirstName, UserLastName, UserEmail, UserPasswordHashed, UserTypeFlag)"
 				+ " valus (?,?,?,?,?,?);";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, user.getUserId());
@@ -38,7 +38,7 @@ public class UserDAOImpl implements IUserDAO {
 
 	@Override
 	public List<User> findAll() throws SQLException {
-		String sql = "select * from User;";
+		String sql = "select * from Users;";
 		stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		User user = null;
@@ -57,7 +57,7 @@ public class UserDAOImpl implements IUserDAO {
 
 	@Override
 	public User findById(String userId) throws SQLException {
-		String sql = "select * from User where UserId = ?;";
+		String sql = "select * from Users where UserId = ?;";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, userId);
 		ResultSet rs = stmt.executeQuery();
@@ -75,7 +75,7 @@ public class UserDAOImpl implements IUserDAO {
 
 	@Override
 	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
-		String sql = "select UserPasswordHashed from User where UserId = ?;";
+		String sql = "select UserPasswordHashed from Users where UserId = ?;";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, user.getUserId());
 		ResultSet rs = stmt.executeQuery();

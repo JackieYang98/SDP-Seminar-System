@@ -5,11 +5,8 @@
  */
 $(document).ready(function(){
   $('.header').load("header.html");
-});
-
-
-$(function () {
-    // Get the modal
+  
+   // Get the modal
     var modal = document.getElementById('loginForm');
 
     // When the user clicks anywhere outside of the modal, close it
@@ -17,5 +14,5 @@ $(function () {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }  
+    } 
 });

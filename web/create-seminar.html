@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="header"></div>
-    <h1 style="text-align: center; font-family: sans-serif">Seminar Details Form</h1>
+    <h1 style= "text-align: center; font-family: SourceSansProRegular">Create Seminar</h1>
     <div class="createSeminarBlock">
         <form action="#createaction" method="POST">
         <table>
@@ -22,38 +22,42 @@
                 <td rowspan="3"><textarea name="seminarDescription" placeholder="About the seminar..." required></textarea></td>
             </tr>
             <tr>
-                <th>Start Time</th>
-                <th>End Time</th>
-            </tr>
-            <tr>
-                <td><input type="time" name="seminarStart" required></td>
-                <td><input type="time" name="seminarEnd" required></td>
-            </tr>
-            <tr>
-                <th>Date</th>>
                 <th>Venue Name</th>
                 <th>Venue Location</th>
             </tr>
             <tr>
-                <td><input type="date" name="seminarDate"  required></td>
                 <td><input type="text" name="venueName" placeholder="Venue Name" required></td>
                 <td><input type="search" name="venueLocation" placeholder="Address..." required ></td>
             </tr>
             <tr>
-                <th>Seminar Host</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="seminarDate"  required></td>
+                <td><input type="time" name="seminarStart" required></td>
+                <td><input type="time" name="seminarEnd" required></td>
+            </tr>
+            <tr>
                 <th>Speaker Name</th>
+                <th>Seminar Host</th>
+                <th rowspan="3"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></th>
+                
+            </tr>
+            <tr>
+                <td><input type="text" name="speakerName" placeholder="Speaker Name" required></td>
+                <td><input type="text" name="seminarHost" placeholder="Host Name" required></td>
+            </tr>
+            <tr>
                 <th>Speaker Bio</th>
             </tr>
             <tr>
-                <td><input type="text" name="seminarHost" placeholder="Host Name" required></td>
-                <td><input type="text" name="speakerName" placeholder="Speaker Name" required></td>
-                <td><textarea name="speakerBio" placeholder="About the speaker..." required></textarea></td>
+                <td colspan="2"><textarea name="speakerBio" placeholder="About the speaker..." required></textarea></td>
+                <td rowspan="3"><input type="file" name="seminarImage"></td>
             </tr>
             <tr>
-                <th colspan="3"><input type="file" name="seminarImage"></th>
-            </tr>
-            <tr>
-                <th colspan="3" style="text-align: center"><input  id="submitButton"type="submit" name="seminarSubmit" value="Create Seminar"></td>
+                <th colspan="3" style="text-align: center"><input id="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></th>
             </tr>
         </table>
         

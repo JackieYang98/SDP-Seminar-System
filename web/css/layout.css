@@ -12,6 +12,10 @@ and open the template in the editor.
     src: url(../css/fonts/SourceSansPro-Regular.otf);
 }
 
+body{
+    font-family: SourceSansProRegular;
+}
+
 #logo{
     float:left;
     width: 150px;
@@ -67,10 +71,6 @@ and open the template in the editor.
     text-align: left;
     font-size: 30px;
     vertical-align: top;
-    font-family: SourceSansProRegular;
-    border: 1 solid;
-    cellpadding: 5;
-    cellspacing: 5;
 }
 
 .createSeminarBlock td{

@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>SeMan Homepage</title>
+        <title>OpenSem Homepage</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script src="script.js"></script>
@@ -17,9 +17,41 @@ and open the template in the editor.
             #hometab{
                 background-color: dodgerblue;
             }
+            td {
+                border: 1px solid black;
+                padding: 200px;
+            } 
+            table {
+                border-spacing: 20px;
+            }
         </style>
     </head>
     <body>
         <div class="header"></div>
+        <br><br>
+        <div align="center">
+            <form action="index.html">
+                Upcoming events:
+                <input type="text" name="Venue" value="Venue"/>
+                <input type="date" name="Date" value="2018-01-01"
+                       min="2018-01-01" max="2099-12-31"/> <!-- will not work on default IE because it's HTML5-->
+                <input type="submit" name="Search" value="Search"/>
+            </form>
+        </div>
+        <br>
+        <div align="center">
+            <table>
+                <tr>
+                    <td>EVENT 1</td>
+                    <td>EVENT 2</td>
+                    <td>EVENT 3</td>
+                </tr>
+                <tr>
+                    <td>EVENT 4</td>
+                    <td>EVENT 5</td>
+                    <td>EVENT 6</td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>

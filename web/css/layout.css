@@ -12,10 +12,6 @@ and open the template in the editor.
     src: url(../css/fonts/SourceSansPro-Regular.otf);
 }
 
-.logo{
-    padding: 0px 0px 85px 50px;
-}
-
 #logo{
     float:left;
     width: 150px;
@@ -23,6 +19,7 @@ and open the template in the editor.
 }
 
 .navbar{
+    padding: 0px 0px 30px 50px;
     overflow: hidden;
     background-color: black;
 }
@@ -31,7 +28,7 @@ and open the template in the editor.
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 20px 50px;
+    padding: 3px 60px;
     text-decoration: none;
     font-size: 20px;
     
@@ -55,8 +52,10 @@ and open the template in the editor.
     margin-right: auto;
     width:100%;
 }
+
 .userfeatures{
-    float:right;
+    margin-top: 50px;
+    float: right;
     padding: 0px 0px;
 }
 
@@ -95,7 +94,7 @@ and open the template in the editor.
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 30px 0;
+    margin: 30px 0px;
     border: none;
     cursor: pointer;
 }

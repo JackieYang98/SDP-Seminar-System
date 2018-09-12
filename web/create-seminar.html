@@ -14,59 +14,35 @@
 </head>
 <body>
     <div class="header"></div>
-    <h1 style= "text-align: center; font-family: SourceSansProRegular">Create Seminar</h1>
-    <div class="createSeminarBlock">
-        <form action="#createaction" method="POST">
-        <table>
-            <tr>
-                <th colspan="2">Seminar Name</th>
-                <th>Seminar Description</th>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" name="seminarName" placeholder="Name" required></td>
-                <td rowspan="3"><textarea name="seminarDescription" placeholder="About the seminar..." required></textarea></td>
-            </tr>
-            <tr>
-                <th>Venue Name</th>
-                <th>Venue Location</th>
-            </tr>
-            <tr>
-                <td><input type="text" name="venueName" placeholder="Venue Name" required></td>
-                <td><input type="search" name="venueLocation" placeholder="Address..." required ></td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-            </tr>
-            <tr>
-                <td><input type="date" name="seminarDate"  required></td>
-                <td><input type="time" name="seminarStart" required></td>
-                <td><input type="time" name="seminarEnd" required></td>
-            </tr>
-            <tr>
-                <th>Speaker Name</th>
-                <th>Seminar Host</th>
-                <th rowspan="3"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></th>
-                
-            </tr>
-            <tr>
-                <td><input type="text" name="speakerName" placeholder="Speaker Name" required></td>
-                <td><input type="text" name="seminarHost" placeholder="Host Name" required></td>
-            </tr>
-            <tr>
-                <th>Speaker Bio</th>
-            </tr>
-            <tr>
-                <td colspan="2"><textarea name="speakerBio" placeholder="About the speaker..." required></textarea></td>
-                <td rowspan="3"><input type="file" name="seminarImage"></td>
-            </tr>
-            <tr>
-                <th colspan="3" style="text-align: center"><input id="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></th>
-            </tr>
-        </table>
-        
+    <h1 style="padding-left:20px;">Create Seminar</h1>
+    <form action="#createaction" method="POST">
+       
+        <div class="grid-container">
+            <div class="grid-sem-name">Seminar Name</div>
+            <div class="grid-sem-desc">Seminar Description</div>
+            <div class="grid-sem-name-input"><input type="text" name="seminarName" placeholder="Name" required style="width:530px; height:40px;"></div>  
+            <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>
+            <div class="grid-ven-name">Venue Name</div>
+            <div class="grid-ven-loc">Venue Location</div>
+            <div class="grid-ven-name-input"><input type="text" name="venueName" placeholder="Venue Name" required></div>
+            <div class="grid-ven-loc-input"><input type="search" name="venueLocation" placeholder="Venue Address..." required ></div>
+            <div class="grid-sem-date">Seminar Date</div>
+            <div class="grid-start">Start Time</div>
+            <div class="grid-end">End Time</div>
+            <div class="grid-sem-date-input"><input type="date" name="seminarDate"  required style="width: 150px; height:40px;"></div>
+            <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
+            <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
+            <div class="grid-speaker">Speaker</div>
+            <div class="grid-host">Host</div>
+            <div class="grid-cover-photo">Cover Photo</div>
+            <div class="grid-speaker-input"><input type="text" name="speakerName" placeholder="Speaker Name" required></div>
+            <div class="grid-host-input"><input type="text" name="seminarHost" placeholder="Host Name" required></div>
+            <div class="grid-image"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
+            <div class="grid-image-input"><input type="file" name="seminarImage"></div>
+            <div class="grid-bio">Speaker Biography</div>
+            <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
+            <div class="grid-submit"><input id="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
+        </div>
     </form>
-    </div>
 </body>
 </html>

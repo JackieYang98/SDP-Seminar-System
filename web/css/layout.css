@@ -8,16 +8,21 @@ and open the template in the editor.
     Author     : jingl
 */
 @font-face{
-    font-family: SourceSansProRegular;
-    src: url(../css/fonts/SourceSansPro-Regular.otf);
+    font-family: openSansRegular;
+    src: url(../css/fonts/OpenSans-Regular.ttf);
+}
+
+@font-face{
+    font-family: bold;
+    src: url(../css/fonts/OpenSans-Bold.ttf);
 }
 
 body{
-    font-family: SourceSansProRegular;
+    font-family: openSansRegular;
 }
 
 #logo{
-    float:left;
+    float: left;
     width: 150px;
     height: 65px;
 }
@@ -62,47 +67,6 @@ body{
     float: right;
     padding: 0px 0px;
 }
-
-.createSeminarBlock table{
-    position: relative;
-    width:60%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    font-size: 30px;
-    vertical-align: top;
-}
-
-.createSeminarBlock td{
-    padding: 20px 0px 20px 0px;
-    vertical-align: top;
-}
-
-.createSeminarBlock input{
-    font-size: 15pt;
-}
-
-.createSeminarBlock textarea{
-    font-size:20pt;
-    height:150px;
-    width:300px;
-    text-align: left;
-    vertical-align: auto;
-}
-
-#submitButton{
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 30px 0px;
-    border: none;
-    cursor: pointer;
-}
-
-#submitButton:hover{
-    opacity:0.8;
-}
-
 
 /* Full-width input fields */
 .modal input[type=text], input[type=password] {
@@ -219,4 +183,96 @@ span.psw {
 @keyframes animatezoom {
     from {transform: scale(0)} 
     to {transform: scale(1)}
+}
+
+.grid-sem-name { grid-area: a;}
+.grid-sem-desc{ grid-area: b;}
+.grid-sem-name-input{ grid-area: c;}
+.grid-sem-desc-input{grid-area: d;}
+.grid-ven-name{grid-area: e;}
+.grid-ven-loc{grid-area: f;}
+.grid-ven-name-input{grid-area: g;}
+.grid-ven-loc-input{grid-area: h;}
+.grid-sem-date{grid-area: i;}
+.grid-start{grid-area: j;}
+.grid-end{grid-area: k;}
+.grid-sem-date-input{grid-area: l;}
+.grid-start-input{grid-area: m;}
+.grid-end-input{grid-area: n;}
+.grid-speaker{grid-area: o;}
+.grid-host{grid-area: p;}
+.grid-cover-photo{grid-area: q;}
+.grid-speaker-input{grid-area: r;}
+.grid-host-input{grid-area: s;}
+.grid-image{grid-area: t;}
+.grid-bio{grid-area: u;}
+.grid-image-input{grid-area: v;}
+.grid-bio-input{grid-area: w;}
+.grid-submit{grid-area: x;}
+
+.grid-container {
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+    'a a a a b'
+    'c c c c d'
+    'e e f f d'
+    'g g h h d'
+    'i j j k d'
+    'l m m n d'
+    'o o p p q'
+    'r r s s t'
+    'u u u u t'
+    'w w w w t'
+    'w w w w v'
+    'x x x x x';
+   
+}
+
+.grid-container > div {
+    text-align: left;
+    font-size: 25px;
+    font-family: bold;
+}
+
+.grid-container .grid-submit{
+    text-align: center;
+}
+
+.grid-container .biotext{
+    width:515px;
+    height:165px;
+}
+
+.grid-container .desctext{
+    width:330px;
+    height:298px;
+}
+
+.grid-container textarea{
+    border-radius: 5px;
+    padding: 10px 10px;
+    resize: none;
+}
+
+.grid-container input{
+    height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#submitButton{
+    height:50px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 30px 0px;
+    border: none;
+    cursor: pointer;
+}
+
+#submitButton:hover{
+    opacity:0.8;
 }

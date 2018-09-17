@@ -52,7 +52,7 @@ body{
 /* Add a color to the active/current link */
 .navbar a.active {
     background-color: deepskyblue;
-    color: white;
+    color: black;
 }
 
 .loginForm{
@@ -185,6 +185,34 @@ span.psw {
     to {transform: scale(1)}
 }
 
+.grid-container > div {
+    text-align: left;
+    font-size: 25px;
+    font-family: bold;
+}
+
+.grid-container input{
+    height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-family: openSansRegular;
+}
+
+#submitButton{
+    height:50px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 30px 0px;
+    border: none;
+    cursor: pointer;
+}
+
+#submitButton:hover{
+    opacity:0.8;
+}
+
 .grid-sem-name { grid-area: a;}
 .grid-sem-desc{ grid-area: b;}
 .grid-sem-name-input{ grid-area: c;}
@@ -226,14 +254,7 @@ span.psw {
     'u u u u t'
     'w w w w t'
     'w w w w v'
-    'x x x x x';
-   
-}
-
-.grid-container > div {
-    text-align: left;
-    font-size: 25px;
-    font-family: bold;
+    'x x x x x'; 
 }
 
 .grid-container .grid-submit{
@@ -254,25 +275,96 @@ span.psw {
     border-radius: 5px;
     padding: 10px 10px;
     resize: none;
+    font-family: openSansRegular;
 }
 
-.grid-container input{
+.add-fname{ grid-area: a;}
+.add-lname{ grid-area: b;}
+.add-fname-input{ grid-area: c;}
+.add-lname-input{ grid-area: d;}
+.add-email{ grid-area:e;}
+.add-email-input {grid-area:f;}
+.add-faculty{grid-area:g;}
+.add-faculty-input {grid-area:h;}
+.add-role{grid-area:i;}
+.add-role-input{grid-area:j;}
+.add-submit{grid-area:k;}
+
+#add-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a b'
+        'c d'
+        'e .'
+        'f f'
+        'g .'
+        'h h'
+        'i .'
+        'j j'
+        'k k';
+}
+
+.grid-container select{
     height: 40px;
-    width: 250px;
+    width: 530px;
     border-radius: 5px;
     padding-left: 5px;
+    font-family: openSansRegular;
 }
 
-#submitButton{
-    height:50px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 30px 0px;
-    border: none;
-    cursor: pointer;
+.grid-container .role-select{
+    height: 40px;
+    width: 250px;
 }
 
-#submitButton:hover{
-    opacity:0.8;
+.grid-container .add-submit{
+    text-align: center;
+}
+
+.manage-browse{ grid-area: z;}
+.manage-fname{ grid-area: a;}
+.manage-lname{ grid-area: b;}
+.manage-fname-input{ grid-area: c;}
+.manage-lname-input{ grid-area: d;}
+.manage-email{ grid-area:e;}
+.manage-email-input {grid-area:f;}
+.manage-faculty{grid-area:g;}
+.manage-faculty-input {grid-area:h;}
+.manage-role{grid-area:i;}
+.manage-role-input{grid-area:j;}
+.manage-submit{grid-area:k;}
+.manage-delete{grid-area:l;}
+
+#manage-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:
+        'z z'
+        'a b'
+        'c d'
+        'e .'
+        'f f'
+        'g .'
+        'h h'
+        'i .'
+        'j .'
+        'k l';
+}
+
+.user-list{
+    width: 100%;
+    border_bottom: solid 1px #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+.user-list th{
+    height: 50px;
+}
+
+.user-list tr:hover{
+    background-color: #f5f5f5;
 }

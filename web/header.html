@@ -6,6 +6,7 @@
             <div class="userfeatures">
                 <a id="browse" href="index.html">Browse</a>
                 <a id="adduser" href="add_user.html">Add User</a>
+                <a id="manageuser" href="manage_user.html">Manage User</a>
                 <a id="createseminar" href="create-seminar.html">Create Seminar</a>
                 <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login</a>
             </div>
@@ -22,18 +23,29 @@
                 <label for="username"><b>Username</b></label>
                 <input type="text" placeholder="Staff or student number" name="username" required
                        oninvalid="this.setCustomValidity('NOMBREEE!')"  
-                       oninput="setCustomValidity('')"
+                       oninput="setCustomValidity('Please enter only digits')"
                        pattern="^[0-9]{0,8}$" autofocus>
 
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="UTS Password" name="password" required
                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
-
+                 
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>
                 <button type="submit">Login</button>
             </div>
         </form>
     </div>
 
+    <script>
+    // Get the modal
+    var modal = document.getElementById('loginForm');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }; 
+        </script>
 </body>
 

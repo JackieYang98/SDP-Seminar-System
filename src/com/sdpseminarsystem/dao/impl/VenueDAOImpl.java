@@ -6,13 +6,10 @@ import java.util.*;
 import com.sdpseminarsystem.dao.IVenueDAO;
 import com.sdpseminarsystem.vo.Venue;
 
-public class VenueDAOImpl implements IVenueDAO {
-	
-	private Connection conn;
-	private PreparedStatement stmt = null;
+public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
 	
 	public VenueDAOImpl(Connection conn) {
-		this.conn = conn;
+		super(conn);
 	}
 	
 	@Override

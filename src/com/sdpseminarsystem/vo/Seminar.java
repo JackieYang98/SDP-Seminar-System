@@ -1,7 +1,7 @@
 package com.sdpseminarsystem.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Seminar implements Serializable {
 	

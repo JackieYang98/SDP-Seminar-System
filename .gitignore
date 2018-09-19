@@ -1,1 +1,10 @@
 /build/
+
+# eclipse setting dictionary
+.settings/
+
+# netbean setting dictionary
+.idea/
+
+# vscode setting dictionary
+.vscode/

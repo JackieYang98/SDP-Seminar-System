@@ -9,13 +9,10 @@ import com.sdpseminarsystem.dao.IUserDAO;
 import com.sdpseminarsystem.login.PasswordHash;
 import com.sdpseminarsystem.vo.User;
 
-public class UserDAOImpl implements IUserDAO {
-	
-	private Connection conn;
-	private PreparedStatement stmt = null;
+public class UserDAOImpl extends DAOImpl implements IUserDAO {
 	
 	public UserDAOImpl(Connection conn) {
-		this.conn = conn;
+		super(conn);
 	} 
 	
 	@Override
@@ -84,5 +81,4 @@ public class UserDAOImpl implements IUserDAO {
 		else
 			return false;
 	}
-
 }

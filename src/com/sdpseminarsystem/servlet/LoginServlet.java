@@ -35,8 +35,9 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		User user = (User) request.getAttribute("User");
+		User user = new User();
+		user.setUserId((String) request.getAttribute("username"));
+		user.setUserPassword((String) request.getAttribute("password"));
 		try {
 			if(UserDAOFactory.getInstance().verify(user))
 			{
@@ -49,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			// TODO 自动生成的 catch 块
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();

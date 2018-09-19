@@ -1,16 +1,18 @@
+<%-- 
+    Document   : index
+    Created on : 19/09/2018, 4:05:49 PM
+    Author     : jingl
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>OpenSem Homepage</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script src="script.js"></script>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <style>
@@ -27,11 +29,11 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <div class="header"></div>
+        <%@include file="WEB-INF/header.jsp" %>
         <br><br>
         <div align="center">
-            <form action="index.html">
-                Upcoming events:
+            <form action="index.jsp">
+                Upcoming events: 
                 <input type="text" name="Venue" value="Venue"/>
                 <input type="date" name="Date" /> <!-- will not work on default IE because it's HTML5-->
                 <input type="submit" name="Search" value="Search"/>

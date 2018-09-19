@@ -1,13 +1,15 @@
+<%-- 
+    Document   : manage_user
+    Created on : 19/09/2018, 5:15:19 PM
+    Author     : jingl
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manage User</title>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="script.js"></script>
@@ -19,9 +21,9 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <div class="header"></div>
+        <%@include file="WEB-INF/header.jsp" %>
+        <div class="center">
         <h1 style="padding-left:20px;">Manage User</h1>
-        
         <form action="#createaction" method="POST">
             <div id="manage-grid" class="grid-container">
                 <div class="manage-browse"><button type="button" onclick="document.getElementById('userList').style.display='block';return false;" style="width:auto">BROWSE</button></div>
@@ -57,7 +59,7 @@ and open the template in the editor.
                 <div class="manage-delete"><input id="submitButton" type="submit" name="userDelete" value="Delete"></div>
             </div>
         </form>
-        
+        </div>
         
         <div id="userList" class="modal">
             <form class="modal-content animate" action="manage_user.html" method="POST">

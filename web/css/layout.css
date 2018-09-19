@@ -37,7 +37,7 @@ body{
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 3px 60px;
+    padding: 3px 20px;
     text-decoration: none;
     font-size: 20px;
     
@@ -45,8 +45,8 @@ body{
 
 /* Change the color of links on hover */
 .navbar a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: none;
+    color: skyblue;
 }
 
 /* Add a color to the active/current link */
@@ -183,6 +183,10 @@ span.psw {
 @keyframes animatezoom {
     from {transform: scale(0)} 
     to {transform: scale(1)}
+}
+
+.center{
+    text-align: center;
 }
 
 .grid-container > div {

@@ -1,26 +1,30 @@
+<%-- 
+    Document   : add_user
+    Created on : 19/09/2018, 5:11:46 PM
+    Author     : jingl
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add User</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="script.js"></script>
-        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
+         <style>
             #adduser{
                 text-decoration: underline;
             }
         </style>
     </head>
     <body>
-        <div class="header"></div>
+        <%@include file="WEB-INF/header.jsp" %>
+        <div class="center">
         <h1 style="padding-left:20px;">Add User</h1>
+        
         <form action="#createaction" method="POST">
 
             <div id="add-grid" class="grid-container">
@@ -55,5 +59,6 @@ and open the template in the editor.
                 <div class="add-submit"><input id="submitButton" type="submit" name="addUser" value="Register"></div>
             </div>
         </form>
+        </div>
     </body>
 </html>

@@ -1,4 +1,4 @@
-package com.sdpseminarsystem.dao.impl;
+  package com.sdpseminarsystem.dao.impl;
 
 import java.sql.SQLException;
 import java.util.List;

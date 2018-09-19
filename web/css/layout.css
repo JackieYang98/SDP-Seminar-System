@@ -212,7 +212,19 @@ span.psw {
 #submitButton:hover{
     opacity:0.8;
 }
+#deleteButton{
+    height:50px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 30px 0px;
+    border: none;
+    cursor: pointer;
+}
 
+#deleteButton:hover{
+    opacity:0.8;
+}
 .grid-sem-name { grid-area: a;}
 .grid-sem-desc{ grid-area: b;}
 .grid-sem-name-input{ grid-area: c;}
@@ -237,6 +249,7 @@ span.psw {
 .grid-image-input{grid-area: v;}
 .grid-bio-input{grid-area: w;}
 .grid-submit{grid-area: x;}
+.grid-delete{grid-area: y;}
 
 .grid-container {
     display: inline-grid;
@@ -254,10 +267,14 @@ span.psw {
     'u u u u t'
     'w w w w t'
     'w w w w v'
-    'x x x x x'; 
+    'z z x x y'; 
 }
 
 .grid-container .grid-submit{
+    text-align: center;
+}
+
+grid-container .grid-delete{
     text-align: center;
 }
 

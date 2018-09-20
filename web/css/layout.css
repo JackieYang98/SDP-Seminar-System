@@ -217,19 +217,18 @@ span.psw {
     opacity:0.8;
 }
 #deleteButton{
-    height:50px;
-    background-color: #4CAF50;
+    background-color: #114BE9;
     color: white;
     padding: 14px 20px;
-    margin: 30px 0px;
+    margin: 8px 0;
     border: none;
     cursor: pointer;
+    width: 50%;
 }
 
 #deleteButton:hover{
     opacity:0.8;
 }
-
 .grid-sem-name { grid-area: a;}
 .grid-sem-desc{ grid-area: b;}
 .grid-sem-name-input{ grid-area: c;}
@@ -304,7 +303,57 @@ span.psw {
     margin: auto auto;
     width: 800px;
 }
+.register-Fname{ grid-area: a;}
+.register-Lname{ grid-area: b;}
+.register-Fname-input{ grid-area: c;}
+.register-Lname-input{ grid-area: d;}
+.register-email{grid-area:e;}
+.register-email-input{grid-area:f;}
+.register-status{ grid-area:g;}
+.register-status-input{ grid-area:h;}
+.register-submit{grid-area:i;}
+.register-cancel{grid-area:j}
 
+.register-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a a b b'
+        'c c d d'
+        'e . . .'
+        'f f f f'
+        'g . . .'
+        'h . . .'
+        'i . j .';
+}
+#cancelButton{
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200%;
+}
+#registerButton{
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200%;
+}
+.register-cancel button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200%;
+}
 .add-id{ grid-area: a;}
 .add-id-input{ grid-area: b;}
 .add-role{grid-area:c;}
@@ -337,12 +386,13 @@ span.psw {
     width:100%;
     border: solid 1px #ddd;
     text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 30px;
 }
 .user-list td{
     text-align: left;
     padding: 15px; 
-    border-top: solid 1px black;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px #ddd;
 }
 
 .user-list th{

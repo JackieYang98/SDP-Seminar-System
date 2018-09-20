@@ -24,7 +24,7 @@
     <body>
         <%@include file="WEB-INF/header.jsp" %>
         <div class="center">
-            <table>
+            <table align="center">
                 <tr>
                     <td> <h1 style="padding-left:20px;">Manage Seminar</h1></td>
                     <td><sub>View attendee list</sub></td>
@@ -55,9 +55,19 @@
                         <div class="grid-image-input"><input type="file" name="seminarImage"></div>
                         <div class="grid-bio">Speaker Biography</div>
                         <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
+                         <div class="grid-delete"><input id="deleteButton" type="button" name="seminarDelete" value="Delete Seminar" onclick="document.getElementById('deleteConfirm').style.display='block';return false;"></div>
                         <div class="grid-submit"><input id="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>
                     </div>
                 </form>
         </div>
+            <div id="deleteConfirm" class="modal">
+            <form class="modal-content animate" method="POST">
+            <div class="container">
+                <h1>Seminar Deleted</h1>
+                <p> <b>Seminar Name:</b> Some name here </p>
+                <button type="button" onclick="document.getElementById('deleteConfirm').style.display='none'" title="Close Modal">Return</button>
+            </div>
+        </form>
+    </div>
     </body>
 </html>

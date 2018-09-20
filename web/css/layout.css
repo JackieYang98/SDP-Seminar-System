@@ -334,15 +334,16 @@ span.psw {
 }
 
 .user-list{
-    width:100%;
+    width: 100%;
     border: solid 1px #ddd;
     text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 30px;
 }
 .user-list td{
     text-align: left;
     padding: 15px; 
-    border-top: solid 1px black;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px #ddd;
 }
 
 .user-list th{

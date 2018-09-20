@@ -95,7 +95,7 @@ body{
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
+    background-color: #114BE9;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -204,13 +204,13 @@ span.psw {
 }
 
 #submitButton{
-    height:50px;
-    background-color: #4CAF50;
+    background-color: #114BE9;
     color: white;
     padding: 14px 20px;
-    margin: 30px 0px;
+    margin: 8px 0;
     border: none;
     cursor: pointer;
+    width: 100%;
 }
 
 #submitButton:hover{
@@ -229,6 +229,7 @@ span.psw {
 #deleteButton:hover{
     opacity:0.8;
 }
+
 .grid-sem-name { grid-area: a;}
 .grid-sem-desc{ grid-area: b;}
 .grid-sem-name-input{ grid-area: c;}
@@ -278,7 +279,7 @@ span.psw {
     text-align: center;
 }
 
-grid-container .grid-delete{
+.grid-container .grid-delete{
     text-align: center;
 }
 
@@ -299,49 +300,58 @@ grid-container .grid-delete{
     font-family: openSansRegular;
 }
 
-.add-fname{ grid-area: a;}
-.add-lname{ grid-area: b;}
-.add-fname-input{ grid-area: c;}
-.add-lname-input{ grid-area: d;}
-.add-email{ grid-area:e;}
-.add-email-input {grid-area:f;}
-.add-faculty{grid-area:g;}
-.add-faculty-input {grid-area:h;}
-.add-role{grid-area:i;}
-.add-role-input{grid-area:j;}
-.add-submit{grid-area:k;}
+.manage-page{
+    margin: auto auto;
+    width: 800px;
+}
+
+.add-id{ grid-area: a;}
+.add-id-input{ grid-area: b;}
+.add-role{grid-area:c;}
+.add-role-input{ grid-area:d;}
+.add-submit{grid-area:e;}
+.add-cancel{grid-area:f}
 
 #add-grid{
     display: inline-grid;
     grid-gap: 15px;
     padding-left: 30px;
     grid-template-areas:   
-        'a b'
-        'c d'
-        'e .'
-        'f f'
-        'g .'
-        'h h'
-        'i .'
-        'j j'
-        'k k';
+        '. a a .'
+        '. b b .'
+        '. c c .'
+        '. d d .'
+        'e e f f';
 }
 
-.grid-container select{
+.add-role-input select{
     height: 40px;
-    width: 530px;
+    width: 330px;
     border-radius: 5px;
     padding-left: 5px;
+    margin-bottom: 20px;
     font-family: openSansRegular;
 }
 
-.grid-container .role-select{
-    height: 40px;
-    width: 250px;
+.user-list{
+    width:100%;
+    border: solid 1px #ddd;
+    text-align: left;
+}
+.user-list td{
+    text-align: left;
+    padding: 15px; 
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
 }
 
-.grid-container .add-submit{
-    text-align: center;
+.user-list th{
+    padding: 15px;  
+    height: 50px;
+}
+
+.user-list tr:hover{
+    background-color: #f5f5f5;
 }
 
 .manage-browse{ grid-area: z;}
@@ -373,19 +383,4 @@ grid-container .grid-delete{
         'i .'
         'j .'
         'k l';
-}
-
-.user-list{
-    width: 100%;
-    border_bottom: solid 1px #ddd;
-    padding: 15px;
-    text-align: left;
-}
-
-.user-list th{
-    height: 50px;
-}
-
-.user-list tr:hover{
-    background-color: #f5f5f5;
 }

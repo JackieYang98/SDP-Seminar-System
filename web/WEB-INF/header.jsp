@@ -26,7 +26,6 @@
             </a>
             <div class="userfeatures">
                 <a id="browse" href="index.jsp">Browse</a>
-                <a id="adduser" href="add_user.jsp">Add User</a>
                 <a id="manageuser" href="manage_user.jsp">Manage User</a>
                 <a id="createseminar" href="create_seminar.jsp">Create Seminar</a>
                
@@ -45,11 +44,9 @@
                 <label for="username"><b>Username</b></label>
                 <input type="text" placeholder="Staff or student number" name="username" required                 
                        pattern="^[0-9]{0,8}$" autofocus>
-<!--oninvalid="this.setCustomValidity('Please enter your ID')"--> 
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="UTS Password" name="password" required>
-                       <!--pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">-->
-                 
+              
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>
                 <button type="submit">Login</button>
             </div>
@@ -69,5 +66,8 @@
     }; 
     </script>
 
+    
+    <!--oninvalid="this.setCustomValidity('Please enter your ID')"--> 
 
+<!--pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">-->
 

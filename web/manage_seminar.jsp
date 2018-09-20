@@ -10,26 +10,40 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
         <script src="script.js"></script>
         <title>Manage Seminar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <style>
-            table {
-                border-spacing: 20px;
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
             }
+            li{
+                display: inline;
+                border: solid;
+                border-width: 1px 1px 0 1px;
+                margin: 0 5px 0 0; 
+                font-size: 40px
+                    
+            }
+            li a {
+                padding: 0 10px;
+            }
+
         </style>
     </head>
     <body>
         <%@include file="WEB-INF/header.jsp" %>
-        <div class="center">
-            <table align="center">
-                <tr>
-                    <td> <h1 style="padding-left:20px;">Manage Seminar</h1></td>
-                    <td><sub>View attendee list</sub></td>
-                </tr>
-            </table>
+      <div id="tabs" class="center">
+            <ul>
+               <li> <a href="#edit"> Edit Seminar </a> </li>
+               <li> <a href="#attendee"> View attendees list </a> </li>
+            </ul>
+            <div id="edit">
                 <form action="#createaction" method="POST">  
                     <div class="grid-container">
                         <div class="grid-sem-name">Seminar Name</div>
@@ -60,14 +74,21 @@
                     </div>
                 </form>
         </div>
-            <div id="deleteConfirm" class="modal">
-            <form class="modal-content animate" method="POST">
-            <div class="container">
-                <h1>Seminar Deleted</h1>
-                <p> <b>Seminar Name:</b> Some name here </p>
-                <button type="button" onclick="document.getElementById('deleteConfirm').style.display='none'" title="Close Modal">Return</button>
-            </div>
-        </form>
+        <div id="deleteConfirm" class="modal">
+                <form class="modal-content animate" method="POST">
+                    <div class="container">
+                        <h1>Seminar Deleted</h1>
+                        <p> <b>Seminar Name:</b> Some name here </p>
+                        <button type="button" onclick="document.getElementById('deleteConfirm').style.display='none'" title="Close Modal">Return</button>
+                    </div>
+                </form>
+        </div>
+        <div id="attendee">
+            <p> something attendees </p>
+        </div>
     </div>
+           <script>
+        $("#tabs").tabs();
+    </script>
     </body>
 </html>

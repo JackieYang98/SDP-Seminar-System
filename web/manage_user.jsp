@@ -52,11 +52,34 @@
                                 <td>FEIT</td>
                                 <td>Admin</td>
                             </tr>
+                            <tr>
+                                <td>PeterParker@oscorp.com</td>
+                                <td>Peter</td>
+                                <td>Parker</td>
+                                <td>FEIT</td>
+                                <td>Admin</td>
+                            </tr>
+                            <tr>
+                                <td>PeterParker@oscorp.com</td>
+                                <td>Peter</td>
+                                <td>Parker</td>
+                                <td>FEIT</td>
+                                <td>Admin</td>
+                            </tr>
+                            <tr>
+                                <td>PeterParker@oscorp.com</td>
+                                <td>Peter</td>
+                                <td>Parker</td>
+                                <td>FEIT</td>
+                                <td>Admin</td>
+                            </tr>
                             
                         </tbody>
                     </table>
+                    <div class="center">
                     <button type="button" onclick="document.getElementById('addUser').style.display='block'; 
-                        return false;" style="text-align: center;">Add</button>
+                        return false;">Add</button>
+                    </div>
 
                     <h1>User Role</h1>
                     <div class="add-role-input">
@@ -66,8 +89,10 @@
                             <option value="rhost">Host</option>
                         </select>
                     </div>
+                    <div class="center">
                     <button type="submit">Confirm</button>
                     <button type="submit">Delete</button>
+                    </div>
                 </div>           
             </form>
             <div class="center">

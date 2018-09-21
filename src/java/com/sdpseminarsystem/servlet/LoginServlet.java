@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sdpseminarsystem.dao.factory.UserDAOFactory;
 import com.sdpseminarsystem.vo.User;
@@ -33,19 +34,26 @@ public class LoginServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+ 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                if(password.equals("sss")){
-                    request.setAttribute("user", password);
+            User user = new User("12491508", "Villiam", "VonDoom", "jinglongh@yahoo.com", "sss", 'h');	
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+                if(password.equals(user.getUserPassword())){
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("currentSessionUser", user);
+                    request.setAttribute("user", user);
+                    response.getWriter().print(username);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
-		
-		}
+                    
+		}else{   
+                    request.setAttribute("message", "Invalid");
+                    response.sendRedirect("index.jsp");
+                }
+        // TODO Auto-generated method stub
 //		User user = (User) request.getAttribute("User");
 //		try {
 //			if(UserDAOFactory.getInstance().verify(user))

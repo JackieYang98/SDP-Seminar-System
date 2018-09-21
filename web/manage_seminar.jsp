@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-        <script src="script.js"></script>
+        <script src="scripts/script.js"></script>
         <title>Manage Seminar</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,8 +69,8 @@
                         <div class="grid-image-input"><input type="file" name="seminarImage"></div>
                         <div class="grid-bio">Speaker Biography</div>
                         <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
-                         <div class="grid-delete"><input id="deleteButton" type="button" name="seminarDelete" value="Delete Seminar" onclick="document.getElementById('deleteConfirm').style.display='block';return false;"></div>
-                        <div class="grid-submit"><input id="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>
+                         <div class="grid-delete"><input class="deleteButton" type="button" name="seminarDelete" value="Delete Seminar" onclick="document.getElementById('deleteConfirm').style.display='block';return false;"></div>
+                        <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>
                     </div>
                 </form>
         </div>

@@ -116,12 +116,12 @@ button:hover {
 }
 
 img.avatar {
-    width: 40%;
-    border-radius: 50%;
+    width: 40%;  
 }
 
 .container {
     padding: 16px;
+    text-align: left;
 }
 
 span.psw {
@@ -203,7 +203,7 @@ span.psw {
     font-family: openSansRegular;
 }
 
-#submitButton{
+.submitButton{
     background-color: #114BE9;
     color: white;
     padding: 14px 20px;
@@ -213,10 +213,10 @@ span.psw {
     width: 100%;
 }
 
-#submitButton:hover{
+.submitButton:hover{
     opacity:0.8;
 }
-#deleteButton{
+.deleteButton{
     height:50px;
     background-color: #4CAF50;
     color: white;
@@ -338,17 +338,37 @@ span.psw {
     border: solid 1px #ddd;
     text-align: left;
     border-collapse: collapse;
-    margin-bottom: 30px;
+ 
 }
-.user-list td{
-    text-align: left;
-    padding: 15px; 
-    border-bottom: solid 1px #ddd;
+
+.user-list thead, tbody{
+    display:block;
+}
+
+.user-list tbody{
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 3px solid black;
+}
+
+.user-list tbody td, thead th {
+    width: 20%; 
+    border-right: 1px solid black;
+}
+
+.user-list tbody td:last-child, thead th:last-child {
+    border-right: none;
 }
 
 .user-list th{
     padding: 15px;  
-    height: 50px;
+    height: 30px;
+}
+
+.user-list td{
+    padding: 15px; 
+    border-bottom: solid 1px #ddd;
 }
 
 .user-list tr:hover{

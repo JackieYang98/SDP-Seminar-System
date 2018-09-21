@@ -10,7 +10,7 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <title>Create seminar</title>
     <style>
@@ -49,7 +49,7 @@
                     <div class="grid-image-input"><input type="file" name="seminarImage"></div>
                     <div class="grid-bio">Speaker Biography</div>
                     <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
-                    <div class="grid-submit"><input id="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
+                    <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
                 </div>
             </form>
         </div>

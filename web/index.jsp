@@ -12,7 +12,7 @@
         <title>OpenSem Homepage</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <script src="script.js"></script>
+        <script src="scripts/script.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <style>
@@ -41,6 +41,7 @@
         </div>
         <br>
         <div align="center">
+            
             <table>
                 <tr>
                     <td>EVENT 1</td>

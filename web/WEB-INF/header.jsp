@@ -4,21 +4,30 @@
     Author     : jingl
 --%>
 
+<%@page import="com.sdpseminarsystem.vo.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <% 
-    if(request.getParameter("username")== null){ %>
+    if(request.getParameter("username") == null || session.getAttribute("user") != null){ %>
         <div class="navbar">
             <a href="https://www.uts.edu.au/">
                 <h1><img id="logo" src="image/uts.png" alt="UTS Logo"></h1>
             </a>
             <div class="userfeatures">
                 <a id="browse" href="index.jsp">Browse</a>
-                <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login</a>            
+                <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login ${message}</a>            
             </div>
     </div>      
     <%}else{
-        String n = request.getParameter("username");
-//        session.setAttribute("user", user);   
+        User user = (User) request.getAttribute("user");
+        String type;
+        if(user.getUserTypeFlag() == 'a'){
+            type = "Admin";
+        } else if (user.getUserTypeFlag() == 'h'){
+                    type = "Host";
+        } else{
+                    type = "Organiser";
+        }
+        session.setAttribute("user", user);
     %>
     <div class="navbar">
             <a href="https://www.uts.edu.au/">
@@ -26,10 +35,10 @@
             </a>
             <div class="userfeatures">
                 <a id="browse" href="index.jsp">Browse</a>
-                <a id="manageuser" href="manage_user.jsp">Manage User</a>
+                <%if(user.getUserTypeFlag()=='a'){%><a id="manageuser" href="manage_user.jsp">Manage User</a><%}%>
                 <a id="createseminar" href="create_seminar.jsp">Create Seminar</a>
-               
-                <a id="login" href="index.jsp" onclick="<% session.invalidate(); %> " style="width:auto" >Login as <%=n%></a>
+                <a id="login" href="index.jsp" onclick="#" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>
+                <a id="logout" href="index.jsp" onclick="<% session.invalidate();%>"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
             </div>
     </div> 
     <% } %>
@@ -42,30 +51,44 @@
             <div class="container">
                 <h1>Log in</h1>
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Staff or student number" name="username" required                 
+                <input id="username" type="text" placeholder="Staff or student number" name="username" required                 
                        pattern="^[0-9]{0,8}$" autofocus>
                 <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="UTS Password" name="password" required>
-              
+                <input id="password" type="password" placeholder="UTS Password" name="password" required>
+               <div id='content'></div>
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>
-                <button type="submit">Login</button>
+                <button id="loginButton" type="submit">Login ${message}</button>
+                <div id="messageDiv" style="display:none;"></div>
             </div>
         </form>
     </div>
             
-    
-   <script>
-    // Get the modal
-    var modal = document.getElementById('loginForm');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    }; 
+    <script>
+        $("#loginButton").click(function(event){
+            event.preventDefault();
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var dataString = 'username='+username+'&password='+password;
+                $.ajax({
+                    type: "POST",
+                    url: "LoginServlet",
+                    data: dataString,
+                    success: function(result)
+                    {
+                       if(result){
+                           document.location="index.jsp";
+                       }else{
+                           alert("Hello");
+                       }
+                    },
+                    error:function(result){
+                        alert("hello");
+                    },                         
+                });
+                return false;
+            });
     </script>
-
+            
     
     <!--oninvalid="this.setCustomValidity('Please enter your ID')"--> 
 

@@ -12,7 +12,7 @@
         <title>Manage User</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="script.js"></script>
+        <script src="scripts/script.js"></script>
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <style>
             #manageuser{
@@ -30,47 +30,47 @@
                     <table class="user-list">
                         <thead>
                             <tr>
-                                <th>Email</th>
+                                <th>UTS ID</th>
                                 <th>First</th>
                                 <th>Last</th>
-                                <th>Faculty</th>
+                                <th>Email</th>
                                 <th>User Role</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>PeterParker@oscorp.com</td>
+                                <td>12491508</td>
                                 <td>Peter</td>
                                 <td>Parker</td>
-                                <td>FEIT</td>
+                                <td>PeterParker@oscorp.com</td>
                                 <td>Admin</td>
                             </tr>
                             <tr>
-                                <td>PeterParker@oscorp.com</td>
+                                <td>12491508</td>
                                 <td>Peter</td>
                                 <td>Parker</td>
-                                <td>FEIT</td>
+                                <td>PeterParker@oscorp.com</td>
+                                <td>Organiser</td>
+                            </tr>
+                            <tr>
+                                <td>12491508</td>
+                                <td>Peter</td>
+                                <td>Parker</td>
+                                <td>PeterParker@oscorp.com</td>
+                                <td>Host</td>
+                            </tr>
+                            <tr>
+                                <td>12491508</td>
+                                <td>Peter</td>
+                                <td>Parker</td>
+                                <td>PeterParker@oscorp.com</td>
                                 <td>Admin</td>
                             </tr>
                             <tr>
-                                <td>PeterParker@oscorp.com</td>
+                                <td>12491508</td>
                                 <td>Peter</td>
                                 <td>Parker</td>
-                                <td>FEIT</td>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
                                 <td>PeterParker@oscorp.com</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>FEIT</td>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <td>PeterParker@oscorp.com</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>FEIT</td>
                                 <td>Admin</td>
                             </tr>
                             
@@ -110,8 +110,8 @@
                                     <option value="rhost">Host</option>
                                 </select>
                             </div>
-                            <div class="add-submit"><input id="submitButton" type="submit" name="addUser" value="Register"></div>
-                            <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input id="submitButton" type="button" name="addUser" value="Cancel"></div>
+                            <div class="add-submit"><input class="submitButton" type="submit" name="addUser" value="Add"></div>
+                            <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input class="submitButton" type="button" name="addUser" value="Cancel"></div>
                         </div>
                     </form>
                 </div>

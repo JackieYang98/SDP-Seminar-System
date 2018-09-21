@@ -13,6 +13,16 @@ public class User implements Serializable {
 	private String userPassword;
 	private char userTypeFlag;
 	
+        public User(){}
+        public User(String id, String fn, String ln, String email, String pass, char type){
+            this.userId = id;
+            this.userFirstName = fn;
+            this.userLastName = ln;
+            this.userEmail = email;
+            this.userPassword = pass;
+            this.userTypeFlag = type;
+        }
+        
 	public String getUserId() {
 		return userId;
 	}

@@ -16,24 +16,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
         <style>
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-            li{
-                display: inline;
-                border: solid;
-                border-width: 1px 1px 0 1px;
-                margin: 0 5px 0 0; 
-                font-size: 40px
-                    
-            }
-            li a {
-                padding: 0 10px;
-            }
-
         </style>
     </head>
     <body>
@@ -43,7 +27,8 @@
                <li> <a href="#edit"> Edit Seminar </a> </li>
                <li> <a href="#attendee"> View attendees list </a> </li>
             </ul>
-            <div id="edit">
+          <br>
+            <div id="edit" >
                 <form action="#createaction" method="POST">  
                     <div class="grid-container">
                         <div class="grid-sem-name">Seminar Name</div>
@@ -70,7 +55,7 @@
                         <div class="grid-bio">Speaker Biography</div>
                         <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
                          <div class="grid-delete"><input class="deleteButton" type="button" name="seminarDelete" value="Delete Seminar" onclick="document.getElementById('deleteConfirm').style.display='block';return false;"></div>
-                        <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>
+                        <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>                       
                     </div>
                 </form>
         </div>
@@ -84,10 +69,65 @@
                 </form>
         </div>
         <div id="attendee">
-            <p> something attendees </p>
+            <h1> Attendees </h1>
+                <table class="user-list">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>bob@gmail.com</td>
+                            <td>Rick</td>
+                            <td>Rolled</td>
+                            <td>Going</td>
+                        </tr>                            
+                    </tbody>
+                </table>
+
+                    <button id="attendeeButtons" type="button" onclick="document.getElementById('Register').style.display='block';return false;" style="text-align: center;">Register</button>
+                    <button id="attendeeButtons" type="button" onclick="document.getElementById('Edit').style.display='block';return false;" style="text-align: center;">Edit</button>
+                    <button id="attendeeButtons" type="button" onclick="document.getElementById('Delete').style.display='block';return false;" style="text-align: center;">Delete</button>
+                    <br>
+                    <button id="attendeeButtons" type="button" onclick="document.getElementById('PrintTags').style.display='block';return false;" style="text-align: center;">Print Tags</button>
+                    <button id="attendeeButtons" type="button" onclick="document.getElementById('Email').style.display='block';return false;" style="text-align: center;">Email</button>
+        </div>
+        <div id="Register" class="modal">
+            <form class="modal-content animate" action="#" method="POST">
+                <h1>Add Attendee</h1>
+                <div class="register-grid">
+                    <div class="register-Fname">First Name</div>
+                    <div class="register-Lname">Last Name</div>    
+                    <div class="register-Fname-input"><input type="text" name="FirstName" placeholder="First Name" required></div>
+                    <div class="register-Lname-input"><input type="text" name="LastName" placeholder="Last Name" required></div>
+                    <div class="register-email">Email</div>   
+                    <div class="register-email-input"><input type="text" name="email" placeholder="JohnDoe@email.com" required></div>    
+                    <div class="register-status">Status</div>   
+                    <div class="register-status-input">
+                        <select>
+                            <option value="Going">Going</option>
+                            <option value="Interested">Interested</option>
+                        </select>
+                    </div>    
+                    <div class="register-submit"><input id="registerButton" type="submit" name="attendeeRegister" value="Confirm" onclick="document.getElementById('Confirmation').style.display='block';document.getElementById('Register').style.display='none';return false;"></div>
+                    <div class="register-cancel"><button type="button" onclick="document.getElementById('Register').style.display='none'"> Cancel</button></div>
+                </div>
+            </form>
+        </div>
+        <div id="Confirmation" class="modal">
+            <div class="container">
+                <h1>Registration Complete</h1>
+                <p> <b>First Name:</b> Some name here </p>
+                <p> <b>Last Name:</b> Some name here </p>
+                <button type="button" onclick="document.getElementById('Confirmation').style.display='none'" title="Close Modal">Return</button>
+            </div>        
         </div>
     </div>
-           <script>
+    <script>
         $("#tabs").tabs();
     </script>
     </body>

@@ -219,7 +219,7 @@ span.psw {
 
 .deleteButton{
     height:50px;
-    background-color: #4CAF50;
+    background-color: #114BE9;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -254,8 +254,12 @@ span.psw {
 .grid-bio{grid-area: u;}
 .grid-image-input{grid-area: v;}
 .grid-bio-input{grid-area: w;}
-.grid-submit{grid-area: x;}
-.grid-delete{grid-area: y;}
+.grid-speaker2{grid-area:xa;}
+.grid-speaker2-input{grid-area:xb;}
+.grid-bio2{grid-area:x;}
+.grid-bio2-input{grid-area:y;}
+.grid-submit{grid-area: za;}
+.grid-delete{grid-area: zb;}
 
 .grid-container {
     display: inline-grid;
@@ -266,14 +270,16 @@ span.psw {
     'c c c c d'
     'e e f f d'
     'g g h h d'
-    'i j j k d'
-    'l m m n d'
-    'o o p p q'
-    'r r s s t'
-    'u u u u t'
-    'w w w w t'
-    'w w w w v'
-    'z z x x y'; 
+    'p p i i d'
+    's s l l d'
+    'j j k k q'
+    'm m n n t'
+    'o o xa xa t'
+    'r r xb xb t'
+    'u u x x t'
+    'w w y y v'
+    'w w y y .'
+    '. . za . zb'; 
 }
 
 .grid-container .grid-submit{
@@ -284,14 +290,17 @@ span.psw {
     text-align: center;
 }
 
-.grid-container .biotext{
-    width:515px;
+.grid-container .biotext {
+    width:235px;
     height:165px;
 }
-
+.grid-container .bio2text {
+    width:235px;
+    height:165px;
+}
 .grid-container .desctext{
     width:330px;
-    height:298px;
+    height:258px;
 }
 
 .grid-container textarea{
@@ -299,6 +308,13 @@ span.psw {
     padding: 10px 10px;
     resize: none;
     font-family: openSansRegular;
+}
+#venueLocation{
+    width:255px;
+    height: 45px
+}
+#venueLocation option{
+    width:255px;
 }
 
 .manage-page{
@@ -329,7 +345,7 @@ span.psw {
         'h . . .'
         'i . j .';
 }
-#cancelButton{
+#registerButton{
     background-color: #114BE9;
     color: white;
     padding: 14px 20px;
@@ -338,7 +354,7 @@ span.psw {
     cursor: pointer;
     width: 200%;
 }
-#registerButton{
+#editButton{
     background-color: #114BE9;
     color: white;
     padding: 14px 20px;
@@ -355,6 +371,91 @@ span.psw {
     border: none;
     cursor: pointer;
     width: 200%;
+}
+
+.email-To{ grid-area: a;}
+.email-To-input{ grid-area: b;}
+.email-CC{ grid-area: c;}
+.email-CC-input{ grid-area: d;}
+.email-Subject{grid-area:e;}
+.email-subject-input{grid-area:f;}
+.email-Message{ grid-area:g;}
+.email-Message-input{ grid-area:h;}
+.email-Send{grid-area:i;}
+.email-Cancel{grid-area:j}
+
+.email-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a b b b'
+        'c d d d'
+        'e f f f'
+        'g . . .'
+        'h h h h'
+        'h h h h'
+        'j . . i';
+}
+.email-Cancel button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+.email-Send button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+.attendee-list{
+    width: 50%;
+    border: solid 1px #ddd;
+    text-align: left;
+    border-collapse: collapse;
+    margin-left:auto; 
+    margin-right:auto;
+ 
+}
+
+.attendee-list thead, tbody{
+    display:block;
+}
+.attendee-list tbody{
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 3px solid black;
+}
+
+.attendee-list tbody td, thead th {
+    width: 20%; 
+    border-right: 1px solid black;
+}
+
+.attendee-list tbody td:last-child, thead th:last-child {
+    border-right: none;
+}
+
+.attendee-list th{
+    padding: 34px;  
+    height: 30px;
+}
+
+.attendee-list td{
+    padding: 15px; 
+    border-bottom: solid 1px #ddd;
+}
+
+.attendee-list tr:hover{
+    background-color: #f5f5f5;
 }
 .add-id{ grid-area: a;}
 .add-id-input{ grid-area: b;}

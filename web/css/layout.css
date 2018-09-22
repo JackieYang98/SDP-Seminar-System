@@ -254,12 +254,16 @@ span.psw {
 .grid-bio{grid-area: u;}
 .grid-image-input{grid-area: v;}
 .grid-bio-input{grid-area: w;}
-.grid-speaker2{grid-area:xa;}
-.grid-speaker2-input{grid-area:xb;}
-.grid-bio2{grid-area:x;}
-.grid-bio2-input{grid-area:y;}
-.grid-submit{grid-area: za;}
-.grid-delete{grid-area: zb;}
+.grid-speaker2{grid-area:ob;}
+.grid-speaker2-input{grid-area:rb;}
+.grid-bio2{grid-area:ub;}
+.grid-bio2-input{grid-area:wb;}
+.grid-speaker3{grid-area:oc;}
+.grid-speaker3-input{grid-area:rc;}
+.grid-bio3{grid-area:uc;}
+.grid-bio3-input{grid-area:wc;}
+.grid-submit{grid-area: x;}
+.grid-delete{grid-area: y;}
 
 .grid-container {
     display: inline-grid;
@@ -268,30 +272,43 @@ span.psw {
     grid-template-areas:   
     'a a a a b'
     'c c c c d'
-    'e e f f d'
-    'g g h h d'
-    'p p i i d'
-    's s l l d'
-    'j j k k q'
-    'm m n n t'
-    'o o xa xa t'
-    'r r xb xb t'
-    'u u x x t'
-    'w w y y v'
-    'w w y y .'
-    '. . za . zb'; 
+    'p . . . d'
+    's s s s d'
+    'e f f . d'
+    'g h h . d'
+    'i j k . q'
+    'l m n . t'
+    'o o o o t'
+    'r r r r t'
+    'u u u u t'
+    'w w w w v'
+    'w w w w .'
+    'ob ob ob ob .'
+    'rb rb rb rb .'
+    'ub ub ub ub .'
+    'wb wb wb wb .'
+    'wb wb wb wb .'
+    'oc oc oc oc .'
+    'rc rc rc rc .'
+    'uc uc uc uc .'
+    'wc wc wc wc .'
+    'wc wc wc wc .'
+    '. . x . y'; 
 }
 
-.grid-container .grid-submit{
-    text-align: center;
+.grid-container .submitButton{
+    width: 115%;
 }
 
-.grid-container .grid-delete{
+.grid-container .deleteButton{
     text-align: center;
+    width: 50%;
+    background-color: red;
+    margin-left: 150px
 }
 
 .grid-container .biotext {
-    width:235px;
+    width:515px;
     height:165px;
 }
 .grid-container .bio2text {
@@ -309,11 +326,11 @@ span.psw {
     resize: none;
     font-family: openSansRegular;
 }
-#venueLocation{
-    width:255px;
+#selectDropdown{
+    width:155px;
     height: 45px
 }
-#venueLocation option{
+#selectDropdown option{
     width:255px;
 }
 

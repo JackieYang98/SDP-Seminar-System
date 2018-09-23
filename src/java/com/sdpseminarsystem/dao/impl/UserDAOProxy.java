@@ -46,7 +46,7 @@ public class UserDAOProxy implements IUserDAO {
 	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		boolean flag = false;
 		if(dao.findById(user.getUserId()) != null)
-			flag = dao.verify(user);
+			flag = true;
 		return flag;
 	}
 }

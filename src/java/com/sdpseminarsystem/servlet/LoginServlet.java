@@ -38,21 +38,49 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            User user = new User("12491508", "Villiam", "VonDoom", "jinglongh@yahoo.com", "sss", 'h');	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            User user = new User();
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-                if(password.equals(user.getUserPassword())){
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("currentSessionUser", user);
-                    request.setAttribute("user", user);
-                    response.getWriter().print(username);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    
-		}else{   
-                    request.setAttribute("message", "Invalid");
-                    response.sendRedirect("index.jsp");
-                }
+            user.setUserId(username);
+            user.setUserPassword(password);      
+            try {
+			if(UserDAOFactory.getInstance().verify(user))
+			{     
+                            User newUser = UserDAOFactory.getInstance().findById(username);
+                            HttpSession session = request.getSession();
+                            session.setAttribute("user", newUser);
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                            dispatcher.forward(request, response);
+			}
+			else
+			{
+                            System.out.print(username + password); 
+                            response.sendRedirect("index.jsp");
+			}
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+		}
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+//            String username = request.getParameter("username");
+//            String password = request.getParameter("password");
+//                if(password.equals(user.getUserPassword())){
+//                    HttpSession session = request.getSession(true);
+//                    session.setAttribute("currentSessionUser", user);
+//                    request.setAttribute("user", user);
+//                    response.getWriter().print(username);
+//                    request.getRequestDispatcher("index.jsp").forward(request, response);
+//                    
+//		}else{   
+//                    request.setAttribute("message", "Invalid");
+//                    response.sendRedirect("index.jsp");
+//                }
         // TODO Auto-generated method stub
 //		User user = (User) request.getAttribute("User");
 //		try {
@@ -75,29 +103,12 @@ public class LoginServlet extends HttpServlet {
 //			dispatcher.forward(request, response);
 //		}
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+//	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		
-//response.setContentType("text/html");
-////		PrintWriter out = response.getWriter();
-////		
-////		String p=request.getParameter("password");
-////		if(p.equals("sss")){
-////			String n=request.getParameter("username");
-////		out.print("Welcome "+n);
-////			
-////		}
-////		else{
-////			out.print("Sorry username or password error!");
-////			RequestDispatcher rd=request.getRequestDispatcher("login.html");
-////			rd.include(request, response);
-////		}
-//// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 }

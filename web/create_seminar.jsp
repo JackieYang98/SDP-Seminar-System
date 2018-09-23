@@ -62,36 +62,21 @@
                     <div class="grid-image-input"><input type="file" name="seminarImage"></div>
                     <div class="grid-bio">Speaker 1 Biography</div>
                     <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
-                    <a class="clickMe">Toggle my text</a>
-                    <div class="grid-speaker2">Speaker 2</div>
-                    <div class="grid-speaker2-input"><input type="text" name="speaker2Name" placeholder="Speaker 2 Name (Optional)" ></div>
-                    <div class="grid-bio2">Speaker 2 Biography</div>
-                    <div class="grid-bio2-input"><textarea class="biotext" name="speakerBio2" placeholder="About the second speaker... (Optional)"></textarea></div>
-                    <div class="grid-speaker3">Speaker 3</div>
-                    <div class="grid-speaker3-input"><input type="text" name="speaker3Name" placeholder="Speaker 3 Name (Optional)" ></div>
-                    <div class="grid-bio3">Speaker 3 Biography</div>
-                    <div class="grid-bio3-input"><textarea class="biotext" name="speakerBio3" placeholder="About the third speaker... (Optional)"></textarea></div>
+                    <div onclick='hide("speaker2")' class="grid-speaker2" style="cursor: pointer; text-decoration: underline; ">Speaker 2 (Click to Toggle)</div>
+                    <div id="speaker2" class="grid-speaker2-input" style="display: none;">
+                        <div><input type="text" name="speaker2Name" placeholder="Speaker 2 Name" ></div>
+                        <div>Speaker 2 Biography</div>
+                        <div><textarea class="biotext" name="speakerBio2" placeholder="About the second speaker..."></textarea></div>
+                            <div onclick='hide("speaker3")' class="grid-speaker3" style="cursor: pointer; text-decoration: underline;">Speaker 3 (Click to Toggle)</div>
+                            <div id="speaker3" class="grid-speaker3-input" style="display: none;">
+                                <div><input type="text" name="speaker3Name" placeholder="Speaker 3 Name" ></div>
+                                <div>Speaker 3 Biography</div>
+                                <div><textarea class="biotext" name="speakerBio3" placeholder="About the third speaker..."></textarea></div>
+                            </div>
+                    </div>
                     <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
-                </div>
+                    </div>
             </form>
         </div>
     </body>
-    <script>
-        $(function () {
-    $(".textBox").hide();
-    $('a.clickMe').click(function () {
-        var thisElem = this;
-        var isVisibe = $(thisElem).nextAll('div.grid-speaker2:first').is(":visible");
-        $(".grid-speaker2").each(function(i,elem){
-            console.error(thisElem,elem)
-        	if(thisElem!==elem){
-            	$(elem).hide();
-            }
-        });
-       // if()
-        $(thisElem).nextAll('div.grid-speaker2')[isVisibe ? "hide" : "show"]();
-        $(thisElem).nextAll('.clickMe:first').nextAll("div.grid-speaker2").hide();
-    });
-});
-    </script>
 </html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.sdpseminarsystem.servlet.LoginServlet</servlet-class>
@@ -12,9 +12,5 @@
         <session-timeout>
             30
         </session-timeout>
-    </session-config>
-    
-    <welcome-file-list>  
-        <welcome-file>index.jsp</welcome-file>  
-    </welcome-file-list>  
+    </session-config>  
 </web-app>

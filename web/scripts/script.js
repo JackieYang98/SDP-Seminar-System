@@ -18,6 +18,13 @@ $(document).ready(function(){
         }
     };
     
+   
+$(".user-list tbody tr").click(function(){
+   $(this).addClass('selected').siblings().removeClass('selected');    
+   var value=$(this).find('td:first').html();  
+});
+    
+    
     
 /*
 * Responsive table code, 
@@ -41,3 +48,43 @@ $(document).ready(function(){
         });    
     }).resize(); // Trigger resize handler
 });
+
+function hide(speaker){
+    var x = document.getElementById(speaker);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function validateAddUserForm(){
+    var userID = document.forms["addUserForm"]["userid"].value;
+    var fName = document.forms["addUserForm"]["fName"].value;
+    var lName = document.forms["addUserForm"]["lName"].value;
+    var email = document.forms["addUserForm"]["email"].value;
+    var password = document.forms["addUserForm"]["password"].value;
+    var role = document.forms["addUserForm"]["role"].value;
+    
+    if(!userID.match("^[0-9]{0,8}$")){
+        alert("Please enter a valid ID");
+        return false;
+    }
+    if(!fName.match("^[A-Za-z]+$")){
+        alert("First name takes only alphabets");
+        return false;
+    }
+    if(!lName.match("^[A-Za-z]+$")){
+        alert("Last name takes only alphabets");
+        return false;
+    }
+    if(!email.match("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")){
+        alert("Please enter valid email address associated with ID");
+        return false;
+    }
+    if(!password.match("(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$")){
+        alert("Please enter valid password associated with ID");
+        return false;
+    }
+    
+}

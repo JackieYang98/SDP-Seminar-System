@@ -6,19 +6,18 @@
 
 <%@page import="com.sdpseminarsystem.vo.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <% 
-    if(request.getParameter("username") == null || session.getAttribute("user") != null){ %>
+<% if(request.getAttribute("logout") != null || session.getAttribute("user") == null) { %>
         <div class="navbar">
             <a href="https://www.uts.edu.au/">
                 <h1><img id="logo" src="image/uts.png" alt="UTS Logo"></h1>
             </a>
             <div class="userfeatures">
-                <a id="browse" href="index.jsp">Browse</a>
-                <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login ${message}</a>            
+                <a id="browse" href="/SDP-Seminar-System/index.jsp">Browse</a>
+                <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login</a>            
             </div>
     </div>      
-    <%}else{
-        User user = (User) request.getAttribute("user");
+    <% }else{
+        User user = (User) session.getAttribute("user");
         String type;
         if(user.getUserTypeFlag() == 'a'){
             type = "Admin";
@@ -27,18 +26,17 @@
         } else{
                     type = "Organiser";
         }
-        session.setAttribute("user", user);
     %>
     <div class="navbar">
             <a href="https://www.uts.edu.au/">
                 <h1><img id="logo" src="image/uts.png" alt="UTS Logo"></h1>
             </a>
             <div class="userfeatures">
-                <a id="browse" href="index.jsp">Browse</a>
-                <%if(user.getUserTypeFlag()=='a'){%><a id="manageuser" href="manage_user.jsp">Manage User</a><%}%>
-                <a id="createseminar" href="create_seminar.jsp">Create Seminar</a>
-                <a id="login" href="index.jsp" onclick="#" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>
-                <a id="logout" href="index.jsp" onclick="<% session.invalidate();%>"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
+                <a id="browse" href="/SDP-Seminar-System/index.jsp">Browse</a>
+                <%if(user.getUserTypeFlag()=='a'){%><a id="manageuser" href="/SDP-Seminar-System/manage_user.jsp">Manage User</a><%}%>
+                <a id="createseminar" href="/SDP-Seminar-System/create_seminar.jsp">Create Seminar</a>
+                <a id="login" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>
+                <a id="logout" href="/SDP-Seminar-System/logout.jsp"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
             </div>
     </div> 
     <% } %>
@@ -64,29 +62,29 @@
     </div>
             
     <script>
-        $("#loginButton").click(function(event){
-            event.preventDefault();
-            var username = $('#username').val();
-            var password = $('#password').val();
-            var dataString = 'username='+username+'&password='+password;
-                $.ajax({
-                    type: "POST",
-                    url: "LoginServlet",
-                    data: dataString,
-                    success: function(result)
-                    {
-                       if(result){
-                           document.location="index.jsp";
-                       }else{
-                           alert("Hello");
-                       }
-                    },
-                    error:function(result){
-                        alert("hello");
-                    },                         
-                });
-                return false;
-            });
+//        $("#loginButton").click(function(event){
+//            event.preventDefault();
+//            var username = $('#username').val();
+//            var password = $('#password').val();
+//            var dataString = 'username='+username+'&password='+password;
+//                $.ajax({
+//                    type: "POST",
+//                    url: "LoginServlet",
+//                    data: dataString,
+//                    success: function(result)
+//                    {
+//                       if(result){
+//                           document.location="index.jsp";
+//                       }else{
+//                           alert("Hello");
+//                       }
+//                    },
+//                    error:function(result){
+//                        alert("hello");
+//                    },                         
+//                });
+//                return false;
+//            });
     </script>
             
     

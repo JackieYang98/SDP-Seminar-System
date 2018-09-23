@@ -15,4 +15,12 @@ public class DAOFactory {
 	public static ISeminarDAO getInstanceOfSeminarDAO() {
 		return SeminarDAOFactory.getInstance();
 	}
+	
+	public static IAttendeeDAO getInstanceOfAttendeeDAO() {
+		return AttendeeDAOFactory.getInstance();
+	}
+	
+	public static ISpeakerDAO getInstanceOfSpeakerDAO() {
+		return SpeakerDAOFactory.getInstance();
+	}
 }

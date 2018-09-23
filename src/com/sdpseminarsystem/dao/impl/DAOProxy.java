@@ -8,7 +8,7 @@ public abstract class DAOProxy {
 	
 	protected DatabaseConnector dbc;
 	
-	public DAOProxy() throws ClassNotFoundException, SQLException {
+	public DAOProxy() throws SQLException {
 		dbc = new DatabaseConnector();
 	}
 }

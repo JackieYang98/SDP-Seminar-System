@@ -10,9 +10,6 @@ public class SeminarDAOFactory {
 		ISeminarDAO dao = null;
 		try {
 			dao = new SeminarDAOProxy();
-		} catch (ClassNotFoundException e) {
-			// TODO auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO auto-generated catch block
 			e.printStackTrace();

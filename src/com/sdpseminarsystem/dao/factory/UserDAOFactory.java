@@ -10,9 +10,6 @@ public class UserDAOFactory {
 		IUserDAO dao = null;
 		try {
 			dao = new UserDAOProxy();
-		} catch (ClassNotFoundException e) {
-			// TODO auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO auto-generated catch block
 			e.printStackTrace();

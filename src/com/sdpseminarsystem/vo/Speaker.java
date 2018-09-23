@@ -4,28 +4,28 @@ import java.io.Serializable;
 
 public class Speaker implements Serializable {
 	
-	private static final long serialVersionUID = 5283126160743378401L;
+	private static final long serialVersionUID = 8137883080259761342L;
 	
-	private int speakerId;
-	private Seminar seminar;
-	private String speakerBiographyAddr;
+	private Integer speakerId;
+	private String speakerName;
+	private String speakerBiography;
 	
-	public int getSpeakerId() {
+	public Integer getSpeakerId() {
 		return speakerId;
 	}
-	public void setSpeakerId(int speakerId) {
+	public void setSpeakerId(Integer speakerId) {
 		this.speakerId = speakerId;
 	}
-	public Seminar getSeminar() {
-		return seminar;
+	public String getSpeakerName() {
+		return speakerName;
 	}
-	public void setSeminar(Seminar seminar) {
-		this.seminar = seminar;
+	public void setSpeakerName(String speakerName) {
+		this.speakerName = speakerName;
 	}
-	public String getSpeakerBiographyAddr() {
-		return speakerBiographyAddr;
+	public String getSpeakerBiography() {
+		return speakerBiography;
 	}
-	public void setSpeakerBiographyAddr(String speakerBiographyAddr) {
-		this.speakerBiographyAddr = speakerBiographyAddr;
+	public void setSpeakerBiography(String speakerBiography) {
+		this.speakerBiography = speakerBiography;
 	}
 }

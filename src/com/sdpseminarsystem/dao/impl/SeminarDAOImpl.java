@@ -15,16 +15,15 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 
 	@Override
 	public boolean create(Seminar seminar) throws SQLException {
-		String sql = "insert into Seminars (VenueId, UserOrganiserId, UserHostId, SeminarTitle, SeminarDescription,"
-				+ "SeminarDate, SeminarLastMins) valus (?,?,?,?,?,?,?);";
+		String sql = "insert into seminars (UserOrganiserId, VenueId, SeminarTitle, SeminarDescription,"
+				+ "SeminarDate, SeminarLastMins) values (?,?,?,?,?,?);";
 		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, seminar.getVenue().getVenueId());
-		stmt.setString(2, seminar.getUserOrganiser().getUserId());
-		stmt.setString(3, seminar.getUserHost().getUserId());
-		stmt.setString(4, seminar.getSeminarTitle());
-		stmt.setString(5, seminar.getSeminarDescription());
-		stmt.setDate(6, seminar.getSeminarDate());
-		stmt.setInt(7, seminar.getSeminarLastMins());
+		stmt.setString(1, seminar.getUserOrganiser().getUserId());
+		stmt.setInt(2, seminar.getVenue().getVenueId());
+		stmt.setString(3, seminar.getSeminarTitle());
+		stmt.setString(4, seminar.getSeminarDescription());
+		stmt.setTimestamp(5, new java.sql.Timestamp(seminar.getSeminarDate().getTime()));
+		stmt.setInt(6, seminar.getSeminarLastMins());
 		int update = stmt.executeUpdate();
 		if(update > 0)
 			return true;
@@ -34,7 +33,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 
 	@Override
 	public List<Seminar> findAll() throws SQLException {
-		String sql = "select * from Seminars;";
+		String sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId;";
 		stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		Seminar seminar = null;
@@ -42,12 +41,12 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 		while(rs.next()) {
 			seminar = new Seminar();
 			seminar.setSeminarId(rs.getInt("SeminarId"));
-			seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("VenueId")));
+			seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("seminars.VenueId")));
 			seminar.setUserOrganiser(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserOrganiserId")));
 			seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
 			seminar.setSeminarTitle(rs.getString("SeminarTitle"));
 			seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-			seminar.setSeminarDate(rs.getDate("SeminarDate"));
+			seminar.setSeminarDate(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
 			seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
 			list.add(seminar);
 		}
@@ -56,7 +55,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 
 	@Override
 	public Seminar findById(int seminarId) throws SQLException {
-		String sql = "select * from Seminars where SeminarId = ?;";
+		String sql = "select * from seminars where SeminarId = ?;";
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, seminarId);
 		ResultSet rs = stmt.executeQuery();
@@ -64,12 +63,12 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 		if(rs.next()) {
 			seminar = new Seminar();
 			seminar.setSeminarId(rs.getInt("SeminarId"));
-			seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("VenueId")));
+			seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("seminars.VenueId")));
 			seminar.setUserOrganiser(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserOrganiserId")));
 			seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
 			seminar.setSeminarTitle(rs.getString("SeminarTitle"));
 			seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-			seminar.setSeminarDate(rs.getDate("SeminarDate"));
+			seminar.setSeminarDate(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
 			seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
 		}
 		return seminar;

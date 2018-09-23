@@ -10,7 +10,7 @@ public class VenueDAOProxy extends DAOProxy implements IVenueDAO {
 	
 	private IVenueDAO dao;
 	
-	public VenueDAOProxy() throws ClassNotFoundException, SQLException {
+	public VenueDAOProxy() throws SQLException {
 		dao = new VenueDAOImpl(dbc.getConnection());
 	}
 	

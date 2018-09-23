@@ -10,7 +10,7 @@ public class SeminarDAOProxy extends DAOProxy implements ISeminarDAO {
 	
 	private ISeminarDAO dao;
 	
-	public SeminarDAOProxy() throws ClassNotFoundException, SQLException {
+	public SeminarDAOProxy() throws SQLException {
 		dao = new SeminarDAOImpl(dbc.getConnection());
 	}
 	

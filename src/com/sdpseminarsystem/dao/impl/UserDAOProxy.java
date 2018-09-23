@@ -12,7 +12,7 @@ public class UserDAOProxy extends DAOProxy implements IUserDAO {
 	
 	private IUserDAO dao;
 	
-	public UserDAOProxy() throws ClassNotFoundException, SQLException {
+	public UserDAOProxy() throws SQLException {
 		dao = new UserDAOImpl(dbc.getConnection());
 	}
 	

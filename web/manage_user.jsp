@@ -4,7 +4,10 @@
     Author     : jingl
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.sdpseminarsystem.dao.factory.UserDAOFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <% 
@@ -15,6 +18,8 @@ if(current == null){
    <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
 <%
     }else {
+    List<User> allUsers = UserDAOFactory.getInstance().findAll();
+    request.setAttribute("allUsers", allUsers);
 %>
 <!DOCTYPE html>
 <html>
@@ -49,42 +54,25 @@ if(current == null){
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach items="${allUsers}" var="Users">
                             <tr>
-                                <td>12491508</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>PeterParker@oscorp.com</td>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <td>12491508</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>PeterParker@oscorp.com</td>
-                                <td>Organiser</td>
-                            </tr>
-                            <tr>
-                                <td>12491508</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>PeterParker@oscorp.com</td>
-                                <td>Host</td>
-                            </tr>
-                            <tr>
-                                <td>12491508</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>PeterParker@oscorp.com</td>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <td>12491508</td>
-                                <td>Peter</td>
-                                <td>Parker</td>
-                                <td>PeterParker@oscorp.com</td>
-                                <td>Admin</td>
-                            </tr>
-                            
+                                <td><c:out value="${Users.userId}"/></td>
+                                <td><c:out value="${Users.userFirstName}"/></td>
+                                <td><c:out value="${Users.userLastName}"/></td>
+                                <td><c:out value="${Users.userEmail}"/></td>
+                                <td><c:choose>
+                                    <c:when test="${Users.userTypeFlag == 'a'}">
+                                        <c:out value="Administrator"/>
+                                    </c:when>
+                                    <c:when test="${Users.userTypeFlag == 'o'}">
+                                        <c:out value="Organiser"/>
+                                    </c:when>
+                                    <c:when test="${Users.userTypeFlag == 'h'}">
+                                        <c:out value="Host"/>
+                                    </c:when>
+                                </c:choose></td>
+                            </tr>  
+                            </c:forEach>
                         </tbody>
                     </table>
                     <div class="center">

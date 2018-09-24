@@ -59,4 +59,11 @@ public class User implements Serializable {
 	public void setUserTypeFlag(char userTypeFlag) {
 		this.userTypeFlag = userTypeFlag;
 	}
+
+    @Override
+    public String toString() {
+        return userEmail + " " + userFirstName + " " + userLastName + " " + userTypeFlag; //To change body of generated methods, choose Tools | Templates.
+    }
+        
+        
 }

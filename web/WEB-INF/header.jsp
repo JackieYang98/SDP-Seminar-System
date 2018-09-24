@@ -53,38 +53,34 @@
                        pattern="^[0-9]{0,8}$" autofocus>
                 <label for="password"><b>Password</b></label>
                 <input id="password" type="password" placeholder="UTS Password" name="password" required>
-               <div id='content'></div>
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>
-                <button id="loginButton" type="submit">Login ${message}</button>
-                <div id="messageDiv" style="display:none;"></div>
+                <button id="loginButton" type="submit">Login</button>
+                <div id="messageDiv"></div>
             </div>
         </form>
     </div>
             
     <script>
-//        $("#loginButton").click(function(event){
-//            event.preventDefault();
-//            var username = $('#username').val();
-//            var password = $('#password').val();
-//            var dataString = 'username='+username+'&password='+password;
-//                $.ajax({
-//                    type: "POST",
-//                    url: "LoginServlet",
-//                    data: dataString,
-//                    success: function(result)
-//                    {
-//                       if(result){
-//                           document.location="index.jsp";
-//                       }else{
-//                           alert("Hello");
-//                       }
-//                    },
-//                    error:function(result){
-//                        alert("hello");
-//                    },                         
-//                });
-//                return false;
-//            });
+        $("#loginButton").click(function(event){
+            event.preventDefault();
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var dataString = 'username='+username+'&password='+password;
+                $.ajax({
+                    type: "POST",
+                    url: "LoginServlet",
+                    data: dataString,
+                    success: function(result)
+                    {
+//                        $("form#modal-content").hide(function(){$("div.container").fadeIn();});
+                        document.location="index.jsp";
+                    },
+                    error:function(result){
+                        alert(result.errorThrown + "  " + result.textStatus);
+                    },                         
+                });
+                return false;
+            });
     </script>
             
     

@@ -43,7 +43,8 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             user.setUserId(username);
-            user.setUserPassword(password);      
+            user.setUserPassword(password);   
+            StringBuffer sb = new StringBuffer();
             try {
 			if(UserDAOFactory.getInstance().verify(user))
 			{     
@@ -55,8 +56,12 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-                            System.out.print(username + password); 
-                            response.sendRedirect("index.jsp");
+                            sb.append("<p>");
+                            sb.append("Error");
+                            sb.append("</p>");
+                            response.setContentType("text/xml");
+                            response.setHeader("Cache-Control", "no-cache");
+                            response.getWriter().write(sb.toString());
 			}
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
@@ -66,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 		}
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 //            String username = request.getParameter("username");
 //            String password = request.getParameter("password");

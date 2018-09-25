@@ -352,6 +352,10 @@ span.psw {
         'h . . .'
         'i . j .';
 }
+#emailInput{
+    width: 100%;
+    height: 30px
+}
 #registerButton{
     background-color: #114BE9;
     color: white;

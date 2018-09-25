@@ -31,51 +31,55 @@
             <div id="edit" >
                 <form action="#createaction" method="POST">  
                     <div class="grid-container">
-                        <div class="grid-sem-name">Seminar Name</div>
-                        <div class="grid-sem-desc">Seminar Description</div>
-                        <div class="grid-sem-name-input"><input type="text" name="seminarName" placeholder="Name" required style="width:530px; height:40px;"></div>  
-                        <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>
-                        <div class="grid-ven-name">Venue Name</div>
-                        <div class="grid-ven-loc">Venue Location</div>
-                        <div class="grid-ven-name-input">                     
-                            <select name='venueName' id="selectDropdown">
-                            <option value="Room 1">Room 1</option>
-                            <option value="Room 2">Room 2</option>
-                            <option value="Room 3">Room 3</option>
-                            <option value="Room 4">Room 4..etc</option>
-                            </select>
-                        </div>
-                        <div class="grid-ven-loc-input"><input type="text" name="venueLocation" placeholder="Venue Location (CBXX.YY.ZZZ)" required></div>
-                        <div class="grid-sem-date">Seminar Date</div>
-                        <div class="grid-start">Start Time</div>
-                        <div class="grid-end">End Time</div>
-                        <div class="grid-sem-date-input"><input type="date" name="seminarDate"  required style="width: 150px; height:40px;"></div>
-                        <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
-                        <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
-                        <div class="grid-speaker">Speaker 1</div>
-                        <div class="grid-host">Host</div>
-                        <div class="grid-cover-photo">Cover Photo</div>
-                        <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
-                        <div class="grid-host-input">
-                            <select name="seminarHost" id="selectDropdown">
-                                <option value="Host 1">Host 1</option>
-                                <option value="Host 2">Host 2</option>
-                                <option value="Host 3">Host 3</option>
-                                <option value="Host 4">Host 4..etc</option>
-                            </select>
-                        </div>
-                        <div class="grid-image"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
-                        <div class="grid-image-input"><input type="file" name="seminarImage"></div>
-                        <div class="grid-bio">Speaker 1 Biography</div>
-                        <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
-                        <div class="grid-speaker2">Speaker 2</div>
-                        <div class="grid-speaker2-input"><input type="text" name="speaker2Name" placeholder="Speaker 2 Name (Optional)" ></div>
-                        <div class="grid-bio2">Speaker 2 Biography</div>
-                        <div class="grid-bio2-input"><textarea class="biotext" name="speakerBio2" placeholder="About the second speaker... (Optional)"></textarea></div>
-                        <div class="grid-speaker3">Speaker 3</div>
-                        <div class="grid-speaker3-input"><input type="text" name="speaker3Name" placeholder="Speaker 3 Name (Optional)" ></div>
-                        <div class="grid-bio3">Speaker 3 Biography</div>
-                        <div class="grid-bio3-input"><textarea class="biotext" name="speakerBio3" placeholder="About the third speaker... (Optional)"></textarea></div>
+                    <div class="grid-sem-name">Seminar Name</div>
+                    <div class="grid-sem-desc">Seminar Description</div>
+                    <div class="grid-sem-name-input"><input type="text" name="seminarName" placeholder="Name" required style="width:530px; height:40px;"></div>  
+                    <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>
+                    <div class="grid-ven-name">Venue Name</div>
+                    <div class="grid-ven-loc">Venue Location</div>
+                    <div class="grid-ven-name-input">                     
+                        <select name='venueName' id="selectDropdown">
+                        <option value="Room 1">Room 1</option>
+                        <option value="Room 2">Room 2</option>
+                        <option value="Room 3">Room 3</option>
+                        <option value="Room 4">Room 4..etc</option>
+                        </select>
+                    </div>
+                    <div class="grid-ven-loc-input"><input type="text" name="venueLocation" placeholder="Venue Location (CBXX.YY.ZZZ)" required></div>
+                    <div class="grid-sem-date">Seminar Date</div>
+                    <div class="grid-start">Start Time</div>
+                    <div class="grid-end">End Time</div>
+                    <div class="grid-sem-date-input"><input type="date" name="seminarDate"  required style="width: 150px; height:40px;"></div>
+                    <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
+                    <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
+                    <div class="grid-speaker">Speaker 1</div>
+                    <div class="grid-host">Host</div>
+                    <div class="grid-cover-photo">Cover Photo</div>
+                    <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
+                    <div class="grid-host-input">
+                        <select name="seminarHost" id="selectDropdown">
+                            <option value="Host 1">Host 1</option>
+                            <option value="Host 2">Host 2</option>
+                            <option value="Host 3">Host 3</option>
+                            <option value="Host 4">Host 4..etc</option>
+                        </select>
+                    </div>
+                    <div class="grid-image"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
+                    <div class="grid-image-input"><input type="file" name="seminarImage"></div>
+                    <div class="grid-bio">Speaker 1 Biography</div>
+                    <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
+                    <div onclick='hide("speaker2")' class="grid-speaker2" style="cursor: pointer; text-decoration: underline; ">Speaker 2 (Click to Toggle)</div>
+                    <div id="speaker2" class="grid-speaker2-input" style="display: none;">
+                        <div><input type="text" name="speaker2Name" placeholder="Speaker 2 Name" ></div>
+                        <div>Speaker 2 Biography</div>
+                        <div><textarea class="biotext" name="speakerBio2" placeholder="About the second speaker..."></textarea></div>
+                            <div onclick='hide("speaker3")' class="grid-speaker3" style="cursor: pointer; text-decoration: underline;">Speaker 3 (Click to Toggle)</div>
+                            <div id="speaker3" class="grid-speaker3-input" style="display: none;">
+                                <div><input type="text" name="speaker3Name" placeholder="Speaker 3 Name" ></div>
+                                <div>Speaker 3 Biography</div>
+                                <div><textarea class="biotext" name="speakerBio3" placeholder="About the third speaker..."></textarea></div>
+                            </div>
+                    </div>
                         <div class="grid-delete"><input class="deleteButton" type="button" name="seminarDelete" value="Delete Seminar" onclick="document.getElementById('deleteConfirm').style.display='block';return false;"></div>
                         <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>                       
                     </div>
@@ -143,15 +147,15 @@
             <button id="attendeeButtons" type="button" onclick="document.getElementById('emailAttendee').style.display='block';return false;" style="text-align: center;">Email</button>
         </div>
         <div id="Register" class="modal">
-            <form class="modal-content animate" action="#" method="POST">
+            <form class="modal-content animate" name="registerAttendeeForm" action="#"  onsubmit="document.getElementById('Confirmation').style.display='block';return false;"method="POST">
                 <h1>Add Attendee</h1>
                 <div class="register-grid">
                     <div class="register-Fname">First Name</div>
                     <div class="register-Lname">Last Name</div>    
-                    <div class="register-Fname-input"><input type="text" name="FirstName" placeholder="First Name" required></div>
-                    <div class="register-Lname-input"><input type="text" name="LastName" placeholder="Last Name" required></div>
+                    <div class="register-Fname-input"><input type="text" name="regFName" placeholder="First Name" required ></div>
+                    <div class="register-Lname-input"><input type="text" name="regLName" placeholder="Last Name" required></div>
                     <div class="register-email">Email</div>   
-                    <div class="register-email-input"><input type="text" name="email" placeholder="JohnDoe@email.com" required></div>    
+                    <div class="register-email-input"><input type="email" id=emailInput name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
                     <div class="register-status">Status</div>   
                     <div class="register-status-input">
                         <select>
@@ -159,8 +163,8 @@
                             <option value="Interested">Interested</option>
                         </select>
                     </div>    
-                    <div class="register-submit"><input id="registerButton" type="submit" name="attendeeRegister" value="Confirm" onclick="document.getElementById('Confirmation').style.display='block';document.getElementById('Register').style.display='none';return false;"></div>
-                    <div class="register-cancel"><button type="button" onclick="document.getElementById('Register').style.display='none'"> Cancel</button></div>
+                    <div class="register-submit"><input id="registerButton" type="submit" name="attendeeRegister" value="Confirm"> </button></div>
+                    <div class="register-cancel"><button type="button" onclick="document.getElementById('Register').style.display='none'"> Close </button></div>
                 </div>
             </form>
         </div>
@@ -173,7 +177,7 @@
             </div>        
         </div>
         <div id="editAttendee" class="modal">
-            <form class="modal-content animate" action="#" method="POST">
+            <form class="modal-content animate" action="#" onSubmit="document.getElementById('editConfirmation').style.display='block';return false" method="POST">
                 <h1>Edit Attendee</h1>
                 <div class="register-grid">
                     <div class="register-Fname">First Name</div>
@@ -181,7 +185,7 @@
                     <div class="register-Fname-input"><input type="text" name="editFirstName" placeholder="First Name" required></div>
                     <div class="register-Lname-input"><input type="text" name="editLastName" placeholder="Last Name" required></div>
                     <div class="register-email">Email</div>   
-                    <div class="register-email-input"><input type="text" name="editEmail" placeholder="JohnDoe@email.com" required></div>    
+                    <div class="register-email-input"><input type="email" id=emailInput name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
                     <div class="register-status">Status</div>   
                     <div class="register-status-input">
                         <select>
@@ -189,8 +193,8 @@
                             <option value="Interested">Interested</option>
                         </select>
                     </div>    
-                    <div class="register-submit"><input id="editButton" type="submit" name="attendeeEdit" value="Confirm" onclick="document.getElementById('editConfirmation').style.display='block';document.getElementById('editAttendee').style.display='none';return false;"></div>
-                    <div class="register-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Cancel</button></div>
+                    <div class="register-submit"><input id="editButton" type="submit" name="attendeeEdit" value="Confirm"> </div>
+                    <div class="register-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Close</button></div>
                 </div>
             </form>
         </div>

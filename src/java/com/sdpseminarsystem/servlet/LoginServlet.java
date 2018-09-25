@@ -43,9 +43,11 @@ public class LoginServlet extends HttpServlet {
             User user = new User();
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+           
             user.setUserId(username);
             user.setUserPassword(password);   
             StringBuffer sb = new StringBuffer();
+            
             try {
 			if(DAOFactory.getInstanceOfUserDAO().verify(user))
 			{     
@@ -57,12 +59,15 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-                            sb.append("<p>");
-                            sb.append("Error");
-                            sb.append("</p>");
-                            response.setContentType("text/xml");
-                            response.setHeader("Cache-Control", "no-cache");
-                            response.getWriter().write(sb.toString());
+                            response.setContentType("text/plain");
+                            response.setCharacterEncoding("UTF-8");
+                            response.getWriter().write("invalid");
+//                            sb.append("<p>");
+//                            sb.append("Error");
+//                            sb.append("</p>");
+//                            response.setContentType("text/xml");
+//                            response.setHeader("Cache-Control", "no-cache");
+//                            response.getWriter().write(sb.toString());
 			}
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block

@@ -41,7 +41,7 @@
     </div> 
     <% } %>
     <div id="loginForm" class="modal">
-        <form class="modal-content animate" action="login" method="POST">
+        <form id="login-form" class="modal-content animate" action="login" method="POST">
             <div class="imgcontainer">
                 <img src="image/uts_logo.png" alt="logo" class="avatar">
                 <span onclick="document.getElementById('loginForm').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -61,26 +61,31 @@
     </div>
             
     <script>
-//        $("#loginButton").click(function(event){
-//            event.preventDefault();
-//            var username = $('#username').val();
-//            var password = $('#password').val();
-//            var dataString = 'username='+username+'&password='+password;
-//                $.ajax({
-//                    type: "POST",
-//                    url: "LoginServlet",
-//                    data: dataString,
-//                    success: function(result)
-//                    {
-////                        $("form#modal-content").hide(function(){$("div.container").fadeIn();});
-//                        document.location="index.jsp";
-//                    },
-//                    error:function(result){
-//                        alert(result.errorThrown + "  " + result.textStatus);
-//                    },                         
-//                });
-//                return false;
-//            });
+        $("#login-form").submit(function(event){
+            event.preventDefault();
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var data = 'username=' +username+'&password='+password;
+//            var data = $(this).serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "LoginServlet",
+                    data: data,
+                    success: function(data)
+                    {
+                        if(data != "invalid"){
+                            window.location = "index.jsp";
+                        }else{
+                            $("#messageDiv").html('<span class="error" style="color: red">' + "Invalid Username and/or Password" + '</span>');  
+                        }
+                    },
+                    error:function(xhr, ajaxOptions, thrownError){
+                        alert(xhr.status);
+                        alert(thrownError);
+                    },                         
+                });
+                return false;
+            });
     </script>
             
     

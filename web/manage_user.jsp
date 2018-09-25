@@ -11,15 +11,21 @@
 
 
 <% 
-User current = (User) session.getAttribute("user");
-if(current == null){
-    //Only for logged in users
+    User current = (User) session.getAttribute("user");
+    if(current == null){
+        //Only for logged in users
 %>
-   <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
+        <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
 <%
+    }else if(current.getUserTypeFlag() != 'a'){
+        //Only for Administrator User
+%>
+        <%@include file="WEB-INF/errors/unauthorized_action.jsp" %>
+<%  
     }else {
-    List<User> allUsers = UserDAOFactory.getInstance().findAll();
-    request.setAttribute("allUsers", allUsers);
+        //Retrieve all the list of the user
+        List<User> allUsers = UserDAOFactory.getInstance().findAll();
+        request.setAttribute("allUsers", allUsers);
 %>
 <!DOCTYPE html>
 <html>
@@ -54,6 +60,7 @@ if(current == null){
                             </tr>
                         </thead>
                         <tbody>
+                            <!--For each user in the database, populate the table-->
                             <c:forEach items="${allUsers}" var="Users">
                             <tr>
                                 <td><c:out value="${Users.userId}"/></td>
@@ -94,32 +101,34 @@ if(current == null){
                     </div>
                 </div>           
             </form>
+            
+            <!--Pop up for add user-->
             <div class="center">
                 <div id="addUser" class="modal">
                     <form name="addUserForm" class="modal-content animate" action="#" onsubmit="return validateAddUserForm()" method="POST">
                         <h2>Add User</h2>
-                        <div id="add-grid" class="container">
-                            <div class="add-id">UTS ID</div>
-                            <div class="add-id-input"><input type="text" name="userid" placeholder="UTS ID" required pattern="^[0-9]{0,8}$"></div>
-                            <div class="add-fname">First Name</div>
-                            <div class="add-lname">Last Name</div>
-                            <div class="add-fname-input"><input type="text" name="fName" placeholder="First Name" required pattern="^[A-Za-z]+$"></div>  
-                            <div class="add-lname-input"><input type="text" name="lName" placeholder="Last Name" required pattern="^[A-Za-z]+$"></div>
-                            <div class="add-email">Email</div>
-                            <div class="add-email-input"><input type="text" name="email" placeholder="Email" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"></div>
-                            <div class="add-password">Password</div>
-                            <div class="add-password-input"><input type="password" name="password" placeholder="Password" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"></div>
-                            <div class="add-role">User Role</div>
-                            <div class="add-role-input">
-                                <select class="role-select" name="role">
-                                    <option value="radmin">Administrator</option>
-                                    <option value="rorganiser" selected>Organiser</option>
-                                    <option value="rhost">Host</option>
-                                </select>
+                            <div id="add-grid" class="container">
+                                <div class="add-id">UTS ID</div>
+                                <div class="add-id-input"><input type="text" name="userid" placeholder="UTS ID" required pattern="^[0-9]{0,8}$"></div>
+                                <div class="add-fname">First Name</div>
+                                <div class="add-lname">Last Name</div>
+                                <div class="add-fname-input"><input type="text" name="fName" placeholder="First Name" required pattern="^[A-Za-z]+$"></div>  
+                                <div class="add-lname-input"><input type="text" name="lName" placeholder="Last Name" required pattern="^[A-Za-z]+$"></div>
+                                <div class="add-email">Email</div>
+                                <div class="add-email-input"><input type="text" name="email" placeholder="Email" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"></div>
+                                <div class="add-password">Password</div>
+                                <div class="add-password-input"><input type="password" name="password" placeholder="Password" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"></div>
+                                <div class="add-role">User Role</div>
+                                <div class="add-role-input">
+                                    <select class="role-select" name="role">
+                                        <option value="radmin">Administrator</option>
+                                        <option value="rorganiser" selected>Organiser</option>
+                                        <option value="rhost">Host</option>
+                                    </select>
+                                </div>
+                                <div class="add-submit"><input class="submitButton" type="submit" name="addUser" value="Add"></div>
+                                <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input class="submitButton" type="button" name="addUser" value="Cancel"></div>
                             </div>
-                            <div class="add-submit"><input class="submitButton" type="submit" name="addUser" value="Add"></div>
-                            <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input class="submitButton" type="button" name="addUser" value="Cancel"></div>
-                        </div>
                     </form>
                 </div>
             </div>

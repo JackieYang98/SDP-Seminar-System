@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class Venue implements Serializable {
 	
-	private static final long serialVersionUID = -5067450996883025696L;
+	private static final long serialVersionUID = -1510807057622218077L;
 	
-	private int venueId;
+	private Integer venueId;
 	private String venueName;
 	private String venueLocation;
-	private int venueCapacity;
+	private Integer venueCapacity;
 	
-	public int getVenueId() {
+	public Integer getVenueId() {
 		return venueId;
 	}
-	public void setVenueId(int venueId) {
+	public void setVenueId(Integer venueId) {
 		this.venueId = venueId;
 	}
 	public String getVenueName() {
@@ -29,10 +29,10 @@ public class Venue implements Serializable {
 	public void setVenueLocation(String venueLocation) {
 		this.venueLocation = venueLocation;
 	}
-	public int getVenueCapacity() {
+	public Integer getVenueCapacity() {
 		return venueCapacity;
 	}
-	public void setVenueCapacity(int venueCapacity) {
+	public void setVenueCapacity(Integer venueCapacity) {
 		this.venueCapacity = venueCapacity;
 	}
 }

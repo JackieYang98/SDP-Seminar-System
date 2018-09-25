@@ -4,25 +4,15 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 2085844320482884610L;
+	private static final long serialVersionUID = 6086326671389480875L;
 	
 	private String userId;
 	private String userFirstName;
 	private String userLastName;
 	private String userEmail;
 	private String userPassword;
-	private char userTypeFlag;
+	private Character userTypeFlag;
 	
-        public User(){}
-        public User(String id, String fn, String ln, String email, String pass, char type){
-            this.userId = id;
-            this.userFirstName = fn;
-            this.userLastName = ln;
-            this.userEmail = email;
-            this.userPassword = pass;
-            this.userTypeFlag = type;
-        }
-        
 	public String getUserId() {
 		return userId;
 	}
@@ -53,17 +43,10 @@ public class User implements Serializable {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public char getUserTypeFlag() {
+	public Character getUserTypeFlag() {
 		return userTypeFlag;
 	}
-	public void setUserTypeFlag(char userTypeFlag) {
+	public void setUserTypeFlag(Character userTypeFlag) {
 		this.userTypeFlag = userTypeFlag;
 	}
-
-    @Override
-    public String toString() {
-        return userEmail + " " + userFirstName + " " + userLastName + " " + userTypeFlag; //To change body of generated methods, choose Tools | Templates.
-    }
-        
-        
 }

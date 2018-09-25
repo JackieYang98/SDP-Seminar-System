@@ -6,18 +6,15 @@ import java.util.*;
 import com.sdpseminarsystem.dao.IVenueDAO;
 import com.sdpseminarsystem.vo.Venue;
 
-public class VenueDAOImpl implements IVenueDAO {
-	
-	private Connection conn;
-	private PreparedStatement stmt = null;
+public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
 	
 	public VenueDAOImpl(Connection conn) {
-		this.conn = conn;
+		super(conn);
 	}
 	
 	@Override
 	public List<Venue> findAll() throws SQLException {
-		String sql = "select * from Venues;";
+		String sql = "select * from venues;";
 		stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		Venue venue = null;
@@ -35,7 +32,7 @@ public class VenueDAOImpl implements IVenueDAO {
 
 	@Override
 	public Venue findById(int venueId) throws SQLException {
-		String sql = "select * from Venues where VenueId = ?;";
+		String sql = "select * from venues where VenueId = ?;";
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, venueId);
 		ResultSet rs = stmt.executeQuery();

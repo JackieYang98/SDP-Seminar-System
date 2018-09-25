@@ -6,16 +6,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.sdpseminarsystem.dao.IUserDAO;
-import com.sdpseminarsystem.dbc.DatabaseConnector;
 import com.sdpseminarsystem.vo.User;
 
-public class UserDAOProxy implements IUserDAO {
+public class UserDAOProxy extends DAOProxy implements IUserDAO {
 	
-	private DatabaseConnector dbc;
 	private IUserDAO dao;
 	
-	public UserDAOProxy() throws ClassNotFoundException, SQLException {
-		dbc = new DatabaseConnector();
+	public UserDAOProxy() throws SQLException {
 		dao = new UserDAOImpl(dbc.getConnection());
 	}
 	
@@ -46,7 +43,7 @@ public class UserDAOProxy implements IUserDAO {
 	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		boolean flag = false;
 		if(dao.findById(user.getUserId()) != null)
-			flag = true;
+			flag = dao.verify(user);
 		return flag;
 	}
 }

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : not_logged_in
-    Created on : 23/09/2018, 11:56:24 AM
+    Document   : unauthorized_action
+    Created on : 25/09/2018, 12:11:49 PM
     Author     : jingl
 --%>
 
@@ -15,9 +15,9 @@
         </head>
         <body>
             <%@include file="../header.jsp" %>
-            <h1>Login Required</h1>
+            <h1>Unauthorized Access</h1>
             <p>
-                You have to be logged-in to visit this page. Please 
+                You do not have the clearance to visit this page. Please 
                 <a href="/SDP-Seminar-System/index.jsp">log-in</a>. You will be redirected in 3 seconds...
             </p>
         </body>

@@ -10,9 +10,6 @@ public class VenueDAOFactory {
 		IVenueDAO dao = null;
 		try {
 			dao = new VenueDAOProxy();
-		} catch (ClassNotFoundException e) {
-			// TODO auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO auto-generated catch block
 			e.printStackTrace();

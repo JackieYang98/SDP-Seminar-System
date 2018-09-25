@@ -2,6 +2,7 @@ package com.sdpseminarsystem.servlet;
 
 
 
+import com.sdpseminarsystem.dao.factory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
@@ -46,9 +47,9 @@ public class LoginServlet extends HttpServlet {
             user.setUserPassword(password);   
             StringBuffer sb = new StringBuffer();
             try {
-			if(UserDAOFactory.getInstance().verify(user))
+			if(DAOFactory.getInstanceOfUserDAO().verify(user))
 			{     
-                            User newUser = UserDAOFactory.getInstance().findById(username);
+                            User newUser = DAOFactory.getInstanceOfUserDAO().findById(username);
                             HttpSession session = request.getSession();
                             session.setAttribute("user", newUser);
                             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
@@ -71,45 +72,8 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 		}
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-//            String username = request.getParameter("username");
-//            String password = request.getParameter("password");
-//                if(password.equals(user.getUserPassword())){
-//                    HttpSession session = request.getSession(true);
-//                    session.setAttribute("currentSessionUser", user);
-//                    request.setAttribute("user", user);
-//                    response.getWriter().print(username);
-//                    request.getRequestDispatcher("index.jsp").forward(request, response);
-//                    
-//		}else{   
-//                    request.setAttribute("message", "Invalid");
-//                    response.sendRedirect("index.jsp");
-//                }
-        // TODO Auto-generated method stub
-//		User user = (User) request.getAttribute("User");
-//		try {
-//			if(UserDAOFactory.getInstance().verify(user))
-//			{
-//				RequestDispatcher dispatcher = request.getRequestDispatcher("login_succseeful.jsp");
-//				dispatcher.forward(request, response);
-//			}
-//			else
-//			{
-//				RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-//				dispatcher.forward(request, response);
-//			}
-//		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-//			//
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-//			dispatcher.forward(request, response);
-//		}
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
-
+        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

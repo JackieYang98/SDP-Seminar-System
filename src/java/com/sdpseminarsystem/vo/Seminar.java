@@ -5,21 +5,21 @@ import java.util.Date;
 
 public class Seminar implements Serializable {
 	
-	private static final long serialVersionUID = 3566639161383290634L;
+	private static final long serialVersionUID = 4036335793236909777L;
 	
-	private int seminarId;
+	private Integer seminarId;
 	private Venue venue;
 	private User userOrganiser;
 	private User userHost;
 	private String seminarTitle;
 	private String seminarDescription;
 	private Date seminarDate;
-	private int seminarLastMins;
+	private Integer seminarLastMins;
 	
-	public int getSeminarId() {
+	public Integer getSeminarId() {
 		return seminarId;
 	}
-	public void setSeminarId(int seminarId) {
+	public void setSeminarId(Integer seminarId) {
 		this.seminarId = seminarId;
 	}
 	public Venue getVenue() {
@@ -58,10 +58,10 @@ public class Seminar implements Serializable {
 	public void setSeminarDate(Date seminarDate) {
 		this.seminarDate = seminarDate;
 	}
-	public int getSeminarLastMins() {
+	public Integer getSeminarLastMins() {
 		return seminarLastMins;
 	}
-	public void setSeminarLastMins(int seminarLastMins) {
+	public void setSeminarLastMins(Integer seminarLastMins) {
 		this.seminarLastMins = seminarLastMins;
 	}
 }

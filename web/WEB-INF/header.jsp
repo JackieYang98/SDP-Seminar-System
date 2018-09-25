@@ -61,26 +61,26 @@
     </div>
             
     <script>
-        $("#loginButton").click(function(event){
-            event.preventDefault();
-            var username = $('#username').val();
-            var password = $('#password').val();
-            var dataString = 'username='+username+'&password='+password;
-                $.ajax({
-                    type: "POST",
-                    url: "LoginServlet",
-                    data: dataString,
-                    success: function(result)
-                    {
-//                        $("form#modal-content").hide(function(){$("div.container").fadeIn();});
-                        document.location="index.jsp";
-                    },
-                    error:function(result){
-                        alert(result.errorThrown + "  " + result.textStatus);
-                    },                         
-                });
-                return false;
-            });
+//        $("#loginButton").click(function(event){
+//            event.preventDefault();
+//            var username = $('#username').val();
+//            var password = $('#password').val();
+//            var dataString = 'username='+username+'&password='+password;
+//                $.ajax({
+//                    type: "POST",
+//                    url: "LoginServlet",
+//                    data: dataString,
+//                    success: function(result)
+//                    {
+////                        $("form#modal-content").hide(function(){$("div.container").fadeIn();});
+//                        document.location="index.jsp";
+//                    },
+//                    error:function(result){
+//                        alert(result.errorThrown + "  " + result.textStatus);
+//                    },                         
+//                });
+//                return false;
+//            });
     </script>
             
     

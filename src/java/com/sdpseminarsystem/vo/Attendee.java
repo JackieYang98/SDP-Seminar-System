@@ -4,32 +4,32 @@ import java.io.Serializable;
 
 public class Attendee implements Serializable {
 	
-	private static final long serialVersionUID = 8653613949704220660L;
+	private static final long serialVersionUID = -350294326949380782L;
 	
-	private int attendeeId;
-	private Seminar Seminar;
+	private Integer attendeeId;
 	private String attendeeEmail;
+	private String attendeePhone;
 	private String attendeeFirstName;
 	private String attendeeLastName;
-	private char attendeeState;
+	private Character attendeeState;
 	
-	public int getAttendeeId() {
+	public Integer getAttendeeId() {
 		return attendeeId;
 	}
-	public void setAttendeeId(int attendeeId) {
+	public void setAttendeeId(Integer attendeeId) {
 		this.attendeeId = attendeeId;
-	}
-	public Seminar getSeminar() {
-		return Seminar;
-	}
-	public void setSeminar(Seminar seminar) {
-		Seminar = seminar;
 	}
 	public String getAttendeeEmail() {
 		return attendeeEmail;
 	}
 	public void setAttendeeEmail(String attendeeEmail) {
 		this.attendeeEmail = attendeeEmail;
+	}
+	public String getAttendeePhone() {
+		return attendeePhone;
+	}
+	public void setAttendeePhone(String attendeePhone) {
+		this.attendeePhone = attendeePhone;
 	}
 	public String getAttendeeFirstName() {
 		return attendeeFirstName;
@@ -43,10 +43,10 @@ public class Attendee implements Serializable {
 	public void setAttendeeLastName(String attendeeLastName) {
 		this.attendeeLastName = attendeeLastName;
 	}
-	public char getAttendeeState() {
+	public Character getAttendeeState() {
 		return attendeeState;
 	}
-	public void setAttendeeState(char attendeeState) {
+	public void setAttendeeState(Character attendeeState) {
 		this.attendeeState = attendeeState;
 	}
 }

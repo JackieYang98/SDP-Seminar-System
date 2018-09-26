@@ -328,18 +328,18 @@ span.psw {
     margin: auto auto;
     width: 800px;
 }
-.register-Fname{ grid-area: a;}
-.register-Lname{ grid-area: b;}
-.register-Fname-input{ grid-area: c;}
-.register-Lname-input{ grid-area: d;}
-.register-email{grid-area:e;}
-.register-email-input{grid-area:f;}
-.register-status{ grid-area:g;}
-.register-status-input{ grid-area:h;}
-.register-submit{grid-area:i;}
-.register-cancel{grid-area:j}
+.addAttendee-Fname{ grid-area: a;}
+.addAttendee-Lname{ grid-area: b;}
+.addAttendee-Fname-input{ grid-area: c;}
+.addAttendee-Lname-input{ grid-area: d;}
+.addAttendee-email{grid-area:e;}
+.addAttendee-email-input{grid-area:f;}
+.addAttendee-status{ grid-area:g;}
+.addAttendee-status-input{ grid-area:h;}
+.addAttendee-submit{grid-area:i;}
+.addAttendee-cancel{grid-area:j}
 
-.register-grid{
+.addAttendee-grid{
     display: inline-grid;
     grid-gap: 15px;
     padding-left: 30px;
@@ -374,6 +374,40 @@ span.psw {
     cursor: pointer;
     width: 200%;
 }
+.addAttendee-cancel button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200%;
+}
+.register-Fname{ grid-area: a;}
+.register-Lname{ grid-area: b;}
+.register-Fname-input{ grid-area: c;}
+.register-Lname-input{ grid-area: d;}
+.register-email{grid-area:e;}
+.register-email-input{grid-area:f;}
+.register-status{ grid-area:g;}
+.register-status-Going{ grid-area:h;}
+.register-status-Interested{ grid-area:hb;}
+.register-submit{grid-area:i;}
+.register-cancel{grid-area:j}
+
+.register-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a a b b'
+        'c c d d'
+        'e . . .'
+        'f f f f'
+        'g . . .'
+        'h . hb .'
+        'i . j .';
+}
 .register-cancel button {
     background-color: #114BE9;
     color: white;
@@ -383,7 +417,7 @@ span.psw {
     cursor: pointer;
     width: 200%;
 }
-
+.register-status-Going
 .email-To{ grid-area: a;}
 .email-To-input{ grid-area: b;}
 .email-CC{ grid-area: c;}
@@ -584,4 +618,45 @@ span.psw {
         'i .'
         'j .'
         'k l';
+}
+.detail-seminar-venue{ grid-area: a;}
+.detail-seminar-location{ grid-area: b;}
+.detail-seminar-date{ grid-area: c;}
+.detail-seminar-start{ grid-area: d;}
+.detail-seminar-end{grid-area:e;}
+.detail-seminar-host{grid-area:f;}
+.detail-seminar-speaker{ grid-area:g;}
+.detail-seminar-speakerV{ grid-area:gv;}
+.detail-seminar-desc{grid-area:h;}
+.detail-seminar-descV{grid-area:hv;}
+.detail-seminar-register{grid-area:i;}
+
+.detail-seminar-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a a a g'
+        'b b b gv'
+        'c d e gv'
+        'f f . gv'
+        'h h . .'
+        'hv hv hv hv'
+        '. . i i';
+}
+.detail-seminar-register button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 65%;
+}
+.detail-seminar-descV textArea{
+    width:760px; 
+    height:250px;
+}
+.detail-seminar-speakerV textArea{
+    width:430px; height:100px;
 }

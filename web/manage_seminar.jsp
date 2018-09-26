@@ -139,32 +139,32 @@
                     </tbody>
                     
                 </table>
-            <button id="attendeeButtons" type="button" onclick="document.getElementById('Register').style.display='block';return false;" style="text-align: center;">Register</button>
+            <button id="attendeeButtons" type="button" onclick="document.getElementById('addAttendee').style.display='block';return false;" style="text-align: center;">Register</button>
             <button id="attendeeButtons" type="button" onclick="document.getElementById('editAttendee').style.display='block';return false;" style="text-align: center;">Edit</button>
             <button id="attendeeButtons" type="button" onclick="document.getElementById('deleteConfirmation').style.display='block';return false;" style="text-align: center;">Delete</button>
             <br>
             <button id="attendeeButtons" type="button" onclick="document.getElementById('printTags').style.display='block';return false;" style="text-align: center;">Print Tags</button>
             <button id="attendeeButtons" type="button" onclick="document.getElementById('emailAttendee').style.display='block';return false;" style="text-align: center;">Email</button>
         </div>
-        <div id="Register" class="modal">
-            <form class="modal-content animate" name="registerAttendeeForm" action="#"  onsubmit="document.getElementById('Confirmation').style.display='block';return false;"method="POST">
+        <div id="addAttendee" class="modal">
+            <form class="modal-content animate" name="addAttendeeForm" action="#"  onsubmit="document.getElementById('Confirmation').style.display='block';return false;"method="POST">
                 <h1>Add Attendee</h1>
-                <div class="register-grid">
-                    <div class="register-Fname">First Name</div>
-                    <div class="register-Lname">Last Name</div>    
-                    <div class="register-Fname-input"><input type="text" name="regFName" placeholder="First Name" required ></div>
-                    <div class="register-Lname-input"><input type="text" name="regLName" placeholder="Last Name" required></div>
-                    <div class="register-email">Email</div>   
-                    <div class="register-email-input"><input type="email" id=emailInput name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
-                    <div class="register-status">Status</div>   
-                    <div class="register-status-input">
+                <div class="addAttendee-grid">
+                    <div class="addAttendee-Fname">First Name</div>
+                    <div class="addAttendee-Lname">Last Name</div>    
+                    <div class="addAttendee-Fname-input"><input type="text" name="regFName" placeholder="First Name" required ></div>
+                    <div class="addAttendee-Lname-input"><input type="text" name="regLName" placeholder="Last Name" required></div>
+                    <div class="addAttendee-email">Email</div>   
+                    <div class="addAttendee-email-input"><input type="email" id="emailInput" name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
+                    <div class="addAttendee-status">Status</div>   
+                    <div class="addAttendee-status-input">
                         <select>
                             <option value="Going">Going</option>
                             <option value="Interested">Interested</option>
                         </select>
                     </div>    
-                    <div class="register-submit"><input id="registerButton" type="submit" name="attendeeRegister" value="Confirm"> </button></div>
-                    <div class="register-cancel"><button type="button" onclick="document.getElementById('Register').style.display='none'"> Close </button></div>
+                    <div class="addAttendee-submit"><input id="registerButton" type="submit" name="attendeeAdd" value="Confirm"> </button></div>
+                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('addAttendee').style.display='none'"> Close </button></div>
                 </div>
             </form>
         </div>
@@ -179,22 +179,22 @@
         <div id="editAttendee" class="modal">
             <form class="modal-content animate" action="#" onSubmit="document.getElementById('editConfirmation').style.display='block';return false" method="POST">
                 <h1>Edit Attendee</h1>
-                <div class="register-grid">
-                    <div class="register-Fname">First Name</div>
-                    <div class="register-Lname">Last Name</div>    
-                    <div class="register-Fname-input"><input type="text" name="editFirstName" placeholder="First Name" required></div>
-                    <div class="register-Lname-input"><input type="text" name="editLastName" placeholder="Last Name" required></div>
-                    <div class="register-email">Email</div>   
-                    <div class="register-email-input"><input type="email" id=emailInput name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
-                    <div class="register-status">Status</div>   
-                    <div class="register-status-input">
+                <div class="addAttendee-grid">
+                    <div class="addAttendee-Fname">First Name</div>
+                    <div class="addAttendee-Lname">Last Name</div>    
+                    <div class="addAttendee-Fname-input"><input type="text" name="editFirstName" placeholder="First Name" required></div>
+                    <div class="addAttendee-Lname-input"><input type="text" name="editLastName" placeholder="Last Name" required></div>
+                    <div class="addAttendee-email">Email</div>   
+                    <div class="addAttendee-email-input"><input type="email" id="emailInput" name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
+                    <div class="addAttendee-status">Status</div>   
+                    <div class="addAttendee-status-input">
                         <select>
                             <option value="Going">Going</option>
                             <option value="Interested">Interested</option>
                         </select>
                     </div>    
-                    <div class="register-submit"><input id="editButton" type="submit" name="attendeeEdit" value="Confirm"> </div>
-                    <div class="register-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Close</button></div>
+                    <div class="addAttendee-submit"><input id="editButton" type="submit" name="attendeeEdit" value="Confirm"> </div>
+                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Close</button></div>
                 </div>
             </form>
         </div>

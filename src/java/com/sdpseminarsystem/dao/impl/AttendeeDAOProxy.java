@@ -34,4 +34,22 @@ public class AttendeeDAOProxy extends DAOProxy implements IAttendeeDAO {
 		dbc.close();
 		return attendee;
 	}
+
+	@Override
+	public boolean update(Attendee attendee) throws SQLException {
+		boolean flag = false;
+		if(dao.findById(attendee.getAttendeeId()) != null)
+			dao.update(attendee);
+		dbc.close();
+		return flag;
+	}
+
+	@Override
+	public boolean delete(Attendee attendee) throws SQLException {
+		boolean flag = false;
+		if(dao.findById(attendee.getAttendeeId()) != null)
+			dao.delete(attendee);
+		dbc.close();
+		return flag;
+	}
 }

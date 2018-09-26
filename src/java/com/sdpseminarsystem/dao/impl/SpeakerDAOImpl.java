@@ -59,4 +59,30 @@ public class SpeakerDAOImpl extends DAOImpl implements ISpeakerDAO {
 		}
 		return speaker;
 	}
+
+	@Override
+	public boolean update(Speaker speaker) throws SQLException {
+		String sql = "update speakers set SpeakerName = ?, SpeakerBiography = ? where SpeakerId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, speaker.getSpeakerName());
+		stmt.setString(2, speaker.getSpeakerBiography());
+		stmt.setInt(3, speaker.getSpeakerId());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public boolean delete(Speaker speaker) throws SQLException {
+		String sql = "delete from speakers where SpeakerId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, speaker.getSpeakerId());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
 }

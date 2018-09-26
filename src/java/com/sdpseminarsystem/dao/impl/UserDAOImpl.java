@@ -69,6 +69,31 @@ public class UserDAOImpl extends DAOImpl implements IUserDAO {
 		}
 		return user;
 	}
+	
+	@Override
+	public boolean update(User user) throws SQLException {
+		String sql = "update users set UserTypeFlag = ? where UserId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, String.valueOf(user.getUserTypeFlag()));
+		stmt.setString(2, user.getUserId());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public boolean delete(User user) throws SQLException {
+		String sql = "delete from users where UserId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, user.getUserId());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
 
 	@Override
 	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {

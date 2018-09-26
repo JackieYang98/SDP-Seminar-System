@@ -34,4 +34,22 @@ public class SpeakerDAOProxy extends DAOProxy implements ISpeakerDAO {
 		dbc.close();
 		return speaker;
 	}
+
+	@Override
+	public boolean update(Speaker speaker) throws SQLException {
+		boolean flag = false;
+		if(dao.findById(speaker.getSpeakerId()) != null)
+			dao.update(speaker);
+		dbc.close();
+		return flag;
+	}
+
+	@Override
+	public boolean delete(Speaker speaker) throws SQLException {
+		boolean flag = false;
+		if(dao.findById(speaker.getSpeakerId()) != null)
+			dao.delete(speaker);
+		dbc.close();
+		return flag;
+	}
 }

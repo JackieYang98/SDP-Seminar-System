@@ -40,6 +40,24 @@ public class UserDAOProxy extends DAOProxy implements IUserDAO {
 	}
 	
 	@Override
+	public boolean update(User user) throws SQLException {
+		boolean flag = false;
+		if(dao.findById(user.getUserId()) == null)
+			flag = dao.update(user);
+		dbc.close();
+		return flag;
+	}
+	
+	@Override
+	public boolean delete(User user) throws SQLException {
+		boolean flag = false;
+		if(dao.findById(user.getUserId()) == null)
+			flag = dao.delete(user);
+		dbc.close();
+		return flag;
+	}
+	
+	@Override
 	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		boolean flag = false;
 		if(dao.findById(user.getUserId()) != null)

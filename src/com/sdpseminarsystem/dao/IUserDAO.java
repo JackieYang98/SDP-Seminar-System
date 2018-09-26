@@ -11,5 +11,7 @@ public interface IUserDAO {
 	public boolean create(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException;
 	public List<User> findAll() throws SQLException;
 	public User findById(String userId) throws SQLException;
+	public boolean update(User user) throws SQLException;
+	public boolean delete(User user) throws SQLException;
 	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException;
 }

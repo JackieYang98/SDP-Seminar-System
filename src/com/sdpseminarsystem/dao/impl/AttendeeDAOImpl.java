@@ -69,4 +69,34 @@ public class AttendeeDAOImpl extends DAOImpl implements IAttendeeDAO {
 		}
 		return attendee;
 	}
+
+	@Override
+	public boolean update(Attendee attendee) throws SQLException {
+		String sql = "update attendees set AttendeeEmail = ?, AttendeePhone = ?, AttendeeFirstName = ?,"
+				+ " AttendeeLastName = ?, AttendeeState = ? where AttendeeId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, attendee.getAttendeeEmail());
+		stmt.setString(2, attendee.getAttendeePhone());
+		stmt.setString(3, attendee.getAttendeeFirstName());
+		stmt.setString(4, attendee.getAttendeeLastName());
+		stmt.setString(5, String.valueOf(attendee.getAttendeeState()));
+		stmt.setInt(6, attendee.getAttendeeId());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public boolean delete(Attendee attendee) throws SQLException {
+		String sql = "delete from attendees where AttendeeId = ?;";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, attendee.getAttendeeId());
+		int update = stmt.executeUpdate();
+		if(update > 0)
+			return true;
+		else
+			return false;
+	}
 }

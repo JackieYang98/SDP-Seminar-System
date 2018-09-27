@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Seminar implements Serializable {
 	
-	private static final long serialVersionUID = 4036335793236909777L;
+	private static final long serialVersionUID = -7728848261548449116L;
 	
 	private Integer seminarId;
 	private Venue venue;
@@ -13,8 +13,9 @@ public class Seminar implements Serializable {
 	private User userHost;
 	private String seminarTitle;
 	private String seminarDescription;
-	private Date seminarDate;
+	private Date seminarStartTime;
 	private Integer seminarLastMins;
+	private static final Long MIN = (long) (60 * 1000);
 	
 	public Integer getSeminarId() {
 		return seminarId;
@@ -52,16 +53,22 @@ public class Seminar implements Serializable {
 	public void setSeminarDescription(String seminarDescription) {
 		this.seminarDescription = seminarDescription;
 	}
-	public Date getSeminarDate() {
-		return seminarDate;
+	public Date getSeminarStartTime() {
+		return seminarStartTime;
 	}
-	public void setSeminarDate(Date seminarDate) {
-		this.seminarDate = seminarDate;
+	public void setSeminarStartTime(Date seminarStartTime) {
+		this.seminarStartTime = seminarStartTime;
 	}
 	public Integer getSeminarLastMins() {
 		return seminarLastMins;
 	}
 	public void setSeminarLastMins(Integer seminarLastMins) {
 		this.seminarLastMins = seminarLastMins;
+	}
+	public Date getSeminarEndTime() {
+		return new Date(seminarStartTime.getTime() + seminarLastMins * MIN);
+	}
+	public void setSeminarEndTime(Date seminarEndTime) {
+		this.seminarLastMins = (int) ((seminarEndTime.getTime() - seminarStartTime.getTime()) / MIN);
 	}
 }

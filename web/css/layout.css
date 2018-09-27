@@ -383,41 +383,7 @@ span.psw {
     cursor: pointer;
     width: 200%;
 }
-.register-Fname{ grid-area: a;}
-.register-Lname{ grid-area: b;}
-.register-Fname-input{ grid-area: c;}
-.register-Lname-input{ grid-area: d;}
-.register-email{grid-area:e;}
-.register-email-input{grid-area:f;}
-.register-status{ grid-area:g;}
-.register-status-Going{ grid-area:h;}
-.register-status-Interested{ grid-area:hb;}
-.register-submit{grid-area:i;}
-.register-cancel{grid-area:j}
 
-.register-grid{
-    display: inline-grid;
-    grid-gap: 15px;
-    padding-left: 30px;
-    grid-template-areas:   
-        'a a b b'
-        'c c d d'
-        'e . . .'
-        'f f f f'
-        'g . . .'
-        'h . hb .'
-        'i . j .';
-}
-.register-cancel button {
-    background-color: #114BE9;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 200%;
-}
-.register-status-Going
 .email-To{ grid-area: a;}
 .email-To-input{ grid-area: b;}
 .email-CC{ grid-area: c;}
@@ -635,6 +601,7 @@ span.psw {
     display: inline-grid;
     grid-gap: 15px;
     padding-left: 30px;
+    text-align: left;
     grid-template-areas:   
         'a a a g'
         'b b b gv'
@@ -659,4 +626,100 @@ span.psw {
 }
 .detail-seminar-speakerV textArea{
     width:430px; height:100px;
+}
+.register-Fname{ grid-area: a;}
+.register-Lname{ grid-area: b;}
+.register-Fname-input{ grid-area: c;}
+.register-Lname-input{ grid-area: d;}
+.register-email{grid-area:e;}
+.register-email-input{grid-area:f;}
+.register-status{ grid-area:g;}
+.register-status-Going{ grid-area:h;}
+.register-status-Interested{ grid-area:hb;}
+.register-registered{grid-area:i;}
+.register-submit{grid-area:j;}
+.register-cancel{grid-area:k}
+
+.register-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a a b b'
+        'c c d d'
+        'e . . .'
+        'f f f f'
+        'g . . .'
+        'h . hb .'
+        '. . . i'
+        'j . k .';
+}
+.register-cancel button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200%;
+}
+.registerEdit-Fname{ grid-area: a;}
+.registerEdit-Lname{ grid-area: b;}
+.registerEdit-Fname-input{ grid-area: c;}
+.registerEdit-Lname-input{ grid-area: d;}
+.registerEdit-email{grid-area:e;}
+.registerEdit-email-input{grid-area:f;}
+.registerEdit-status{ grid-area:g;}
+.registerEdit-status-Going{ grid-area:h;}
+.registerEdit-status-Interested{ grid-area:hb;}
+.registerEdit-submit{grid-area:i;}
+.registerEdit-delete{grid-area:j}
+
+.registerEdit-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a a b b'
+        'c c d d'
+        'e . . .'
+        'f f f f'
+        'g . . .'
+        'h . hb .'
+        'i . j .';
+}
+.registerEdit-delete button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200%;
+}
+
+.registered-email{ grid-area: a;}
+.registered-email-input{ grid-area: b;}
+.registered-submit{ grid-area: c;}
+
+.registered-grid{
+    display: inline-grid;
+    grid-gap: 15px;
+    padding-left: 30px;
+    grid-template-areas:   
+        'a b b b'
+        '. c c .';
+}
+.registered-email-input input{
+    width: 100%;
+    height: 30px;
+}
+.registered-cancel button {
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 65%;
 }

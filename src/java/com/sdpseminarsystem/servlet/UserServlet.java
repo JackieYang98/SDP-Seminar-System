@@ -60,14 +60,20 @@ public class UserServlet extends HttpServlet {
 			}
 			else if (submitFlag == "delete") {
 				User user = (User) request.getAttribute("user");
+				User deleteUser = new User();
+				deleteUser.setUserId(request.getParameter("userid"));
+				deleteUser.setUserTypeFlag(request.getParameter("role").charAt(0));
+				DAOFactory.getInstanceOfUserDAO().update(deleteUser);
+			}
+			else if (submitFlag == "delete") {
+				User user = new User();
+				user.setUserId(request.getParameter("userid"));
+
 				DAOFactory.getInstanceOfUserDAO().delete(user);
 			}
 			else {
 				throw new SQLException();
 			}
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":"+request.getServerPort()
-				+ request.getContextPath() + "/";
-			request.getRequestDispatcher(basePath).forward(request, response);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,6 +81,10 @@ public class UserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			request.setAttribute("mess", false);
+		} finally {
+//			String basePath = request.getScheme() + "://" + request.getServerName() + ":"+request.getServerPort() 
+//				+ request.getContextPath() + "/";
+			request.getRequestDispatcher("manage_user.jsp").forward(request, response);
 		}
 	}
 }

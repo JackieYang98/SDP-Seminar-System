@@ -76,12 +76,6 @@ public class UserServlet extends HttpServlet {
 			else {
 				throw new SQLException();
 			}
-<<<<<<< Updated upstream
-=======
-//			String basePath = request.getScheme() + "://" + request.getServerName() + ":"+request.getServerPort()
-//				+ request.getContextPath() + "/";
-			request.getRequestDispatcher("manage_user.jsp").forward(request, response);
->>>>>>> Stashed changes
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

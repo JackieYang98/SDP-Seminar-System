@@ -76,28 +76,6 @@
                     </div>
                 </form>
             </div>
-            <div id="seminarConfirm" class="modal">
-                <div class="modal-content animate" align="center">
-                    <p><b>Your registration for the following seminar has been confirmed.</b></p>
-                    <table align="center">
-                        <tr>
-                            <th><b>Venue:</b></th>
-                            <th><b>Location:</b></th>
-                            <th><b>Date: </b></th>
-                        </tr>
-                        <tr>
-                            <td>xxxxxxxxxxxx</td>
-                            <td>yyyyyyyyyyyyyyyyyyyyyyy</td>
-                            <td>zzzzzzzzzzzzzzz </td>
-                        </tr>
-                    </table>
-                    <p> <b>First Name:</b> Some name here </p>
-                    <p> <b>Last Name:</b> Some name here </p>
-                    <p> <b>Email: </b> Some email here </p>
-                    <p> <b>Status: </b> Some status here </p>
-                    <button type="button" onclick="document.getElementById('seminarConfirm').style.display='none';document.getElementById('seminarRegister').style.display='none'" title="Close Page">Return</button>
-                </div> 
-            </div>
             <div id="seminarRegistered" class="modal">
                 <div align="center">
                     <form class="modal-content animate" name="detailRegisteredEmailForm" action="#"  onsubmit="document.getElementById('seminarRegisterEdit').style.display='block'; document.getElementById('seminarRegistered').style.display='none';return false;"method="POST">
@@ -112,7 +90,7 @@
                 </div> 
              </div>
             <div id="seminarRegisterEdit" class="modal" >
-                <form class="modal-content animate" name="detailRegAttendeeEditForm" action="#"  onsubmit="document.getElementById('seminarConfirm').style.display='block';return false;"method="POST">
+                <form class="modal-content animate" name="detailRegAttendeeEditForm" action="#"  onsubmit="document.getElementById('seminarEditConfirm').style.display='block';return false;"method="POST">
                     <div class="center">
                         <h1>Seminar Name</h1>
                         <table align="center">
@@ -140,10 +118,54 @@
                             <div class="registerEdit-status-Interested"><input type="radio" name="status" value="Interested"/> Interested</div>
                             <div class="registerEdit-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered?</label></div>  
                             <div class="registerEdit-submit"><input id="registerButton" type="submit" name="seminarRegisterEditSubmit" value="Confirm"></div>
-                            <div class="registerEdit-delete"><button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='none'">Delete</button></div>
+                            <div class="registerEdit-delete"><button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='block'">Delete</button></div>
                         </div>
                     </div>
                 </form>
+            </div>
+            <div id="seminarConfirm" class="modal">
+                <div class="modal-content animate" align="center">
+                    <p><b>Your registration for the following seminar has been confirmed.</b></p>
+                    <table align="center">
+                        <tr>
+                            <th><b>Venue:</b></th>
+                            <th><b>Location:</b></th>
+                            <th><b>Date: </b></th>
+                        </tr>
+                        <tr>
+                            <td>xxxxxxxxxxxx</td>
+                            <td>yyyyyyyyyyyyyyyyyyyyyyy</td>
+                            <td>zzzzzzzzzzzzzzz </td>
+                        </tr>
+                    </table>
+                    <p> <b>First Name:</b> Some name here </p>
+                    <p> <b>Last Name:</b> Some name here </p>
+                    <p> <b>Email: </b> Some email here </p>
+                    <p> <b>Status: </b> Some status here </p>
+                    <button type="button" onclick="document.getElementById('seminarConfirm').style.display='none';document.getElementById('seminarRegister').style.display='none'" title="Close Page">Return</button>
+                </div> 
+            </div>
+            <div id="seminarEditConfirm" class="modal">
+                <div class="modal-content animate" align="center">
+                    <p><b>Your edit for the following seminar has been confirmed.</b></p>
+                    <table align="center">
+                        <tr>
+                            <th><b>Venue:</b></th>
+                            <th><b>Location:</b></th>
+                            <th><b>Date: </b></th>
+                        </tr>
+                        <tr>
+                            <td>xxxxxxxxxxxx</td>
+                            <td>yyyyyyyyyyyyyyyyyyyyyyy</td>
+                            <td>zzzzzzzzzzzzzzz </td>
+                        </tr>
+                    </table>
+                    <p> <b>First Name:</b> Some name here </p>
+                    <p> <b>Last Name:</b> Some name here </p>
+                    <p> <b>Email: </b> Some email here </p>
+                    <p> <b>Status: </b> Some status here </p>
+                    <button type="button" onclick="document.getElementById('seminarEditConfirm').style.display='none';document.getElementById('seminarRegisterEdit').style.display='none';" title="Close Page">Return</button>
+                </div> 
             </div>
             <div id="seminarRegisterDelete" class="modal">
                 <div class="modal-content animate">
@@ -152,7 +174,7 @@
                     <p> <b>First Name:</b> Some name here </p>
                     <p> <b>Last Name:</b> Some name here </p>
                     <p> <b>Email</b> Some email here </p>
-                    <button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='none'" title="Close Page">Return</button>
+                    <button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='none';document.getElementById('seminarRegisterEdit').style.display='none'" title="Close Page">Return</button>
                 </div>        
             </div>
         </div>

@@ -22,7 +22,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 		stmt.setInt(2, seminar.getVenue().getVenueId());
 		stmt.setString(3, seminar.getSeminarTitle());
 		stmt.setString(4, seminar.getSeminarDescription());
-		stmt.setTimestamp(5, new java.sql.Timestamp(seminar.getSeminarDate().getTime()));
+		stmt.setTimestamp(5, new java.sql.Timestamp(seminar.getSeminarStartTime().getTime()));
 		stmt.setInt(6, seminar.getSeminarLastMins());
 		int update = stmt.executeUpdate();
 		if(update > 0)
@@ -67,7 +67,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 			seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
 			seminar.setSeminarTitle(rs.getString("SeminarTitle"));
 			seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-			seminar.setSeminarDate(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
+			seminar.setSeminarStartTime(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
 			seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
 		}
 		return seminar;
@@ -95,7 +95,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 			seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
 			seminar.setSeminarTitle(rs.getString("SeminarTitle"));
 			seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-			seminar.setSeminarDate(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
+			seminar.setSeminarStartTime(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
 			seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
 			list.add(seminar);
 		}
@@ -122,7 +122,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 		stmt.setInt(1, seminar.getVenue().getVenueId());
 		stmt.setString(2, seminar.getSeminarTitle());
 		stmt.setString(3, seminar.getSeminarDescription());
-		stmt.setTimestamp(4, new java.sql.Timestamp(seminar.getSeminarDate().getTime()));
+		stmt.setTimestamp(4, new java.sql.Timestamp(seminar.getSeminarStartTime().getTime()));
 		stmt.setInt(5, seminar.getSeminarLastMins());
 		stmt.setInt(6, seminar.getSeminarId());
 		int update = stmt.executeUpdate();
@@ -145,7 +145,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 			seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
 			seminar.setSeminarTitle(rs.getString("SeminarTitle"));
 			seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-			seminar.setSeminarDate(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
+			seminar.setSeminarStartTime(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
 			seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
 			list.add(seminar);
 		}

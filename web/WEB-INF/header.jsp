@@ -34,7 +34,10 @@
             <div class="userfeatures">
                 <a id="browse" href="/SDP-Seminar-System/index.jsp">Browse</a>
                 <%if(user.getUserTypeFlag()=='a'){%><a id="manageuser" href="/SDP-Seminar-System/manage_user.jsp">Manage User</a><%}%>
-                <a id="createseminar" href="/SDP-Seminar-System/create_seminar.jsp">Create Seminar</a>
+                <%if(user.getUserTypeFlag()!='a'){%>
+                    <a id="manageseminar" href="/SDP-Seminar-System/manage_seminar.jsp">Manage Seminar</a>
+                    <a id="createseminar" href="/SDP-Seminar-System/create_seminar.jsp">Create Seminar</a>
+                <%}%>
                 <a id="login" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>
                 <a id="logout" href="/SDP-Seminar-System/logout.jsp"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
             </div>
@@ -66,7 +69,6 @@
             var username = $('#username').val();
             var password = $('#password').val();
             var data = 'username=' +username+'&password='+password;
-//            var data = $(this).serialize();
                 $.ajax({
                     type: "POST",
                     url: "LoginServlet",

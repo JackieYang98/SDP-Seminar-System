@@ -46,7 +46,7 @@
         <%@include file="WEB-INF/header.jsp" %>
         <div class="manage-page">
         
-            <form action="manage_user.jsp" method="POST">
+            <form action="user" method="POST">
                 <div class="container">
                     <h1>User List</h1>
                     <table class="user-list">
@@ -90,14 +90,15 @@
                     <h1>User Role</h1>
                     <div class="add-role-input">
                         <select class="role-select">
-                            <option value="radmin">Administrator</option>
-                            <option value="rorganiser" selected>Organiser</option>
-                            <option value="rhost">Host</option>
+                            <option value="admin">Administrator</option>
+                            <option value="organiser" selected>Organiser</option>
+                            <option value="host">Host</option>
                         </select>
                     </div>
                     <div class="center">
-                    <button type="submit">Confirm</button>
-                    <button type="submit">Delete</button>
+                    <input id="confirm-delete" type="hidden" name="submit">
+                    <button name="update" type="submit" onclick="updateDelete(this)">Confirm</button>
+                    <button name="delete" type="submit" onclick="updateDelete(this)">Delete</button>
                     </div>
                 </div>           
             </form>
@@ -105,7 +106,7 @@
             <!--Pop up for add user-->
             <div class="center">
                 <div id="addUser" class="modal">
-                    <form name="addUserForm" class="modal-content animate" action="#" onsubmit="return validateAddUserForm()" method="POST">
+                    <form name="addUserForm" class="modal-content animate" action="user" onsubmit="return validateAddUserForm()" method="POST">
                         <h2>Add User</h2>
                             <div id="add-grid" class="container">
                                 <div class="add-id">UTS ID</div>
@@ -121,18 +122,26 @@
                                 <div class="add-role">User Role</div>
                                 <div class="add-role-input">
                                     <select class="role-select" name="role">
-                                        <option value="radmin">Administrator</option>
-                                        <option value="rorganiser" selected>Organiser</option>
-                                        <option value="rhost">Host</option>
+                                        <option value="admin">Administrator</option>
+                                        <option value="organiser" selected>Organiser</option>
+                                        <option value="host">Host</option>
                                     </select>
                                 </div>
                                 <div class="add-submit"><input class="submitButton" type="submit" name="addUser" value="Add"></div>
+                                <input type="hidden" name="submit" value="create">
                                 <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input class="submitButton" type="button" name="addUser" value="Cancel"></div>
                             </div>
                     </form>
                 </div>
             </div>
         </div>
+        
+        <script>
+            function updateDelete(button){
+                document.getElementById('confirm-delete').value = button.name;
+                return true;
+            }
+        </script>
     </body>
 </html>     
 <%  

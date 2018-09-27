@@ -54,11 +54,13 @@ public class UserServlet extends HttpServlet {
 				user.setUserTypeFlag(request.getParameter("role").charAt(0));
 				DAOFactory.getInstanceOfUserDAO().create(user);
 			}
-			else if (submitFlag == "update") {
+			else if (submitFlag.equals("update")) {
+                                System.out.print(submitFlag);
 				User user = (User) request.getAttribute("user");
 				DAOFactory.getInstanceOfUserDAO().update(user);
 			}
-			else if (submitFlag == "delete") {
+			else if (submitFlag.equals("delete")) {
+                                System.out.print(submitFlag);
 				User user = (User) request.getAttribute("user");
 				User deleteUser = new User();
 				deleteUser.setUserId(request.getParameter("userid"));
@@ -74,6 +76,12 @@ public class UserServlet extends HttpServlet {
 			else {
 				throw new SQLException();
 			}
+<<<<<<< Updated upstream
+=======
+//			String basePath = request.getScheme() + "://" + request.getServerName() + ":"+request.getServerPort()
+//				+ request.getContextPath() + "/";
+			request.getRequestDispatcher("manage_user.jsp").forward(request, response);
+>>>>>>> Stashed changes
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

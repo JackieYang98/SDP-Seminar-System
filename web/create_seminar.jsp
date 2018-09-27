@@ -23,7 +23,7 @@
         <%@include file="WEB-INF/header.jsp" %>
         <div class="center">
         <h1 style="padding-left:20px;">Create Seminar</h1>
-            <form action="#createaction" method="POST">
+            <form action="CreateSeminarServlet" method="POST">
                 <div class="grid-container">
                     <div class="grid-sem-name">Seminar Name</div>
                     <div class="grid-sem-desc">Seminar Description</div>
@@ -33,10 +33,10 @@
                     <div class="grid-ven-loc">Venue Location</div>
                     <div class="grid-ven-name-input">                     
                         <select name='venueName' id="selectDropdown">
-                        <option value="Room 1">Room 1</option>
-                        <option value="Room 2">Room 2</option>
-                        <option value="Room 3">Room 3</option>
-                        <option value="Room 4">Room 4..etc</option>
+                            <option value="Room 1">Room 1</option>
+                            <option value="Room 2">Room 2</option>
+                            <option value="Room 3">Room 3</option>
+                            <option value="Room 4">Room 4..etc</option>
                         </select>
                     </div>
                     <div class="grid-ven-loc-input"><input type="text" name="venueLocation" placeholder="Venue Location (CBXX.YY.ZZZ)" required></div>
@@ -58,25 +58,35 @@
                             <option value="Host 4">Host 4..etc</option>
                         </select>
                     </div>
-                    <div class="grid-image"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
-                    <div class="grid-image-input"><input type="file" name="seminarImage"></div>
+                    <div class="grid-image"><img id="image" src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
+                    <div class="grid-image-input"><input id="image-input" type="file" name="seminarImage"></div>
                     <div class="grid-bio">Speaker 1 Biography</div>
                     <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
                     <div onclick='hide("speaker2")' class="grid-speaker2" style="cursor: pointer; text-decoration: underline; ">Speaker 2 (Click to Toggle)</div>
                     <div id="speaker2" class="grid-speaker2-input" style="display: none;">
-                        <div><input type="text" name="speaker2Name" placeholder="Speaker 2 Name" ></div>
+                        <div><input type="text" name="speakerTwoName" placeholder="Speaker 2 Name" ></div>
                         <div>Speaker 2 Biography</div>
-                        <div><textarea class="biotext" name="speakerBio2" placeholder="About the second speaker..."></textarea></div>
+                        <div><textarea class="biotext" name="speakerTwoBio" placeholder="About the second speaker..."></textarea></div>
                             <div onclick='hide("speaker3")' class="grid-speaker3" style="cursor: pointer; text-decoration: underline;">Speaker 3 (Click to Toggle)</div>
                             <div id="speaker3" class="grid-speaker3-input" style="display: none;">
-                                <div><input type="text" name="speaker3Name" placeholder="Speaker 3 Name" ></div>
+                                <div><input type="text" name="speakerThreeName" placeholder="Speaker 3 Name" ></div>
                                 <div>Speaker 3 Biography</div>
-                                <div><textarea class="biotext" name="speakerBio3" placeholder="About the third speaker..."></textarea></div>
+                                <div><textarea class="biotext" name="speakerThreeBio" placeholder="About the third speaker..."></textarea></div>
                             </div>
                     </div>
                     <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
-                    </div>
+                </div>
             </form>
         </div>
+        <script>
+            $('#image-input').onchange = function(e) {
+            // Get the first file in the FileList object
+            var imageFile = this.files[0];
+            // get a local URL representation of the image blob
+            var url = window.URL.createObjectURL(imageFile);
+            // Now use your newly created URL!
+            $('#image').src = url;
+}
+        </script>
     </body>
 </html>

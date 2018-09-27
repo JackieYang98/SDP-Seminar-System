@@ -436,7 +436,7 @@ span.psw {
  
 }
 
-.attendee-list thead, tbody{
+/*.attendee-list thead, tbody{
     display:block;
 }
 .attendee-list tbody{
@@ -467,7 +467,7 @@ span.psw {
 
 .attendee-list tr:hover{
     background-color: #f5f5f5;
-}
+}*/
 .add-id{ grid-area: a;}
 .add-id-input{ grid-area: b;}
 .add-fname {grid-area:c;}
@@ -511,7 +511,7 @@ span.psw {
     font-family: openSansRegular;
 }
 
-.user-list{
+/*.user-list{
     width: 100%;
     border: solid 1px #ddd;
     text-align: left;
@@ -553,7 +553,7 @@ span.psw {
 .selected {
     background-color: #4195fc;
     color: #FFF;
-}
+}*/
 
 .manage-browse{ grid-area: z;}
 .manage-fname{ grid-area: a;}

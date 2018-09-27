@@ -45,33 +45,28 @@ public class UserServlet extends HttpServlet {
 		try {
 			String submitFlag = request.getParameter("submit");
 			if(submitFlag.equals("create")) {
-				User user = new User();
-				user.setUserId(request.getParameter("userid"));
-				user.setUserEmail(request.getParameter("email"));
-				user.setUserFirstName(request.getParameter("fName"));
-				user.setUserLastName(request.getParameter("lName"));
-				user.setUserPassword(request.getParameter("password"));
-				user.setUserTypeFlag(request.getParameter("role").charAt(0));
-				DAOFactory.getInstanceOfUserDAO().create(user);
+                            User user = new User();    
+                            user.setUserId(request.getParameter("userid"));
+                            user.setUserEmail(request.getParameter("email"));
+                            user.setUserFirstName(request.getParameter("fName"));
+                            user.setUserLastName(request.getParameter("lName"));
+                            user.setUserPassword(request.getParameter("password"));
+                            user.setUserTypeFlag(request.getParameter("role").charAt(0));
+                            DAOFactory.getInstanceOfUserDAO().create(user);
 			}
 			else if (submitFlag.equals("update")) {
-                                System.out.print(submitFlag);
-				User user = (User) request.getAttribute("user");
-				DAOFactory.getInstanceOfUserDAO().update(user);
+                            String selectedUser = request.getParameter("row");
+                            User user = new User();
+                            user.setUserTypeFlag(request.getParameter("role").charAt(0));
+                            user.setUserId(selectedUser);
+                            System.out.print(user.getUserId() + user.getUserTypeFlag());
+                            DAOFactory.getInstanceOfUserDAO().update(user);
 			}
 			else if (submitFlag.equals("delete")) {
-                                System.out.print(submitFlag);
-				User user = (User) request.getAttribute("user");
-				User deleteUser = new User();
-				deleteUser.setUserId(request.getParameter("userid"));
-				deleteUser.setUserTypeFlag(request.getParameter("role").charAt(0));
-				DAOFactory.getInstanceOfUserDAO().update(deleteUser);
-			}
-			else if (submitFlag == "delete") {
-				User user = new User();
-				user.setUserId(request.getParameter("userid"));
-
-				DAOFactory.getInstanceOfUserDAO().delete(user);
+                            User selectedUser = new User();
+                            selectedUser.setUserId(request.getParameter("row"));
+                            System.out.print(request.getParameter("row"));
+                            DAOFactory.getInstanceOfUserDAO().delete(selectedUser);
 			}
 			else {
 				throw new SQLException();

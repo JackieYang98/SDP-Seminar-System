@@ -35,6 +35,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="scripts/script.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <style>
             #manageuser{
@@ -49,12 +52,13 @@
             <form action="user" method="POST">
                 <div class="container">
                     <h1>User List</h1>
-                    <table class="user-list">
+                    <div id="events"></div>
+                    <table id="user-list" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>UTS ID</th>
-                                <th>First</th>
-                                <th>Last</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
                                 <th>User Role</th>
                             </tr>
@@ -89,7 +93,7 @@
 
                     <h1>User Role</h1>
                     <div class="add-role-input">
-                        <select class="role-select">
+                        <select class="role-select" name="role">
                             <option value="admin">Administrator</option>
                             <option value="organiser" selected>Organiser</option>
                             <option value="host">Host</option>
@@ -97,8 +101,9 @@
                     </div>
                     <div class="center">
                     <input id="confirm-delete" type="hidden" name="submit">
-                    <button name="update" type="submit" onclick="updateDelete(this)">Confirm</button>
-                    <button name="delete" type="submit" onclick="updateDelete(this)">Delete</button>
+                    <input id="row" type="hidden" value="" name="row">
+                    <button name="update" type="submit" onclick="return updateDelete(this)">Confirm</button>
+                    <button name="delete" type="submit" onclick="return updateDelete(this)">Delete</button>
                     </div>
                 </div>           
             </form>
@@ -136,12 +141,26 @@
             </div>
         </div>
         
-        <script>
-            function updateDelete(button){
-                document.getElementById('confirm-delete').value = button.name;
-                return true;
+<script>
+    function updateDelete(button){
+        document.getElementById('confirm-delete').value = button.name;
+        return true;
+    }
+
+    $(document).ready(function() {
+        var table = $('#user-list').DataTable( {
+            select:{
+                items: 'row',
+                style: 'single'
             }
-        </script>
+        } );
+
+        $('#user-list tbody').on( 'click', 'tr', function () {
+            var data =  table.row( this ).data()[0];
+            $('#row').val(data);
+        } );
+    } );
+</script>
     </body>
 </html>     
 <%  

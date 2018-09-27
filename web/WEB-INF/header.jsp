@@ -82,8 +82,8 @@
                         }
                     },
                     error:function(xhr, ajaxOptions, thrownError){
-                        alert(xhr.status);
-                        alert(thrownError);
+                        alert(xhr.status + " " + thrownError + " Please come back soon while the server reload.");
+                        
                     },                         
                 });
                 return false;

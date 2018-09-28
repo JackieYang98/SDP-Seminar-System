@@ -56,4 +56,9 @@
             </table>
         </div>
     </body>
+    <script>
+        //Function to get current date
+        var currentDate = new Date().toISOString().split('T')[0];
+        document.getElementsByName("Date")[0].setAttribute('min', currentDate);
+        </script>
 </html>

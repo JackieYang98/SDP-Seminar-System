@@ -164,7 +164,7 @@
                         </select>
                     </div>    
                     <div class="addAttendee-submit"><input id="registerButton" type="submit" name="attendeeAdd" value="Confirm"> </button></div>
-                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('addAttendee').style.display='none'"> Close </button></div>
+                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('addAttendee').style.display='none'"> Cancel </button></div>
                 </div>
             </form>
         </div>
@@ -173,7 +173,7 @@
                 <h1>Registration Complete</h1>
                 <p> <b>First Name:</b> Some name here </p>
                 <p> <b>Last Name:</b> Some name here </p>
-                <button type="button" onclick="document.getElementById('Confirmation').style.display='none'" title="Close Page">Return</button>
+                <button type="button" onclick="document.getElementById('Confirmation').style.display='none';document.getElementById('addAttendee').style.display='none'" title="Close Page">Return</button>
             </div>        
         </div>
         <div id="editAttendee" class="modal">
@@ -194,7 +194,7 @@
                         </select>
                     </div>    
                     <div class="addAttendee-submit"><input id="editButton" type="submit" name="attendeeEdit" value="Confirm"> </div>
-                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Close</button></div>
+                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Cancel</button></div>
                 </div>
             </form>
         </div>
@@ -203,7 +203,7 @@
                 <h1>Attendee edited</h1>
                 <p> <b>First Name:</b> Some name here </p>
                 <p> <b>Last Name:</b> Some name here </p>
-                <button type="button" onclick="document.getElementById('editConfirmation').style.display='none'" title="Close Page">Return</button>
+                <button type="button" onclick="document.getElementById('editConfirmation').style.display='none';document.getElementById('editAttendee').style.display='none'" title="Close Page">Return</button>
             </div>        
         </div>
         <div id="deleteConfirmation" class="modal">
@@ -247,6 +247,9 @@
     </div>
     <script>
         $("#tabs").tabs();
+        //Function to get current date
+        var currentDate = new Date().toISOString().split('T')[0];
+        document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
     </script>
     </body>
 </html>

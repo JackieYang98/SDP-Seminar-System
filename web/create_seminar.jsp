@@ -86,7 +86,10 @@
             var url = window.URL.createObjectURL(imageFile);
             // Now use your newly created URL!
             $('#image').src = url;
-}
+            }
+            //Function to get current date
+            var currentDate = new Date().toISOString().split('T')[0];
+            document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
         </script>
     </body>
 </html>

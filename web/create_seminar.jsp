@@ -5,6 +5,20 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+    User current = (User) session.getAttribute("user");
+    if(current == null){
+        //Only for logged in users
+%>
+        <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
+<%
+    }else if(current.getUserTypeFlag() != 'h' && current.getUserTypeFlag() != 'o'){
+        //Only for Organiser or Host User
+%>
+        <%@include file="WEB-INF/errors/unauthorized_action.jsp" %>
+<%  
+    }else {
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +46,7 @@
                     <div class="grid-ven-name">Venue Name</div>
                     <div class="grid-ven-loc">Venue Location</div>
                     <div class="grid-ven-name-input">                     
-                        <select name='venueName' id="selectDropdown">
+                        <select name='venueName' class="selectDropdown" id="venueDropdown">
                             <option value="Room 1">Room 1</option>
                             <option value="Room 2">Room 2</option>
                             <option value="Room 3">Room 3</option>
@@ -51,11 +65,7 @@
                     <div class="grid-cover-photo">Cover Photo</div>
                     <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
                     <div class="grid-host-input">
-                        <select name="seminarHost" id="selectDropdown">
-                            <option value="Host 1">Host 1</option>
-                            <option value="Host 2">Host 2</option>
-                            <option value="Host 3">Host 3</option>
-                            <option value="Host 4">Host 4..etc</option>
+                        <select name="seminarHost" class="selectDropdown" id="hostDropdown">
                         </select>
                     </div>
                     <div class="grid-image"><img id="image" src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
@@ -74,6 +84,7 @@
                                 <div><textarea class="biotext" name="speakerThreeBio" placeholder="About the third speaker..."></textarea></div>
                             </div>
                     </div>
+                    <input type="hidden" value="<%=current.getUserId()%>" name="organiser">
                     <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
                 </div>
             </form>
@@ -87,9 +98,25 @@
             // Now use your newly created URL!
             $('#image').src = url;
             }
+            
+            $(document).ready(function(){
             //Function to get current date
             var currentDate = new Date().toISOString().split('T')[0];
             document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
+            
+            $.ajax({
+               url:"CreateSeminarServlet",
+               type: "GET",
+               success:function(data){
+                   $("#hostDropdown").html(data); 
+               }
+            });
+            
+            
+    });
         </script>
     </body>
 </html>
+<%  
+}
+%>

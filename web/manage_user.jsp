@@ -102,8 +102,8 @@
                     <div class="center">
                     <input id="confirm-delete" type="hidden" name="submit">
                     <input id="row" type="hidden" value="" name="row">
-                    <button name="update" type="submit" onclick="return updateDelete(this)">Confirm</button>
-                    <button name="delete" type="submit" onclick="return updateDelete(this)">Delete</button>
+                    <button id="confirm-button" name="update" type="submit" onclick="return updateDelete(this)" disabled="true">Confirm</button>
+                    <button id="delete-button" name="delete" type="submit" onclick="return updateDelete(this)" disabled="true">Delete</button>
                     </div>
                 </div>           
             </form>
@@ -158,6 +158,13 @@
         $('#user-list tbody').on( 'click', 'tr', function () {
             var data =  table.row( this ).data()[0];
             $('#row').val(data);
+            if($('#confirm-button').is(":disabled")){
+                $('#confirm-button').prop('disabled', false);
+                $('#delete-button').prop('disabled',false);
+            }else{
+                $('#confirm-button').prop('disabled', true);
+                $('#delete-button').prop('disabled',true);
+        }
         } );
     } );
 </script>

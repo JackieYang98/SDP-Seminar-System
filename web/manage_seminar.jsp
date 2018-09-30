@@ -38,7 +38,7 @@
                     <div class="grid-ven-name">Venue Name</div>
                     <div class="grid-ven-loc">Venue Location</div>
                     <div class="grid-ven-name-input">                     
-                        <select name='venueName' id="selectDropdown">
+                        <select name='venueName' class="selectDropdown">
                         <option value="Room 1">Room 1</option>
                         <option value="Room 2">Room 2</option>
                         <option value="Room 3">Room 3</option>
@@ -57,7 +57,7 @@
                     <div class="grid-cover-photo">Cover Photo</div>
                     <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
                     <div class="grid-host-input">
-                        <select name="seminarHost" id="selectDropdown">
+                        <select name="seminarHost" class="selectDropdown">
                             <option value="Host 1">Host 1</option>
                             <option value="Host 2">Host 2</option>
                             <option value="Host 3">Host 3</option>

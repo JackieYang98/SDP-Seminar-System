@@ -7,9 +7,23 @@ package com.sdpseminarsystem.servlet;
 
 import com.sdpseminarsystem.dao.factory.DAOFactory;
 import com.sdpseminarsystem.vo.Seminar;
+import com.sdpseminarsystem.vo.User;
 import com.sdpseminarsystem.vo.Venue;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.AbstractList;
+import java.util.ArrayList;
+
+import java.util.Date;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,40 +48,71 @@ public class CreateSeminarServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String seminarName= request.getParameter("seminarName");
-        String seminarDescription = request.getParameter("seminarDescription");
-        String venueName= request.getParameter("venueName");
-        String venueDescription = request.getParameter("venueLocation");
-        String seminarDate = request.getParameter("seminarDate");
-        String seminarStart = request.getParameter("seminarStart");
-        String seminarEnd = request.getParameter("seminarEnd");
-        String seminarHost = request.getParameter("seminarHost");
-        String speakerOne = request.getParameter("speakerName");
-        String speakerOneBio = request.getParameter("speakerBio");
-        String image = request.getParameter("seminarImage");
+        try{ 
+            
+            String seminarName= request.getParameter("seminarName");
+            String seminarDescription = request.getParameter("seminarDescription");
+            String venueName= request.getParameter("venueName");
+            String venueLocation = request.getParameter("venueLocation");
+            String seminarDate = request.getParameter("seminarDate");
+            String seminarStart = request.getParameter("seminarStart");
+            String seminarEnd = request.getParameter("seminarEnd");
+            String seminarHost = request.getParameter("seminarHost");
+            String speakerOne = request.getParameter("speakerName");
+            String speakerOneBio = request.getParameter("speakerBio");
+            String image = request.getParameter("seminarImage");
+            String organiser = request.getParameter("organiser");
+            
+            Seminar newSeminar = new Seminar();
+            newSeminar.setSeminarId(DAOFactory.getInstanceOfSeminarDAO().findAll().size());
+            newSeminar.setSeminarTitle(seminarName);
+            newSeminar.setSeminarDescription(seminarDescription);
+            Venue venue = new Venue();
+            venue.setVenueName(venueName);
+            venue.setVenueLocation(venueLocation);
+            venue.setVenueId(5);
+            newSeminar.setVenue(venue);
+            
+    //        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
+    //        Date date = dateFormatter.parse(seminarDate);          
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
+    //        Date startTime = timeFormatter.parse(seminarStart);
+            LocalDate datePart = LocalDate.parse(seminarDate);
+            LocalTime timePart = LocalTime.parse(seminarStart);
+            LocalDateTime startDate = LocalDateTime.of(datePart,timePart);
+            Date endTime = timeFormatter.parse(seminarEnd);
+            Date date = Date.from(startDate.atZone(ZoneId.systemDefault()).toInstant());
+            newSeminar.setSeminarStartTime(date);
+            newSeminar.setSeminarEndTime(endTime);
+            System.out.print(seminarHost.substring(0,8));
+            newSeminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(seminarHost.substring(0,8)));
+            
+            newSeminar.setUserOrganiser(DAOFactory.getInstanceOfUserDAO().findById(organiser));
+            System.out.print(newSeminar.getUserHost());
+                        System.out.print(newSeminar.getSeminarId() + newSeminar.getSeminarTitle() + newSeminar.getSeminarEndTime() + newSeminar.getUserOrganiser() + newSeminar.getUserHost() + newSeminar.getVenue() + newSeminar.getSeminarStartTime() +
+                    newSeminar.getSeminarLastMins());
+            DAOFactory.getInstanceOfSeminarDAO().create(newSeminar);
+            
 
-        Seminar newSeminar = new Seminar();
-        Venue venue = new Venue();
-//        DAOFactory.getInstanceOfVenueDAO().findById(0);
-        newSeminar.setSeminarTitle(seminarName);
-        newSeminar.setSeminarDescription(seminarDescription);
-        newSeminar.setVenue(venue);
-//        DAOFactory.getInstanceOfSeminarDAO().create(newSeminar);
-        try {
-            String speakerTwo = request.getParameter("venueLocation");
-            String speakerTwoBio = request.getParameter("speakerBio");
-            String speakerThree = request.getParameter("venueLocation");
-            String speakerThreeBio = request.getParameter("speakerBio");
+            
+            String speakerTwo = request.getParameter("speakerTwoName");
+            String speakerTwoBio = request.getParameter("speakerTwoBio");
+            if(speakerTwo != null && speakerTwoBio != null){
+                
+            }
+            String speakerThree = request.getParameter("speakerThreeName");
+            String speakerThreeBio = request.getParameter("speakerThreeBio");
+            if(speakerThree != null && speakerThreeBio != null){
+                
+            }
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e){
             e.printStackTrace();
+        }finally{
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
         }
-        
-        System.out.print(seminarName + " " + seminarDescription + " " + venueName + " " + venueDescription + " " +
-                seminarDate + " " + seminarStart + " " + seminarEnd + " " +
-                seminarHost + " " + image + " " +speakerOne + " " +speakerOneBio);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,7 +127,18 @@ public class CreateSeminarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try{
+            List<User> allUsers = DAOFactory.getInstanceOfUserDAO().findAll();
+            for(User user: allUsers){
+                if(user.getUserTypeFlag().equals('h')){    
+                    response.setContentType("text/plain");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("<option>"+user.getUserId() + " " + user.getUserFirstName() + "</option>");
+                }
+            }
+        }catch(SQLException e){
+            e.printStackTrace();;
+        }
     }
 
     /**

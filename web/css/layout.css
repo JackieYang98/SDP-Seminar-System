@@ -108,6 +108,11 @@ button:hover {
     opacity: 0.8;
 }
 
+button:disabled{
+    color: gainsboro;
+    background-color: grey;
+}
+
 /* Center the image and position the close button */
 .imgcontainer {
     text-align: center;
@@ -316,18 +321,20 @@ span.psw {
     resize: none;
     font-family: openSansRegular;
 }
-#selectDropdown{
+select{
     width:155px;
-    height: 45px
+    height: 45px;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-family: openSansRegular;
 }
-#selectDropdown option{
-    width:255px;
-}
+
 
 .manage-page{
     margin: auto auto;
     width: 800px;
 }
+
 .addAttendee-Fname{ grid-area: a;}
 .addAttendee-Lname{ grid-area: b;}
 .addAttendee-Fname-input{ grid-area: c;}

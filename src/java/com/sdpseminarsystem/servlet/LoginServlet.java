@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("user", newUser);
                             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                             dispatcher.forward(request, response);
-			}
+                        }
 			else
 			{
                             response.setContentType("text/plain");
@@ -63,12 +63,12 @@ public class LoginServlet extends HttpServlet {
                             response.getWriter().write("invalid");
 			}
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+                    e.printStackTrace();
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                    dispatcher.forward(request, response);
 		}
 	}
         

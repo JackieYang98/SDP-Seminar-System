@@ -6,7 +6,7 @@ import java.util.List;
 import com.sdpseminarsystem.vo.*;
 
 public interface ISeminarDAO {
-	public boolean create(Seminar seminar) throws SQLException;
+	public int create(Seminar seminar) throws SQLException;
 	public List<Seminar> findAll() throws SQLException;
 	public List<Seminar> findAllSortByDate() throws SQLException;
 	public List<Seminar> findAllSortByVenue() throws SQLException;

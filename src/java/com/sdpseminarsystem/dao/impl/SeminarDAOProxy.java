@@ -7,18 +7,18 @@ import com.sdpseminarsystem.dao.ISeminarDAO;
 import com.sdpseminarsystem.vo.*;
 
 public class SeminarDAOProxy extends DAOProxy implements ISeminarDAO {
-	
+
 	private ISeminarDAO dao;
-	
+
 	public SeminarDAOProxy() throws SQLException {
 		dao = new SeminarDAOImpl(dbc.getConnection());
 	}
-	
+
 	@Override
-	public boolean create(Seminar seminar) throws SQLException {
-		boolean flag = dao.create(seminar);
+	public int create(Seminar seminar) throws SQLException {
+		int lastInsertId = dao.create(seminar);
 		dbc.close();
-		return flag;
+		return lastInsertId;
 	}
 
 	@Override

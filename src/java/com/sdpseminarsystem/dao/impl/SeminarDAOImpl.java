@@ -14,7 +14,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 	}
 
 	@Override
-	public boolean create(Seminar seminar) throws SQLException {
+	public int create(Seminar seminar) throws SQLException {
 		String sql = "insert into seminars (UserOrganiserId, VenueId, SeminarTitle, SeminarDescription,"
 				+ "SeminarDate, SeminarLastMins) values (?,?,?,?,?,?);";
 		stmt = conn.prepareStatement(sql);
@@ -24,11 +24,12 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 		stmt.setString(4, seminar.getSeminarDescription());
 		stmt.setTimestamp(5, new java.sql.Timestamp(seminar.getSeminarStartTime().getTime()));
 		stmt.setInt(6, seminar.getSeminarLastMins());
+		System.out.println("LastMIN: " + seminar.getSeminarLastMins());
 		int update = stmt.executeUpdate();
 		if(update > 0)
-			return true;
+			return getLastInsertId();
 		else
-			return false;
+			return 0;
 	}
 
 	@Override
@@ -130,6 +131,13 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 			return true;
 		else
 			return false;
+	}
+
+	private int getLastInsertId() throws SQLException {
+		String sql = "select last_insert_id();";
+		stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		return rs.getInt(1);
 	}
 
 	private List<Seminar> selectBySqlStmt(String sqlStmt) throws SQLException {

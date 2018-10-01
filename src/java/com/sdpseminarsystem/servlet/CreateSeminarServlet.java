@@ -12,6 +12,7 @@ import com.sdpseminarsystem.vo.Venue;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
@@ -73,17 +74,12 @@ public class CreateSeminarServlet extends HttpServlet {
             venue.setVenueId(5);
             newSeminar.setVenue(venue);
             
-    //        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
-    //        Date date = dateFormatter.parse(seminarDate);          
-            SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-    //        Date startTime = timeFormatter.parse(seminarStart);
-            LocalDate datePart = LocalDate.parse(seminarDate);
-            LocalTime timePart = LocalTime.parse(seminarStart);
-            LocalDateTime startDate = LocalDateTime.of(datePart,timePart);
-            Date endTime = timeFormatter.parse(seminarEnd);
-            Date date = Date.from(startDate.atZone(ZoneId.systemDefault()).toInstant());
-            newSeminar.setSeminarStartTime(date);
-            newSeminar.setSeminarEndTime(endTime);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            Date startDate = dateFormat.parse(seminarDate + " " + seminarStart);
+            Date endDate = dateFormat.parse(seminarDate + " " + seminarEnd);
+            newSeminar.setSeminarStartTime(startDate);
+            newSeminar.setSeminarEndTime(endDate);
+            
             System.out.print(seminarHost.substring(0,8));
             newSeminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(seminarHost.substring(0,8)));
             

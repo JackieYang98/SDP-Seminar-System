@@ -237,30 +237,27 @@ span.psw {
     opacity:0.8;
 }
 .grid-sem-name { grid-area: a;}
-.grid-sem-desc{ grid-area: b;}
-.grid-sem-name-input{ grid-area: c;}
-.grid-sem-desc-input{grid-area: d;}
-.grid-ven-loc{grid-area: f;}
-.grid-ven-loc-input{grid-area: h;}
-.grid-sem-date{grid-area: i;}
-.grid-start{grid-area: j;}
-.grid-end{grid-area: k;}
-.grid-sem-date-input{grid-area: l;}
-.grid-start-input{grid-area: m;}
-.grid-end-input{grid-area: n;}
-.grid-speaker{grid-area: o;}
-.grid-host{grid-area: p;}
-.grid-cover-photo{grid-area: q;}
-.grid-speaker-input{grid-area: r;}
-.grid-host-input{grid-area: s;}
-.grid-image{grid-area: t;}
-.grid-bio{grid-area: u;}
-.grid-image-input{grid-area: v;}
-.grid-bio-input{grid-area: w;}
+.grid-sem-name-input{ grid-area: b;}
+.grid-speaker{grid-area: c;}
+.grid-speaker-input{grid-area: d;}
+.grid-bio{grid-area: e;}
+.grid-bio-input{grid-area: f;}
 .grid-speaker2{grid-area:ob;}
 .grid-speaker2-input{grid-area:rb;}
 .grid-speaker3{grid-area:oc;}
 .grid-speaker3-input{grid-area:rc;}
+.grid-host{grid-area: g;}
+.grid-host-input{grid-area: h;}
+.grid-ven-loc{grid-area: i;}
+.grid-ven-loc-input{grid-area: j;}
+.grid-sem-date{grid-area: k;}
+.grid-start{grid-area: l;}
+.grid-end{grid-area: m;}
+.grid-sem-date-input{grid-area: n;}
+.grid-start-input{grid-area: o;}
+.grid-end-input{grid-area: p;}
+.grid-sem-desc{ grid-area: q;}
+.grid-sem-desc-input{grid-area: r;}
 .grid-submit{grid-area: x;}
 .grid-delete{grid-area: y;}
 
@@ -269,23 +266,18 @@ span.psw {
     grid-gap: 15px;
     padding-left: 30px;
     grid-template-areas:   
-    'a a a a b'
-    'c c c c d'
-    'p p p p d'
-    's s s s d'
-    'f f f f d'
-    'h h h h d'
-    'i j k k q'
-    'l m n n t'
-    'o o o o t'
-    'r r r r t'
-    'u u u u t'
-    'w w w w v'
-    'w w w w v'
-    'ob ob . . .'
-    'rb rb rb rb rb'
-    'oc oc . . .'
-    'rc rc rc rc rc'
+    'a a a a c'
+    'b b b b d'
+    'g g g g e'
+    'h h h h f'
+    'i i i i f'
+    'j j j j f'
+    'k l m . f'
+    'n o p . f'
+    'q q q q ob'
+    'r r r r rb'
+    '. . . . oc'
+    '. . . . rc'
     '. . x . y'; 
 }
 
@@ -301,16 +293,16 @@ span.psw {
 }
 
 .grid-container .biotext {
-    width:515px;
-    height:165px;
-}
-.grid-container .bio2text {
-    width:235px;
-    height:165px;
-}
-.grid-container .desctext{
     width:330px;
     height:258px;
+}
+/*.grid-container .bio2text {
+    width:235px;
+    height:165px;
+}*/
+.grid-container .desctext{
+    width:515px;
+    height:165px;
 }
 
 .grid-container textarea{
@@ -328,7 +320,7 @@ span.psw {
 }
 
 #venueDropdown{
-    width:400px;
+    width: 515px;
     height: 45px;
     border-radius: 5px;
     padding-left: 5px;

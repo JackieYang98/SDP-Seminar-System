@@ -32,40 +32,11 @@
                 <form action="#createaction" method="POST">  
                     <div class="grid-container">
                     <div class="grid-sem-name">Seminar Name</div>
-                    <div class="grid-sem-desc">Seminar Description</div>
                     <div class="grid-sem-name-input"><input type="text" name="seminarName" placeholder="Name" required style="width:530px; height:40px;"></div>  
-                    <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>
-                    <div class="grid-ven-name">Venue Name</div>
-                    <div class="grid-ven-loc">Venue Location</div>
-                    <div class="grid-ven-name-input">                     
-                        <select name='venueName' class="selectDropdown">
-                        <option value="Room 1">Room 1</option>
-                        <option value="Room 2">Room 2</option>
-                        <option value="Room 3">Room 3</option>
-                        <option value="Room 4">Room 4..etc</option>
-                        </select>
-                    </div>
-                    <div class="grid-ven-loc-input"><input type="text" name="venueLocation" placeholder="Venue Location (CBXX.YY.ZZZ)" required></div>
-                    <div class="grid-sem-date">Seminar Date</div>
-                    <div class="grid-start">Start Time</div>
-                    <div class="grid-end">End Time</div>
-                    <div class="grid-sem-date-input"><input type="date" name="seminarDate"  required style="width: 150px; height:40px;"></div>
-                    <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
-                    <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
+                    
+
                     <div class="grid-speaker">Speaker 1</div>
-                    <div class="grid-host">Host</div>
-                    <div class="grid-cover-photo">Cover Photo</div>
                     <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
-                    <div class="grid-host-input">
-                        <select name="seminarHost" class="selectDropdown">
-                            <option value="Host 1">Host 1</option>
-                            <option value="Host 2">Host 2</option>
-                            <option value="Host 3">Host 3</option>
-                            <option value="Host 4">Host 4..etc</option>
-                        </select>
-                    </div>
-                    <div class="grid-image"><img src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
-                    <div class="grid-image-input"><input type="file" name="seminarImage"></div>
                     <div class="grid-bio">Speaker 1 Biography</div>
                     <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
                     <div onclick='hide("speaker2")' class="grid-speaker2" style="cursor: pointer; text-decoration: underline; ">Speaker 2 (Click to Toggle)</div>
@@ -80,6 +51,27 @@
                                 <div><textarea class="biotext" name="speakerBio3" placeholder="About the third speaker..."></textarea></div>
                             </div>
                     </div>
+                    <div class="grid-host">Host</div>
+                    <div class="grid-host-input">
+                        <select name="seminarHost" id="hostDropdown"></select>
+                    </div>
+                    <div class="grid-ven-loc">Venue</div>
+                    <div class="grid-ven-loc-input">                     
+                        <select name='venueName'  id="venueDropdown" >
+                            <option value="" disabled selected>-- Select a host to display venue --</option>
+                        </select>
+                    </div>   
+                    <div class="grid-sem-date">Seminar Date</div>
+                    <div class="grid-start">Start Time</div>
+                    <div class="grid-end">End Time</div>
+                    <div class="grid-sem-date-input"><input type="date" name="seminarDate"  required style="width: 150px; height:40px;"></div>
+                    <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
+                    <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
+                    
+
+                     <div class="grid-sem-desc">Seminar Description</div>
+                    <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>
+                   
                         <div class="grid-delete"><input class="deleteButton" type="button" name="seminarDelete" value="Delete Seminar" onclick="document.getElementById('deleteConfirm').style.display='block';return false;"></div>
                         <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmitUpdate" value="Update Seminar"></div>                       
                     </div>

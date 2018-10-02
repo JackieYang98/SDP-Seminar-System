@@ -137,6 +137,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
 		String sql = "select last_insert_id();";
 		stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
+		rs.next();
 		return rs.getInt(1);
 	}
 

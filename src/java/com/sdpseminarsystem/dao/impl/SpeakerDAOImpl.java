@@ -14,7 +14,7 @@ public class SpeakerDAOImpl extends DAOImpl implements ISpeakerDAO {
 
 	@Override
 	public boolean create(Speaker speaker, int seminarId) throws SQLException {
-		String sql = "insert into speakers (SeminarId, SpeakerName, SpeakerBiography) values (?,?,?,?,?,?);";
+		String sql = "insert into speakers (SeminarId, SpeakerName, SpeakerBiography) values (?,?,?);";
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, seminarId);
 		stmt.setString(2, speaker.getSpeakerName());

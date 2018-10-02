@@ -46,12 +46,7 @@
                     <div class="grid-ven-name">Venue Name</div>
                     <div class="grid-ven-loc">Venue Location</div>
                     <div class="grid-ven-name-input">                     
-                        <select name='venueName' class="selectDropdown" id="venueDropdown">
-                            <option value="Room 1">Room 1</option>
-                            <option value="Room 2">Room 2</option>
-                            <option value="Room 3">Room 3</option>
-                            <option value="Room 4">Room 4..etc</option>
-                        </select>
+                        <select name='venueName' class="selectDropdown" id="venueDropdown" ></select>
                     </div>
                     <div class="grid-ven-loc-input"><input type="text" name="venueLocation" placeholder="Venue Location (CBXX.YY.ZZZ)" required></div>
                     <div class="grid-sem-date">Seminar Date</div>
@@ -65,8 +60,7 @@
                     <div class="grid-cover-photo">Cover Photo</div>
                     <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
                     <div class="grid-host-input">
-                        <select name="seminarHost" class="selectDropdown" id="hostDropdown">
-                        </select>
+                        <select name="seminarHost" class="selectDropdown" id="hostDropdown" onchange="getVenue();"></select>
                     </div>
                     <div class="grid-image"><img id="image" src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
                     <div class="grid-image-input"><input id="image-input" type="file" name="seminarImage"></div>
@@ -90,30 +84,45 @@
             </form>
         </div>
         <script>
-            $('#image-input').onchange = function(e) {
-            // Get the first file in the FileList object
-            var imageFile = this.files[0];
-            // get a local URL representation of the image blob
-            var url = window.URL.createObjectURL(imageFile);
-            // Now use your newly created URL!
-            $('#image').src = url;
-            }
+    $('#image-input').onchange = function(e) {
+    // Get the first file in the FileList object
+    var imageFile = this.files[0];
+    // get a local URL representation of the image blob
+    var url = window.URL.createObjectURL(imageFile);
+    // Now use your newly created URL!
+    $('#image').src = url;
+    }
             
-            $(document).ready(function(){
-            //Function to get current date
-            var currentDate = new Date().toISOString().split('T')[0];
-            document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
-            
-            $.ajax({
-               url:"CreateSeminarServlet",
-               type: "GET",
-               success:function(data){
-                   $("#hostDropdown").html(data); 
-               }
-            });
-            
-            
+    $(document).ready(function(){
+    //Function to get current date
+    var currentDate = new Date().toISOString().split('T')[0];
+    document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
+    
+        $.ajax({
+            url:"CreateSeminarServlet",
+            type: "GET",
+        success:function(data){
+            $("#hostDropdown").html(data); 
+        }
+        });
     });
+
+
+    function getVenue(){
+        $("#hostDropdown").on('change', function(){
+        var host = $(this).find(':selected').data('value');
+        alert(host);
+
+        $.ajax({
+            url:"CreateSeminarServlet",
+            type: "POST",
+            data: data,
+            success:function(data){
+                $(#venueDropdown).html(data);
+            }
+        });
+    });
+    }
         </script>
     </body>
 </html>

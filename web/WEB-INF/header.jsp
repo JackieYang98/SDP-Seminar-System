@@ -6,7 +6,7 @@
 
 <%@page import="com.sdpseminarsystem.vo.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if(request.getAttribute("logout") != null || session.getAttribute("user") == null) { %>
+<% if(session.getAttribute("user") == null) { %>
         <div class="navbar">
             <a href="https://www.uts.edu.au/">
                 <h1><img id="logo" src="image/uts.png" alt="UTS Logo"></h1>
@@ -16,7 +16,8 @@
                 <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login</a>            
             </div>
     </div>      
-    <% }else{
+    <%
+        }else{
         User user = (User) session.getAttribute("user");
         String type;
         if(user.getUserTypeFlag() == 'a'){
@@ -39,7 +40,7 @@
                     <a id="createseminar" href="/SDP-Seminar-System/create_seminar.jsp">Create Seminar</a>
                 <%}%>
                 <a id="login" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>
-                <a id="logout" href="/SDP-Seminar-System/logout.jsp"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
+                <a id="logout" href="LogoutServlet"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
             </div>
     </div> 
     <% } %>

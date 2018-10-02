@@ -48,20 +48,20 @@ public class LoginServlet extends HttpServlet {
             user.setUserPassword(password);   
             
             try {
-			if(DAOFactory.getInstanceOfUserDAO().verify(user))
-			{     
-                            User newUser = DAOFactory.getInstanceOfUserDAO().findById(username);
-                            HttpSession session = request.getSession();
-                            session.setAttribute("user", newUser);
-                            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-                            dispatcher.forward(request, response);
-                        }
-			else
-			{
-                            response.setContentType("text/plain");
-                            response.setCharacterEncoding("UTF-8");
-                            response.getWriter().write("invalid");
-			}
+                    if(DAOFactory.getInstanceOfUserDAO().verify(user))
+                    {     
+                        User newUser = DAOFactory.getInstanceOfUserDAO().findById(username);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user", newUser);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                        dispatcher.forward(request, response);
+                    }
+                    else
+                    {
+                        response.setContentType("text/plain");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("invalid");
+                    }
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

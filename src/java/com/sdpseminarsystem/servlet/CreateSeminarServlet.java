@@ -123,18 +123,31 @@ public class CreateSeminarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            List<User> allUsers = DAOFactory.getInstanceOfUserDAO().findAll();
-            for(User user: allUsers){
-                if(user.getUserTypeFlag().equals('h')){    
-                    response.setContentType("text/plain");
-                    response.setCharacterEncoding("UTF-8");
-                    response.getWriter().write("<option>"+user.getUserId() + " " + user.getUserFirstName() + "</option>");
+//        if(request.getParameter("host")!=null || request.getParameter("host") != "")
+//            try{
+//                List<Venue> allVenue = DAOFactory.getInstanceOfVenueDAO().findAll();
+//                response.getWriter().write("<option disabled selected value> -- Venue based on host -- </option>");
+//                response.setContentType("text/html");
+//                response.setCharacterEncoding("UTF-8");
+////                response.getWriter().write("<option>"+user.getUserId() + " " + user.getUserFirstName() + "</option>");
+//            }catch(Exception e){
+//                e.printStackTrace();
+//            }
+//        }else{
+            try{
+                List<User> allUsers = DAOFactory.getInstanceOfUserDAO().findAll();
+                response.getWriter().write("<option disabled selected value> -- Select a host -- </option>");
+                for(User user: allUsers){
+                    if(user.getUserTypeFlag().equals('h')){    
+                        response.setContentType("text/html");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("<option>"+user.getUserId() + " " + user.getUserFirstName() + "</option>");
+                    }
                 }
+            }catch(SQLException e){
+                e.printStackTrace();;
             }
-        }catch(SQLException e){
-            e.printStackTrace();;
-        }
+//        }
     }
 
     /**

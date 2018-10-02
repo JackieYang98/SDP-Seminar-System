@@ -9,7 +9,7 @@ public class DatabaseConnector {
 	
 	// username and password of database;
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "sss";
+	private static final String PASSWORD = "password";
 	
 	private Connection conn = null;
 	

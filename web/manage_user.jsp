@@ -143,8 +143,12 @@
         
 <script>
     function updateDelete(button){
-        document.getElementById('confirm-delete').value = button.name;
-        return true;
+        if(confirm("Confirm Action")){
+            document.getElementById('confirm-delete').value = button.name;
+            return true;
+        } else{
+            return false;
+        }
     }
 
     $(document).ready(function() {
@@ -160,10 +164,10 @@
             $('#row').val(data);
             if($('#confirm-button').is(":disabled")){
                 $('#confirm-button').prop('disabled', false);
-                $('#delete-button').prop('disabled',false);
+                $('#delete-button').prop('disabled', false);
             }else{
                 $('#confirm-button').prop('disabled', true);
-                $('#delete-button').prop('disabled',true);
+                $('#delete-button').prop('disabled', true);
         }
         } );
     } );

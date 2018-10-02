@@ -22,7 +22,10 @@
               float: left;
               clear: none;
               margin: 2px 0 0 2px;
-}
+            }
+            .register-registered{
+                text-decoration: underline;
+            }
         </style>
     </head>
     <body>
@@ -69,7 +72,7 @@
                             <div class="register-status">Status</div>   
                             <div class="register-status-Going"><input type="radio" name="status" value="Going" required/>Going </div>
                             <div class="register-status-Interested"><input type="radio" name="status" value="Interested"/> Interested</div>
-                            <div class="register-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered?</label></div>  
+                            <div class="register-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered? Click here</label></div>  
                             <div class="register-submit"><input id="registerButton" type="submit" name="attendeeRegister" value="Confirm"></div>
                             <div class="register-cancel"><button type="button" onclick="document.getElementById('seminarRegister').style.display='none'" title="Close Page">Close</button></div>
                         </div>
@@ -116,7 +119,6 @@
                             <div class="registerEdit-status">Status</div>   
                             <div class="registerEdit-status-Going"><input type="radio" name="status" value="Going" required/>Going </div>
                             <div class="registerEdit-status-Interested"><input type="radio" name="status" value="Interested"/> Interested</div>
-                            <div class="registerEdit-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered?</label></div>  
                             <div class="registerEdit-submit"><input id="registerButton" type="submit" name="seminarRegisterEditSubmit" value="Confirm"></div>
                             <div class="registerEdit-delete"><button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='block'">Delete</button></div>
                         </div>

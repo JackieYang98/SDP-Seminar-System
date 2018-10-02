@@ -650,7 +650,7 @@ span.psw {
     grid-gap: 15px;
     padding-left: 30px;
     grid-template-areas:   
-        'a a b b'
+        'a . b .'
         'c c d d'
         'e . . .'
         'f f f f'
@@ -685,7 +685,7 @@ span.psw {
     grid-gap: 15px;
     padding-left: 30px;
     grid-template-areas:   
-        'a a b b'
+        'a . b .'
         'c c d d'
         'e . . .'
         'f f f f'
@@ -727,4 +727,35 @@ span.psw {
     border: none;
     cursor: pointer;
     width: 65%;
+}
+.mixcontainer {
+  width: 75%;
+  margin: 3em auto;
+}
+.mix {
+  display: none;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  margin: 1em 1%;
+  background-color: #ccc;
+}
+.mix-name{ grid-area: a;}
+.mix-venue{ grid-area: b;}
+.mix-date{ grid-area: c;}
+.mix-edit{ grid-area: d;}
+
+.mix-grid{
+    display: inline-grid;
+    grid-gap: 10px;
+    padding-left: 30px;
+    grid-template-areas:   
+        '. . . . .'
+        '. . . . .'
+        '. . . . .'
+        '. . . . .'      
+        '. . . . .'
+        '. . . . .'
+        'c . a . .'
+        '. . b . d';
 }

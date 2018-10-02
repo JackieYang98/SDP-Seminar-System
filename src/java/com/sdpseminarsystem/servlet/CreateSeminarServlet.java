@@ -54,7 +54,6 @@ public class CreateSeminarServlet extends HttpServlet {
             String seminarName= request.getParameter("seminarName");
             String seminarDescription = request.getParameter("seminarDescription");
             String venueName= request.getParameter("venueName");
-            String venueLocation = request.getParameter("venueLocation");
             String seminarDate = request.getParameter("seminarDate");
             String seminarStart = request.getParameter("seminarStart");
             String seminarEnd = request.getParameter("seminarEnd");
@@ -69,9 +68,8 @@ public class CreateSeminarServlet extends HttpServlet {
             newSeminar.setSeminarTitle(seminarName);
             newSeminar.setSeminarDescription(seminarDescription);
             Venue venue = new Venue();
-            venue.setVenueName(venueName);
-            venue.setVenueLocation(venueLocation);
-            venue.setVenueId(5);
+            System.out.print(venueName + "HI");
+            venue.setVenueId(Integer.parseInt(venueName));
             newSeminar.setVenue(venue);
             
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
@@ -144,7 +142,7 @@ public class CreateSeminarServlet extends HttpServlet {
                 for(Venue venue : allVenue){
                     response.setContentType("text/html");
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().write("<option>"+ venue.getVenueName() + " / " + venue.getVenueLocation() + " / " + " Capacity" + ": " + venue.getVenueCapacity() + "</option>");
+                    response.getWriter().write("<option value=" +venue.getVenueId() +">"+ venue.getVenueName() + " / " + venue.getVenueLocation() + " / " + " Capacity" + ": " + venue.getVenueCapacity() + "</option>");
                 }
             }catch(Exception e){
                 e.printStackTrace();

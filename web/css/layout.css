@@ -240,9 +240,7 @@ span.psw {
 .grid-sem-desc{ grid-area: b;}
 .grid-sem-name-input{ grid-area: c;}
 .grid-sem-desc-input{grid-area: d;}
-.grid-ven-name{grid-area: e;}
 .grid-ven-loc{grid-area: f;}
-.grid-ven-name-input{grid-area: g;}
 .grid-ven-loc-input{grid-area: h;}
 .grid-sem-date{grid-area: i;}
 .grid-start{grid-area: j;}
@@ -275,8 +273,8 @@ span.psw {
     'c c c c d'
     'p p p p d'
     's s s s d'
-    'e f f f d'
-    'g h h h d'
+    'f f f f d'
+    'h h h h d'
     'i j k k q'
     'l m n n t'
     'o o o o t'
@@ -321,8 +319,16 @@ span.psw {
     resize: none;
     font-family: openSansRegular;
 }
-select{
+#hostDropdown{
     width:155px;
+    height: 45px;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-family: openSansRegular;
+}
+
+#venueDropdown{
+    width:400px;
     height: 45px;
     border-radius: 5px;
     padding-left: 5px;

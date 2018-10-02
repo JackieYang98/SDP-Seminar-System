@@ -123,17 +123,7 @@ public class CreateSeminarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        if(request.getParameter("host")!=null || request.getParameter("host") != "")
-//            try{
-//                List<Venue> allVenue = DAOFactory.getInstanceOfVenueDAO().findAll();
-//                response.getWriter().write("<option disabled selected value> -- Venue based on host -- </option>");
-//                response.setContentType("text/html");
-//                response.setCharacterEncoding("UTF-8");
-////                response.getWriter().write("<option>"+user.getUserId() + " " + user.getUserFirstName() + "</option>");
-//            }catch(Exception e){
-//                e.printStackTrace();
-//            }
-//        }else{
+        if(request.getParameter("host") ==null){
             try{
                 List<User> allUsers = DAOFactory.getInstanceOfUserDAO().findAll();
                 response.getWriter().write("<option disabled selected value> -- Select a host -- </option>");
@@ -147,7 +137,19 @@ public class CreateSeminarServlet extends HttpServlet {
             }catch(SQLException e){
                 e.printStackTrace();;
             }
-//        }
+    } else {
+            try{
+                List<Venue> allVenue = DAOFactory.getInstanceOfVenueDAO().findByUserHostId(Integer.parseInt(request.getParameter("host").substring(0,8)));
+                response.getWriter().write("<option disabled selected value> -- Select a venue -- </option>");
+                for(Venue venue : allVenue){
+                    response.setContentType("text/html");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("<option>"+ venue.getVenueName() + " / " + venue.getVenueLocation() + " / " + " Capacity" + ": " + venue.getVenueCapacity() + "</option>");
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

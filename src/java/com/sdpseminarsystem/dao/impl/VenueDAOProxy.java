@@ -27,4 +27,11 @@ public class VenueDAOProxy extends DAOProxy implements IVenueDAO {
 		dbc.close();
 		return venue;
 	}
+        
+        @Override
+        public List<Venue> findByUserHostId(int hostId) throws SQLException{
+                List<Venue> venue = dao.findByUserHostId(hostId);
+                dbc.close();
+                return venue;
+        }
 }

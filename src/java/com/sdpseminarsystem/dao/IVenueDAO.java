@@ -8,4 +8,5 @@ import com.sdpseminarsystem.vo.Venue;
 public interface IVenueDAO {
 	public List<Venue> findAll() throws SQLException;
 	public Venue findById(int venueId) throws SQLException;
+        public List<Venue> findByUserHostId(int hostId) throws SQLException;
 }

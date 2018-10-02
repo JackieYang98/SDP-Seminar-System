@@ -42,13 +42,17 @@
                     <div class="grid-sem-name">Seminar Name</div>
                     <div class="grid-sem-desc">Seminar Description</div>
                     <div class="grid-sem-name-input"><input type="text" name="seminarName" placeholder="Name" required style="width:530px; height:40px;"></div>  
-                    <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>
-                    <div class="grid-ven-name">Venue Name</div>
-                    <div class="grid-ven-loc">Venue Location</div>
-                    <div class="grid-ven-name-input">                     
-                        <select name='venueName' class="selectDropdown" id="venueDropdown" ></select>
+                    <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>  
+                    <div class="grid-host">Host</div>
+                    <div class="grid-host-input">
+                        <select name="seminarHost" id="hostDropdown"></select>
                     </div>
-                    <div class="grid-ven-loc-input"><input type="text" name="venueLocation" placeholder="Venue Location (CBXX.YY.ZZZ)" required></div>
+                    <div class="grid-ven-loc">Venue</div>
+                    <div class="grid-ven-loc-input">                     
+                        <select name='venueName'  id="venueDropdown" >
+                            <option value="" disabled selected>-- Select a host to display venue --</option>
+                        </select>
+                    </div>                   
                     <div class="grid-sem-date">Seminar Date</div>
                     <div class="grid-start">Start Time</div>
                     <div class="grid-end">End Time</div>
@@ -56,12 +60,10 @@
                     <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
                     <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
                     <div class="grid-speaker">Speaker 1</div>
-                    <div class="grid-host">Host</div>
+                    
                     <div class="grid-cover-photo">Cover Photo</div>
                     <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
-                    <div class="grid-host-input">
-                        <select name="seminarHost" class="selectDropdown" id="hostDropdown" onchange="getVenue();"></select>
-                    </div>
+                    
                     <div class="grid-image"><img id="image" src="image/building.jpg" alt="UTS Logo" style="width: 350px; height:250px;"></div>
                     <div class="grid-image-input"><input id="image-input" type="file" name="seminarImage"></div>
                     <div class="grid-bio">Speaker 1 Biography</div>
@@ -107,22 +109,20 @@
         });
     });
 
-
-    function getVenue(){
-        $("#hostDropdown").on('change', function(){
-        var host = $(this).find(':selected').data('value');
-        alert(host);
-
+    $("#hostDropdown").change(function(){
+        var selectedHost = $("#hostDropdown option:selected").val();
+        var data = "host="+selectedHost;
+    
         $.ajax({
             url:"CreateSeminarServlet",
-            type: "POST",
+            type: "GET",
             data: data,
             success:function(data){
-                $(#venueDropdown).html(data);
+                $("#venueDropdown").html(data);
             }
         });
     });
-    }
+    
         </script>
     </body>
 </html>

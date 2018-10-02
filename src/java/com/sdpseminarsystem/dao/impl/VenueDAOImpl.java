@@ -46,4 +46,24 @@ public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
 		}
 		return venue;
 	}
+        
+        @Override
+        public List<Venue> findByUserHostId(int hostId) throws SQLException {
+		String sql = "select * from venues where UserHostId = ?;";
+		stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, hostId);
+		ResultSet rs = stmt.executeQuery();
+		Venue venue = null;
+		List<Venue> list = new ArrayList<Venue>();
+		while(rs.next()) {
+			venue = new Venue();
+			venue.setVenueId(rs.getInt("VenueId"));
+			venue.setVenueName(rs.getString("VenueName"));
+			venue.setVenueLocation(rs.getString("VenueLocation"));
+			venue.setVenueCapacity(rs.getInt("VenueCapacity"));
+			list.add(venue);
+		}
+		return list;
+	}
+
 }

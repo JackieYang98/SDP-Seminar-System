@@ -118,7 +118,7 @@ public class CreateSeminarServlet extends HttpServlet {
 		seminar.setSeminarDescription(request.getParameter("seminarDescription"));
 
 		Venue venue = new Venue();
-		venue.setVenueId(Integer.valueOf(request.getParameter("venueId")));
+		venue.setVenueId(Integer.valueOf(request.getParameter("venueName")));
 		seminar.setVenue(venue);
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");

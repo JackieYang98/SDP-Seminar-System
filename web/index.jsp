@@ -115,6 +115,19 @@
                     }
                 }, 200 );
             });
+        });   
+        
+        
+     $(document).ready(function(){
+        $.ajax({
+            url:"SeminarServlet",
+            type: "GET",
+        success:function(data){
+            $("#hostDropdown").html(data); 
+        }
         });
+     }) ;
+        
+
     </script>
 </html>

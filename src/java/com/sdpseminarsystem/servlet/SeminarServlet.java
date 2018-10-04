@@ -62,6 +62,8 @@ public class SeminarServlet extends HttpServlet {
             }
         }catch(SQLException e){
             e.printStackTrace();
+        }finally{
+            response.getWriter().close();
         }
         
     }
@@ -78,13 +80,13 @@ public class SeminarServlet extends HttpServlet {
                     out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+"</div>");            
                     out.print("<div class='seminar-venue'>"+seminar.getVenue().getVenueName() + " " + 
                             seminar.getVenue().getVenueLocation()+"</div>");
-                    if(user == null ){
+                    if(user == null){
                         out.print("<div class='seminar-button'><button type='button'>Apply</button></div>");
                     }else if (user.getUserTypeFlag() != null){
                         out.print("<div class='seminar-button'><button type='button'>Edit</button></div>");
                     }
                     out.print("</div>");
-                    out.close();
+                    
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

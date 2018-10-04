@@ -18,8 +18,6 @@
     List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MM/dd/yyyy");
     SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -84,7 +82,7 @@
                             <div class="register-Fname-input"><input id="firstNameInput" type="text" name="attdFName" placeholder="First Name" required ></div>
                             <div class="register-Lname-input"><input id="lastNameInput" type="text" name="attdLName" placeholder="Last Name" required></div>
                             <div class="register-email">Email</div>   
-                            <div class="register-email-input"><input type="email" id="emailInput" name="attdEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
+                            <div class="register-email-input"><input type="email" id="emailInput" name="attdEmail" placeholder="Email Address"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
                             <div class="register-phone">Phone Number </div>
                             <div class="register-phone-input"><input type="text" id="phoneInput" name="attdPhone" placeholder="Phone Number" required></div>
                             <div class="register-status">Status</div>   
@@ -93,15 +91,17 @@
                             <input type="hidden" name="submit" value="create">
                             <input type="hidden" name="seminarId" value="<%=seminarId%>">
                             <div class="register-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered? Click here</label></div>  
-                            <div class="register-submit"><button id="confirmButton" name="attendeeRegister" onclick="confirmAttending();">Confirm</button></div>
-                            <div class="register-cancel"><button type="button" onclick="document.getElementById('seminarRegister').style.display='none'" title="Close Page">Close</button></div>                            
+                            <div class="register-submit"><input type="submit" id="confirmButton" onclick="confirmAttending();" value="Confirm"></div>
+                            <!----> 
+                            <div class="register-cancel"><input type="button" onclick="document.getElementById('seminarRegister').style.display='none'" value="Close"></div>                            
                         </div>
                     </div>
                 </form>
             </div>
             <div id="seminarRegistered" class="modal">
                 <div align="center">
-                    <form id="findUserForm" class="modal-content animate" name="detailRegisteredEmailForm" action="AttendeeServlet" onsubmit="document.getElementById('seminarRegisterEdit').style.display='block'; document.getElementById('seminarRegistered').style.display='none';return false;" method="POST">
+                    <!----> 
+                    <form name="detailRegisteredEmailForm" id="findUserForm" class="modal-content animate" action="AttendeeServlet" method="POST">
                         <h1>Enter your email</h1>
                         <br> <br>
                         
@@ -111,12 +111,14 @@
                             <input id="flag" type="hidden" name="submit" value="verify">
                             <input id="seminarId" type="hidden" name="seminarId" value="<%=seminarId%>">
                             <div class="registered-submit"><input id="findUserButton" type="submit" class="registerButton" value="Confirm"> </div>
+                            <div id="registeredDiv" class="registered-error"></div>
                         </div>
                     </form>
                 </div> 
              </div>
             <div id="seminarRegisterEdit" class="modal" >
-                <form class="modal-content animate" name="detailRegAttendeeEditForm" action="AttendeeServlet"  onsubmit="document.getElementById('seminarEditConfirm').style.display='block';"method="POST">
+                <form id="editForm" class="modal-content animate" action="AttendeeServlet" method="POST">
+                    <!---->
                     <div class="center">
                         <h1>Seminar Name</h1>
                         <table align="center">
@@ -132,25 +134,11 @@
                             </tr>
                         </table>
                         <br>
-                        <div class="registerEdit-grid">
-                            <div class="registerEdit-Fname">First Name</div>
-                            <div class="registerEdit-Lname">Last Name</div>    
-                            <div class="registerEdit-Fname-input"><input type="text" name="regFName" placeholder="First Name" required ></div>
-                            <div class="registerEdit-Lname-input"><input type="text" name="regLName" placeholder="Last Name" required></div>
-                            <div class="registerEdit-email">Email</div>   
-                            <div class="registerEdit-email-input"><input type="email" id="emailInput" name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
-                            <div class="registerEdit-status">Status</div>   
-                            <div class="registerEdit-status-Going"><input type="radio" name="status" value="Going" required/>Going </div>
-                            <div class="registerEdit-status-Interested"><input type="radio" name="status" value="Interested"/> Interested</div>
-                            <div class="registerEdit-submit"><input id="EditConfirmButton" type="submit" class="registerButton" value="Confirm"></div>
-                            <input type="hidden" name="submit" value="update">
-                            <input type="hidden" name="seminarId" value="<%=seminarId%>">
-                            <div class="registerEdit-delete"><button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='block'">Delete</button></div>
-                        
-                        </div>
+                        <div class="registerEdit-grid"></div>
                     </div>
                 </form>
             </div>
+            
             <div id="seminarConfirm" class="modal">
                 <div class="modal-content animate" align="center">
                     <p><b>Your registration for the following seminar has been confirmed.</b></p>
@@ -166,14 +154,16 @@
                             <td><%=dateFormat.format(seminar.getSeminarStartTime()) %></td>
                         </tr>
                     </table>
-                        <p> <b>First Name: </b><span  id="firstNameText"></span></p>
-                        <p> <b>Last Name: </b> <span  id="lastNameText"></span></p>
+                        <p> <b>First Name: </b><span id="firstNameText"></span></p>
+                        <p> <b>Last Name: </b> <span id="lastNameText"></span></p>
                         <p> <b>Email: </b> <span id="emailText"></span></p>
                         <p> <b>Phone Number: </b> <span id="phoneText"></span></p>
                         <p> <b>Status: </b> <span id="statusText"></span> </p>
                         <p> <b>You will be redirected in 5 seconds... </b></p>
                 </div> 
             </div>
+                        
+                        
             <div id="seminarEditConfirm" class="modal">
                 <div class="modal-content animate" align="center">
                     <p><b>Your edit for the following seminar has been confirmed.</b></p>
@@ -189,21 +179,17 @@
                             <td><%=dateFormat.format(seminar.getSeminarStartTime()) %></td>
                         </tr>
                     </table>
-                    <p> <b>First Name:</b> Some name here </p>
-                    <p> <b>Last Name:</b> Some name here </p>
-                    <p> <b>Email: </b> Some email here </p>
-                    <p> <b>Status: </b> Some status here </p>
-                    <button type="button" onclick="document.getElementById('seminarEditConfirm').style.display='none';document.getElementById('seminarRegisterEdit').style.display='none';" title="Close Page">Return</button>
+                        <div class="editConfirm"></div>
+                        
                 </div> 
             </div>
             <div id="seminarRegisterDelete" class="modal">
                 <div class="modal-content animate">
                     <h1>You have been removed from the seminar</h1>
-                    <p><b>Seminar Name: </b> Some name here</p>
-                    <p> <b>First Name:</b> Some name here </p>
-                    <p> <b>Last Name:</b> Some name here </p>
-                    <p> <b>Email</b> Some email here </p>
-                    <button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='none';document.getElementById('seminarRegisterEdit').style.display='none'" title="Close Page">Return</button>
+                    <p><b>Seminar Name: </b> <%=seminar.getSeminarTitle()%></p>
+                     <div class="deleteConfirm"></div>
+                    
+                    <!--<button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='none';document.getElementById('seminarRegisterEdit').style.display='none'" title="Close Page">Return</button>-->
                 </div>        
             </div>
         </div>
@@ -230,6 +216,84 @@
         statusText.textContent = $('input[name="status"]:checked','#mainForm').val();    
     }
     
-
+    $("#findUserForm").submit(function(event){
+        event.preventDefault();
+        var submitFlag = $('#flag').val();
+        var email = $('#email').val();
+        var flag = $('#flag').val();
+        var seminarId = $('#seminarId').val();
+        var data = 'submit='+submitFlag+'&email='+email+'&flag='+flag+'&seminarId='+seminarId;
+        
+        $.ajax({
+            url:"AttendeeServlet",
+            type: "POST",
+            data: data,
+            success:function(data){
+                if(data != "null"){
+                    $('.registerEdit-grid').html(data);
+                    document.getElementById('seminarRegisterEdit').style.display='block'; 
+                    document.getElementById('seminarRegistered').style.display='none'; 
+                }else{
+                    $("#registeredDiv").html('<span class="error" style="color: red">' + "Email is not registered with this seminar" + '</span>');  
+                    return false;
+                }
+            }
+        });
+    });
+ 
+    $("#editForm").submit(function(event){
+        event.preventDefault();
+        var submitFlag = $('#hiddenFlag').val();
+        var attendeeId = $('#attdId').val();
+        if(submitFlag === "Confirm"){
+            var firstName = $('#firstNameEdit').val();
+            var lastName = $('#lastNameEdit').val();
+            var email = $('#emailEdit').val();
+            var phone = $('#phoneEdit').val();
+            var status = $('.status:checked').val();
+            var data = 'submit='+submitFlag+'&attdId='+attendeeId+'&attdFName='+firstName+'&attdLName='+
+                    lastName+'&attdEmail='+email+'&attdPhone='+phone+
+                    '&attdState='+status;
+            $.ajax({
+                url:"AttendeeServlet",
+                type: "POST",
+                data: data,
+                success:function(data){
+                    if(data !== "null"){
+                        $('.editConfirm').html(data);
+                    }else{
+                        return false;
+                    }
+                }
+            });
+        }else if(submitFlag === "Delete"){
+            var firstName = $('#firstNameEdit').val();
+            var lastName = $('#lastNameEdit').val();
+            var email = $('#emailEdit').val();
+            var phone = $('#phoneEdit').val();
+            var status = $('.status:checked').val();
+            var data = 'submit='+submitFlag+'&attdId='+attendeeId+'&attdFName='+firstName+'&attdLName='+
+                    lastName+'&attdEmail='+email+'&attdPhone='+phone+
+                    '&attdState='+status;
+            alert(data);
+            $.ajax({
+                url:"AttendeeServlet",
+                type: "POST",
+                data: data,
+                success:function(data){
+                    if(data !== "null"){
+                        $('.deleteConfirm').html(data);
+                    }else{
+                        
+                        return false;
+                    }
+                }
+            });
+            
+        }    
+    });
+    
+    
+   
     </script>
 </html>

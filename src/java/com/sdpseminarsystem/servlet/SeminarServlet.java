@@ -42,18 +42,23 @@ public class SeminarServlet extends HttpServlet {
             if (user == null){
                 List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findAll();
                 for (Seminar seminar : seminars) {
-                    printSeminarBox(response, seminar);
+                    printSeminarBox(response, seminar, user);
                 }
             }else if(user != null && user.getUserTypeFlag() == 'o'){
                 List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findByUser(user);
                 for (Seminar seminar : seminars) {
-                    printSeminarBox(response, seminar);
+                    printSeminarBox(response, seminar, user);
                 }       
             }else if(user != null && user.getUserTypeFlag() == 'h'){
                 List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findByUser(user);
                 for (Seminar seminar : seminars) {
-                    printSeminarBox(response, seminar);
+                    printSeminarBox(response, seminar, user);
                 } 
+            }else if(user != null && user.getUserTypeFlag() == 'a'){
+                List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findAll();
+                for (Seminar seminar : seminars) {
+                    printSeminarBox(response, seminar, user);
+                }
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -61,7 +66,7 @@ public class SeminarServlet extends HttpServlet {
         
     }
 
-    private void printSeminarBox(HttpServletResponse response, Seminar seminar) throws IOException{
+    private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user) throws IOException{
         response.setContentType("text/html;charset=UTF-8");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MM/dd");
                     PrintWriter out = response.getWriter();
@@ -73,8 +78,13 @@ public class SeminarServlet extends HttpServlet {
                     out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+"</div>");            
                     out.print("<div class='seminar-venue'>"+seminar.getVenue().getVenueName() + " " + 
                             seminar.getVenue().getVenueLocation()+"</div>");
-                    out.print("<div class='seminar-button'><button type='button'>Apply</button></div>");
-                    out.print("</div>");  
+                    if(user == null ){
+                        out.print("<div class='seminar-button'><button type='button'>Apply</button></div>");
+                    }else if (user.getUserTypeFlag() != null){
+                        out.print("<div class='seminar-button'><button type='button'>Edit</button></div>");
+                    }
+                    out.print("</div>");
+                    out.close();
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

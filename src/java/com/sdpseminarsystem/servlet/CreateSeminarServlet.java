@@ -63,7 +63,7 @@ public class CreateSeminarServlet extends HttpServlet {
 						response.setCharacterEncoding("UTF-8");
 						response.getWriter()
 						.write("<option>" + user.getUserId() + " " + user.getUserFirstName() + "</option>");
-					}
+                                        }
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

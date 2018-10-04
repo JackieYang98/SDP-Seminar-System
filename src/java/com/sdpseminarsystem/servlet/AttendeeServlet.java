@@ -41,8 +41,8 @@ public class AttendeeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String submitFlag = request.getParameter("submit");
+                        System.out.print(submitFlag);
 			if(submitFlag.equals("create")) {
-                            System.out.print(submitFlag);
 				Attendee attendee = new Attendee();
 				attendee.setAttendeeEmail(request.getParameter("attdEmail"));
 				attendee.setAttendeePhone(request.getParameter("attdPhone"));
@@ -50,7 +50,16 @@ public class AttendeeServlet extends HttpServlet {
 				attendee.setAttendeeLastName(request.getParameter("attdLName"));
 				attendee.setAttendeeState(request.getParameter("status").charAt(0));
 				DAOFactory.getInstanceOfAttendeeDAO().create(attendee, Integer.valueOf(request.getParameter("seminarId")));
-			} else if (submitFlag == "update") {
+			}else if (submitFlag.equals("verify")){
+                                
+                                Integer seminarId= Integer.parseInt(request.getParameter("seminarId"));
+                                String email = request.getParameter("regEmail");
+                                System.out.print(seminarId + email);
+                                Attendee attendee = DAOFactory.getInstanceOfAttendeeDAO().findBySeminarAndEmail(seminarId, email);
+                                request.setAttribute("seminar", seminarId);
+                                request.setAttribute("attendee", attendee);
+                        }else if (submitFlag == "update") {
+                                
 				Attendee attendee = new Attendee();
 				attendee.setAttendeeId(Integer.valueOf(request.getParameter("attdId")));
 				attendee.setAttendeeEmail(request.getParameter("attdEmail"));

@@ -4,6 +4,7 @@
     Author     : Jackie Yang
 --%>
 
+<%@page import="com.sdpseminarsystem.vo.Attendee"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
@@ -92,7 +93,7 @@
                             <input type="hidden" name="submit" value="create">
                             <input type="hidden" name="seminarId" value="<%=seminarId%>">
                             <div class="register-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered? Click here</label></div>  
-                            <div class="register-submit"><button id="registerButton" name="attendeeRegister" onclick="confirmAttending();">Confirm</button></div>
+                            <div class="register-submit"><button id="confirmButton" name="attendeeRegister" onclick="confirmAttending();">Confirm</button></div>
                             <div class="register-cancel"><button type="button" onclick="document.getElementById('seminarRegister').style.display='none'" title="Close Page">Close</button></div>                            
                         </div>
                     </div>
@@ -100,19 +101,22 @@
             </div>
             <div id="seminarRegistered" class="modal">
                 <div align="center">
-                    <form class="modal-content animate" name="detailRegisteredEmailForm" action="#"  onsubmit="document.getElementById('seminarRegisterEdit').style.display='block'; document.getElementById('seminarRegistered').style.display='none';return false;"method="POST">
+                    <form id="findUserForm" class="modal-content animate" name="detailRegisteredEmailForm" action="AttendeeServlet" onsubmit="document.getElementById('seminarRegisterEdit').style.display='block'; document.getElementById('seminarRegistered').style.display='none';return false;" method="POST">
                         <h1>Enter your email</h1>
                         <br> <br>
+                        
                         <div class="registered-grid">
                             <div class="registered-email">Email: </div>
-                            <div class="registered-email-input"><input type="email" name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required> </div>
-                            <div class="registered-submit"><input id="registerButton" type="submit" name="seminarRegisteredSubmit" value="Confirm"> </div>
+                            <div class="registered-email-input"><input type="email" id="email" name="regEmail" placeholder="Your email address"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required> </div>
+                            <input id="flag" type="hidden" name="submit" value="verify">
+                            <input id="seminarId" type="hidden" name="seminarId" value="<%=seminarId%>">
+                            <div class="registered-submit"><input id="findUserButton" type="submit" class="registerButton" value="Confirm"> </div>
                         </div>
                     </form>
                 </div> 
              </div>
             <div id="seminarRegisterEdit" class="modal" >
-                <form class="modal-content animate" name="detailRegAttendeeEditForm" action="#"  onsubmit="document.getElementById('seminarEditConfirm').style.display='block';return false;"method="POST">
+                <form class="modal-content animate" name="detailRegAttendeeEditForm" action="AttendeeServlet"  onsubmit="document.getElementById('seminarEditConfirm').style.display='block';"method="POST">
                     <div class="center">
                         <h1>Seminar Name</h1>
                         <table align="center">
@@ -138,8 +142,11 @@
                             <div class="registerEdit-status">Status</div>   
                             <div class="registerEdit-status-Going"><input type="radio" name="status" value="Going" required/>Going </div>
                             <div class="registerEdit-status-Interested"><input type="radio" name="status" value="Interested"/> Interested</div>
-                            <div class="registerEdit-submit"><input id="registerButton" type="submit" name="seminarRegisterEditSubmit" value="Confirm"></div>
+                            <div class="registerEdit-submit"><input id="EditConfirmButton" type="submit" class="registerButton" value="Confirm"></div>
+                            <input type="hidden" name="submit" value="update">
+                            <input type="hidden" name="seminarId" value="<%=seminarId%>">
                             <div class="registerEdit-delete"><button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='block'">Delete</button></div>
+                        
                         </div>
                     </div>
                 </form>
@@ -202,13 +209,13 @@
         </div>
     </body>
     <script>
-    $('#mainForm').submit(function (e){
-        var form = this;
-        e.preventDefault();
-        setTimeout(function(){
-            form.submit();
-        }, 2000);
-    });
+//    $('#mainForm').submit(function (e){
+//        var form = this;
+//        e.preventDefault();
+//        setTimeout(function(){
+//            form.submit();
+//        }, 2000);
+//    });
     
     function confirmAttending(){       
         var firstNameText = document.getElementById('firstNameText');
@@ -222,5 +229,7 @@
         var statusText = document.getElementById('statusText');
         statusText.textContent = $('input[name="status"]:checked','#mainForm').val();    
     }
+    
+
     </script>
 </html>

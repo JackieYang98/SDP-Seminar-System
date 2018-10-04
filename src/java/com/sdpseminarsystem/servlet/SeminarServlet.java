@@ -5,12 +5,19 @@
  */
 package com.sdpseminarsystem.servlet;
 
+import com.sdpseminarsystem.dao.factory.DAOFactory;
+import com.sdpseminarsystem.vo.Seminar;
+import com.sdpseminarsystem.vo.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,21 +36,46 @@ public class SeminarServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SeminarServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SeminarServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try{
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            if (user == null){
+                List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findAll();
+                for (Seminar seminar : seminars) {
+                    printSeminarBox(response, seminar);
+                }
+            }else if(user != null && user.getUserTypeFlag() == 'o'){
+                List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findByUser(user);
+                for (Seminar seminar : seminars) {
+                    printSeminarBox(response, seminar);
+                }       
+            }else if(user != null && user.getUserTypeFlag() == 'h'){
+                List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findByUser(user);
+                for (Seminar seminar : seminars) {
+                    printSeminarBox(response, seminar);
+                } 
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
         }
+        
     }
 
+    private void printSeminarBox(HttpServletResponse response, Seminar seminar) throws IOException{
+        response.setContentType("text/html;charset=UTF-8");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MM/dd");
+                    PrintWriter out = response.getWriter();
+                    out.print("<div class='seminar-box'>");
+                    out.print("<div class='seminar-image'>");
+                    out.print("<a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"'>");
+                    out.print("<img src='image/building.jpg'></a></div>");                   
+                    out.print("<div class='seminar-name'>"+seminar.getSeminarTitle()+"</div>");
+                    out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+"</div>");            
+                    out.print("<div class='seminar-venue'>"+seminar.getVenue().getVenueName() + " " + 
+                            seminar.getVenue().getVenueLocation()+"</div>");
+                    out.print("<div class='seminar-button'><button type='button'>Apply</button></div>");
+                    out.print("</div>");  
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

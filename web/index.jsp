@@ -24,7 +24,7 @@
     </head>
     <body>
         <%@include file="WEB-INF/header.jsp" %>
-        <div class="mixcontainer" align="center">
+        <div class="center">
             <h1>Upcoming Events</h1>
             <button class="filter" data-filter="all">All</button>
             <button class="filter" data-filter=".blue">Blue</button>
@@ -34,43 +34,48 @@
             <input type="text" id="inputSearch" placeholder="Search...">
 
             <hr>
-            <a href="detail_seminar.jsp">
-            <div class="mix red" onclick="">
-              <p class="eventName">Red</p>
-            </div></a>
-            <a href="detail_seminar.jsp">
-            <div class="mix">
-            <p class="eventName">Reddit</p>
-            </div></a>
-            <a href="detail_seminar.jsp">
-            <div class="mix orange">
-              <p class="eventName">Orange</p>
-            </div></a>
-            <a href="detail_seminar.jsp">
-            <div class="mix blue">
-              <p class="eventName">Blue</p>
-            </div></a>
-            <a href="detail_seminar.jsp">
-            <div class="mix">
-              <p class="eventName">Blue Bottle</p>
-            </div></a>
+           
+            <div class="catalog">  
+                
+<!--                <div class="seminar-box">
             
-            <a href="detail_seminar.jsp">
-            <div class="mix orange">  
-                <p class="eventName" style="color: transparent; font-size:0.1px;"> Angel </p>
-                <div class="mix-grid">
-                    <div class="mix-name"> Angel </div>
-                    <div class="mix-venue"> VENUE </div>
-                    <div class="mix-date"> DATE </div>
-                    <div class="mix-edit"> EDIT </div>
-
+                    <div class="seminar-image"><a href='detail_seminar.jsp' >
+                    <img src="image/building.jpg">
+                    </a></div>
+    
+                    <div class="seminar-name">How to save a life</div>
+                    <div class="seminar-date">16 June</div>
+                    <div class="seminar-venue">Location</div>
+                    <div class="seminar-button">Apply</div>
                 </div>
-            </div></a>
-            
-            <a href="create_seminar.jsp">
-            <div class="mix red blue orange">
-              <p class="eventName">+</p>
-            </div></a>
+                
+        
+                 <div class="seminar-box">
+             
+                    <div class="seminar-image"><a href='detail_seminar.jsp' >
+                    <img src="image/building.jpg">
+                    </a></div>
+           
+                    <div class="seminar-name">How to save a life</div>
+                    <div class="seminar-date">16 June</div>
+                    <div class="seminar-venue">Location</div>
+                    <div class="seminar-button">Apply</div>
+                </div>
+                
+                
+                 <div class="seminar-box">
+                    
+                    <div class="seminar-image"><a href='detail_seminar.jsp' >
+                    <img src="image/building.jpg">
+                    </a></div>
+                  
+                    <div class="seminar-name">How to save a life</div>
+                    <div class="seminar-date">16 June</div>
+                    <div class="seminar-venue">Location</div>
+                    <div class="seminar-button">Apply</div>
+                </div>-->
+                
+            </div>
         </div>
     </body>
     <script>
@@ -123,7 +128,7 @@
             url:"SeminarServlet",
             type: "GET",
         success:function(data){
-            $("#hostDropdown").html(data); 
+            $(".catalog").html(data); 
         }
         });
      }) ;

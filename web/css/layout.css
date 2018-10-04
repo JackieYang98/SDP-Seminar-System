@@ -638,9 +638,11 @@ span.psw {
 .register-Lname-input{ grid-area: d;}
 .register-email{grid-area:e;}
 .register-email-input{grid-area:f;}
+.register-phone{grid-area:m;}
+.register-phone-input{grid-area:n;}
 .register-status{ grid-area:g;}
-.register-status-Going{ grid-area:h;}
-.register-status-Interested{ grid-area:hb;}
+.register-status-going{ grid-area:h;}
+.register-status-interested{ grid-area:hb;}
 .register-registered{grid-area:i;}
 .register-submit{grid-area:j;}
 .register-cancel{grid-area:k}
@@ -652,11 +654,11 @@ span.psw {
     grid-template-areas:   
         'a . b .'
         'c c d d'
-        'e . . .'
-        'f f f f'
+        'e . . m'
+        'f f f n'
         'g . . .'
-        'h . hb .'
-        '. . . i'
+        'h hb . i'
+        '. . . .'
         'j . k .';
 }
 .register-cancel button {
@@ -728,34 +730,38 @@ span.psw {
     cursor: pointer;
     width: 65%;
 }
-.mixcontainer {
+.seminar-container {
   width: 75%;
   margin: 3em auto;
 }
-.mix {
-  display: none;
+.catalog {
   text-align: center;
-  width: 300px;
-  height: 200px;
   margin: 1em 1%;
   background-color: #ccc;
 }
-.mix-name{ grid-area: a;}
-.mix-venue{ grid-area: b;}
-.mix-date{ grid-area: c;}
-.mix-edit{ grid-area: d;}
 
-.mix-grid{
+.seminar-image{ grid-area: a;}
+.seminar-date{ grid-area: b;
+    border: solid black 1px;
+}
+.seminar-name{ grid-area: c;}
+.seminar-venue{ grid-area: d;
+    border: solid black 1px;
+}
+.seminar-button{ grid-area:e;
+    border: solid black 1px;
+}
+.seminar-box{
     display: inline-grid;
-    grid-gap: 10px;
-    padding-left: 30px;
-    grid-template-areas:   
-        '. . . . .'
-        '. . . . .'
-        '. . . . .'
-        '. . . . .'      
-        '. . . . .'
-        '. . . . .'
-        'c . a . .'
-        '. . b . d';
+    width: 280px;
+    min-height: 250px;
+    margin: 20px;
+    text-align: center;
+    border: solid black 1px;
+    grid-template-areas: 
+        
+        'a a a a'
+        'c c c c'
+        'b d d e'
+        '. d d .';
 }

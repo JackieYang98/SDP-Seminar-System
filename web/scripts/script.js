@@ -4,39 +4,26 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){    
-/*
+    closeModal('loginForm');
+    closeModal('seminarRegister');
+    closeModal('seminarRegistered')
+  
+ });  
+ 
+ /*
  * Javascript to close modal when clicking
  * outside the box
  */
-    // Get the modal
-    var modal = document.getElementById('loginForm');
-    
+ function closeModal(id){
+     //Get the modal
+    var modal = document.getElementById(id);
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     };
-    
-
-        
-//     var table = $('#user-list').DataTable({
-//        "scrollY": "200px",
-//        "paging": false
-//     });
-// 
-//    $('#user-list tbody').on( 'click', 'tr', function () {
-//        if ( $(this).hasClass('selected') ) {
-//            $(this).removeClass('selected');
-//        }
-//        else {
-//            table.$('tr.selected').removeClass('selected');
-//            $(this).addClass('selected');
-//        }
-//    } );
- 
-      
- });   
+}
    
 //$(".user-list tbody tr").click(function(){
 //   $(this).addClass('selected').siblings().removeClass('selected');    

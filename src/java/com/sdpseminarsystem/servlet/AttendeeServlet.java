@@ -42,12 +42,13 @@ public class AttendeeServlet extends HttpServlet {
 		try {
 			String submitFlag = request.getParameter("submit");
 			if(submitFlag.equals("create")) {
+                            System.out.print(submitFlag);
 				Attendee attendee = new Attendee();
 				attendee.setAttendeeEmail(request.getParameter("attdEmail"));
 				attendee.setAttendeePhone(request.getParameter("attdPhone"));
 				attendee.setAttendeeFirstName(request.getParameter("attdFName"));
 				attendee.setAttendeeLastName(request.getParameter("attdLName"));
-				attendee.setAttendeeState(request.getParameter("attdState").charAt(0));
+				attendee.setAttendeeState(request.getParameter("status").charAt(0));
 				DAOFactory.getInstanceOfAttendeeDAO().create(attendee, Integer.valueOf(request.getParameter("seminarId")));
 			} else if (submitFlag == "update") {
 				Attendee attendee = new Attendee();
@@ -72,7 +73,7 @@ public class AttendeeServlet extends HttpServlet {
 		} finally {
 			String basePath = request.getScheme() + "://" + request.getServerName() + ":"+request.getServerPort() 
 				+ request.getContextPath() + "/";
-			request.getRequestDispatcher(basePath).forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 }

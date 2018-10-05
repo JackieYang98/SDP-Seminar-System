@@ -70,22 +70,26 @@ public class SeminarServlet extends HttpServlet {
 
     private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user) throws IOException{
         response.setContentType("text/html;charset=UTF-8");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MM/dd");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE - MM/dd");
                     PrintWriter out = response.getWriter();
+                    out.print("<div class='mix'>");
                     out.print("<div class='seminar-box'>");
                     out.print("<div class='seminar-image'>");
                     out.print("<a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"'>");
                     out.print("<img src='image/building.jpg'></a></div>");                   
                     out.print("<div class='seminar-name'>"+seminar.getSeminarTitle()+"</div>");
-                    out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+"</div>");            
+                    out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+ " " +"</div>");            
                     out.print("<div class='seminar-venue'>"+seminar.getVenue().getVenueName() + " " + 
                             seminar.getVenue().getVenueLocation()+"</div>");
                     if(user == null){
-                        out.print("<div class='seminar-button'><button type='button'>Apply</button></div>");
+                        out.print("<div class='seminar-button'><a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Apply</div>");
                     }else if (user.getUserTypeFlag() != null){
-                        out.print("<div class='seminar-button'><button type='button'>Edit</button></div>");
+                        out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Edit</div>");
                     }
                     out.print("</div>");
+                    out.print("</div>");
+                                    System.out.print("hi");
+
                     
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

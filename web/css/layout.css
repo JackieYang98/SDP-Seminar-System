@@ -93,6 +93,17 @@ body{
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248,66,66);
 }
 
+a.button{
+    background-color: #114BE9; 
+    -webkit-appearance: button;
+    color: white;
+    padding: 11px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 /* Set a style for all buttons */
 button {
     background-color: #114BE9;
@@ -192,6 +203,13 @@ span.psw {
 
 .center{
     text-align: center;
+}
+
+input[type=radio]
+{
+   /*Double-sized Checkboxes*/ 
+    -webkit-transform: scale(2);
+    padding: 10px;
 }
 
 .grid-container > div {
@@ -521,11 +539,15 @@ span.psw {
 .detail-seminar-start{ grid-area: d;}
 .detail-seminar-end{grid-area:e;}
 .detail-seminar-host{grid-area:f;}
-.detail-seminar-speaker{ grid-area:g;}
-.detail-seminar-speakerV{ grid-area:gv;}
-.detail-seminar-desc{grid-area:h;}
-.detail-seminar-descV{grid-area:hv;}
-.detail-seminar-register{grid-area:i;}
+.detail-seminar-desc{grid-area:g;}
+.detail-seminar-descV{grid-area:h;}
+.detail-seminar-speaker{ grid-area:i;}
+.detail-seminar-speaker-bio{ grid-area:j;}
+.detail-seminar-speakerO{ grid-area:k;}
+.detail-seminar-speakerO-bio{ grid-area:l;}
+.detail-seminar-speakerT{ grid-area:m;}
+.detail-seminar-speakerT-bio{ grid-area:n;}
+.detail-seminar-register{grid-area:o;}
 
 .detail-seminar-grid{
     display: inline-grid;
@@ -533,13 +555,19 @@ span.psw {
     padding-left: 30px;
     text-align: left;
     grid-template-areas:   
-        'a a a g'
-        'b b b gv'
-        'c d e gv'
-        'f f . gv'
-        'h h . .'
-        'hv hv hv hv'
-        '. . i i';
+        'a a . .'
+        'b b . .'
+        'c d e .'
+        'f f . .'
+        'g g . .'
+        'h h h h'
+        'i i i i'
+        'j j j j'
+        'k k k k'
+        'l l l l'
+        'm m m m'
+        'n n n n'
+        '. o o .';
 }
 .detail-seminar-register button {
     background-color: #114BE9;
@@ -550,18 +578,13 @@ span.psw {
     cursor: pointer;
     width: 65%;
 }
-.detail-seminar-descV textArea{
-    width:700px; 
+.detail-seminar-grid textArea{
+    width:550px; 
     height:150px;
     font-size: 18px;
     resize: none;
 }
-.detail-seminar-speakerV textArea{
-    width:260px; 
-    height:120px;
-    font-size: 18px;
-    resize: none;
-}
+
 .register-Fname{ grid-area: a;}
 .register-Lname{ grid-area: b;}
 .register-Fname-input{ grid-area: c;}
@@ -680,13 +703,13 @@ span.psw {
   text-align: center;
   margin: 1em 1%;
 }
-.mix {
+/*.mix {
   display: none;
   text-align: center;
   width: 300px;
   height: 200px;
   margin: 1em 1%;
-}
+}*/
 .seminar-image{ grid-area: a;}
 .seminar-date{ grid-area: b;
     border: solid black 1px;

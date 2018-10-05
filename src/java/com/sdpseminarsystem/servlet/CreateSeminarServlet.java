@@ -58,11 +58,11 @@ public class CreateSeminarServlet extends HttpServlet {
 				List<User> allUsers = DAOFactory.getInstanceOfUserDAO().findAll();
 				response.getWriter().write("<option disabled selected value> -- Select a host -- </option>");
 				for (User user : allUsers) {
-					if (user.getUserTypeFlag().equals('h')) {
+					if  (user.getUserTypeFlag().equals('h')) {
 						response.setContentType("text/html");
 						response.setCharacterEncoding("UTF-8");
 						response.getWriter()
-						.write("<option>" + user.getUserId() + " " + user.getUserFirstName() + "</option>");
+						.write("<option>" + user.getUserId() + " " + user.getUserFirstName() + " " + user.getUserLastName() + "</option>");
                                         }
 				}
 			} catch (SQLException e) {
@@ -144,7 +144,7 @@ public class CreateSeminarServlet extends HttpServlet {
 
 			speakerName = request.getParameter("speakerTwoName");
 			speakerBio = request.getParameter("speakerTwoBio");
-			if (speakerName != null && speakerName != null) {
+			if (speakerName != null && speakerBio != null) {
 				speaker = new Speaker();
 				speaker.setSpeakerName(speakerName);
 				speaker.setSpeakerBiography(speakerBio);

@@ -36,7 +36,6 @@
                 <a id="browse" href="/SDP-Seminar-System/index.jsp">Browse</a>
                 <%if(user.getUserTypeFlag()=='a'){%><a id="manageuser" href="/SDP-Seminar-System/manage_user.jsp">Manage User</a><%}%>
                 <%if(user.getUserTypeFlag()!='a'){%>
-                    <a id="manageseminar" href="/SDP-Seminar-System/manage_seminar.jsp">Manage Seminar</a>
                     <a id="createseminar" href="/SDP-Seminar-System/create_seminar.jsp">Create Seminar</a>
                 <%}%>
                 <a id="login" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>

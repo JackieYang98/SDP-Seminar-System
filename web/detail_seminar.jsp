@@ -52,15 +52,23 @@
                 <div class="detail-seminar-date"><b>Date:</b> <%=dateFormat.format(seminar.getSeminarStartTime()) %></div>
                 <div class="detail-seminar-start"><b>Start:</b> <%=timeFormat.format(seminar.getSeminarStartTime())%></div>
                 <div class="detail-seminar-end"><b>End:</b> <%=timeFormat.format(seminar.getSeminarEndTime())%></div>
-                <div class="detail-seminar-host"><b>Host:</b> <%=seminar.getUserHost().getUserFirstName() %></div>
+                <div class="detail-seminar-host"><b>Host:</b> <%=seminar.getUserHost().getUserFirstName() %> <%=seminar.getUserHost().getUserLastName() %></div>
                 <div class="detail-seminar-speaker"><b>Speaker: </b> <%=speaker.get(0).getSpeakerName() %> </div>
-                <div class="detail-seminar-speakerV"><textarea name="detailSpeaker" readonly><%=speaker.get(0).getSpeakerBiography() %></textarea></div>
+                <div class="detail-seminar-speaker-bio"><textarea name="detailSpeaker" readonly><%=speaker.get(0).getSpeakerBiography() %></textarea></div>
+                <% if(!(speaker.get(1).getSpeakerName().equals(""))){%>
+                <div class="detail-seminar-speakerO"><b>Speaker 2: </b> <%=speaker.get(1).getSpeakerName()%> </div>               
+                <div class="detail-seminar-speakerO-bio"><textarea name="detailSpeaker" readonly><%=speaker.get(1 ).getSpeakerBiography() %></textarea></div>
+                <% } %>
+                <% if(!(speaker.get(2).getSpeakerName().equals(""))){%>
+                <div class="detail-seminar-speakerT"><b>Speaker 3: </b> <%=speaker.get(2).getSpeakerName() %> </div>
+                <div class="detail-seminar-speakerT-bio"><textarea name="detailSpeaker" readonly><%=speaker.get(2).getSpeakerBiography() %></textarea></div>
+                <% } %>
                 <div class="detail-seminar-desc"><b>Seminar Description</b> </div>
                 <div class="detail-seminar-descV"><textarea name="detailSemDesc" readonly><%=seminar.getSeminarDescription()%> </textarea> </div>
                 <div class="detail-seminar-register"><button type="button" onclick="document.getElementById('seminarRegister').style.display='block';">Register</button> </div>
             </div>
             <div id="seminarRegister" class="modal" >
-                <form id="mainForm" class="modal-content animate" name="detailRegAttendeeForm" action="AttendeeServlet" onsubmit="document.getElementById('seminarConfirm').style.display='block';" method="POST">
+                <form id="mainForm" class="modal-content animate" name="detailRegAttendeeForm" action="AttendeeServlet" onsubmit="document.getElementById('seminarConfirm').style.display='block';return false;" method="POST">
                     <div class="center">
                         <h1><%=seminar.getSeminarTitle()%></h1>
                         <table align="center">
@@ -86,13 +94,12 @@
                             <div class="register-phone">Phone Number </div>
                             <div class="register-phone-input"><input type="text" id="phoneInput" name="attdPhone" placeholder="Phone Number" required></div>
                             <div class="register-status">Status</div>   
-                            <div class="register-status-going"><input type="radio" name="status" value="Going" required/>Going </div>
-                            <div class="register-status-interested"><input type="radio" name="status" value="Interested"/> Interested</div>
-                            <input type="hidden" name="submit" value="create">
-                            <input type="hidden" name="seminarId" value="<%=seminarId%>">
+                            <div class="register-status-going"><input class="status" type="radio" name="status" value="Going" required/>Going </div>
+                            <div class="register-status-interested"><input class="status" type="radio" name="status" value="Interested"/> Interested</div>
+                            <input type="hidden" id="submit" name="submit" value="create">
+                            <input type="hidden" id="seminarId" name="seminarId" value="<%=seminarId%>" >
                             <div class="register-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered? Click here</label></div>  
-                            <div class="register-submit"><input type="submit" id="confirmButton" onclick="confirmAttending();" value="Confirm"></div>
-                            <!----> 
+                            <div class="register-submit"><input type="submit" id="confirmButton" value="Confirm"></div>                           
                             <div class="register-cancel"><input type="button" onclick="document.getElementById('seminarRegister').style.display='none'" value="Close"></div>                            
                         </div>
                     </div>
@@ -100,7 +107,6 @@
             </div>
             <div id="seminarRegistered" class="modal">
                 <div align="center">
-                    <!----> 
                     <form name="detailRegisteredEmailForm" id="findUserForm" class="modal-content animate" action="AttendeeServlet" method="POST">
                         <h1>Enter your email</h1>
                         <br> <br>
@@ -118,7 +124,6 @@
              </div>
             <div id="seminarRegisterEdit" class="modal" >
                 <form id="editForm" class="modal-content animate" action="AttendeeServlet" method="POST">
-                    <!---->
                     <div class="center">
                         <h1>Seminar Name</h1>
                         <table align="center">
@@ -154,12 +159,7 @@
                             <td><%=dateFormat.format(seminar.getSeminarStartTime()) %></td>
                         </tr>
                     </table>
-                        <p> <b>First Name: </b><span id="firstNameText"></span></p>
-                        <p> <b>Last Name: </b> <span id="lastNameText"></span></p>
-                        <p> <b>Email: </b> <span id="emailText"></span></p>
-                        <p> <b>Phone Number: </b> <span id="phoneText"></span></p>
-                        <p> <b>Status: </b> <span id="statusText"></span> </p>
-                        <p> <b>You will be redirected in 5 seconds... </b></p>
+                        <div class="seminarConfirm"></div>                    
                 </div> 
             </div>
                         
@@ -195,26 +195,31 @@
         </div>
     </body>
     <script>
-//    $('#mainForm').submit(function (e){
-//        var form = this;
-//        e.preventDefault();
-//        setTimeout(function(){
-//            form.submit();
-//        }, 2000);
-//    });
-    
-    function confirmAttending(){       
-        var firstNameText = document.getElementById('firstNameText');
-        firstNameText.textContent = document.getElementById('firstNameInput').value;
-        var lastNameText = document.getElementById('lastNameText');
-        lastNameText.textContent = document.getElementById('lastNameInput').value;
-        var emailText = document.getElementById('emailText');
-        emailText.textContent = document.getElementById('emailInput').value; 
-        var phoneText = document.getElementById('phoneText');
-        phoneText.textContent = document.getElementById('phoneInput').value;
-        var statusText = document.getElementById('statusText');
-        statusText.textContent = $('input[name="status"]:checked','#mainForm').val();    
-    }
+    $("#mainForm").submit(function(event){
+        event.preventDefault();
+        var submitFlag = $('#submit').val();
+        var seminarId = $('#seminarId').val();
+        var firstName = $('#firstNameInput').val();
+        var lastName = $('#lastNameInput').val();
+        var email = $('#emailInput').val();
+        var phone = $('#phoneInput').val();
+        var status = $('.status:checked').val();
+        var data = 'submit='+submitFlag+'&seminarId='+seminarId+'&attdFName='+firstName+'&attdLName='+
+                    lastName+'&attdEmail='+email+'&attdPhone='+phone+
+                    '&attdState='+status;
+        $.ajax({
+            url:"AttendeeServlet",
+            type: "POST",
+            data: data,
+            success:function(data){
+                if(data !== "null"){
+                    $('.seminarConfirm').html(data);
+                }else{
+                    return false;
+                }
+            }
+        });
+    });
     
     $("#findUserForm").submit(function(event){
         event.preventDefault();
@@ -275,7 +280,6 @@
             var data = 'submit='+submitFlag+'&attdId='+attendeeId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
                     '&attdState='+status;
-            alert(data);
             $.ajax({
                 url:"AttendeeServlet",
                 type: "POST",
@@ -291,9 +295,6 @@
             });
             
         }    
-    });
-    
-    
-   
+    }); 
     </script>
 </html>

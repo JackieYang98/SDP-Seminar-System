@@ -43,18 +43,23 @@ public class AttendeeServlet extends HttpServlet {
 		try {
 			String submitFlag = request.getParameter("submit");
 			if(submitFlag.equals("create")) {
-				Attendee attendee = new Attendee();
+                            Attendee attendee = findAttendee(request, "seminarId", "attdEmail");
+                            if(attendee == null){
+				attendee = new Attendee();
 				attendee.setAttendeeEmail(request.getParameter("attdEmail"));
 				attendee.setAttendeePhone(request.getParameter("attdPhone"));
 				attendee.setAttendeeFirstName(request.getParameter("attdFName"));
 				attendee.setAttendeeLastName(request.getParameter("attdLName"));
-				attendee.setAttendeeState(request.getParameter("status").charAt(0));
+				attendee.setAttendeeState(request.getParameter("attdState").charAt(0));
 				DAOFactory.getInstanceOfAttendeeDAO().create(attendee, Integer.valueOf(request.getParameter("seminarId")));
-                                request.getRequestDispatcher("index.jsp").forward(request, response);
+                                printConfirm(request, response, "seminarConfirm","seminarRegister");        
+                            }else{
+                                response.getWriter().print("<p style='color:red'>Email already registered! Please try again</p>");
+                                response.getWriter().print("<button type='button' onclick=\"document.getElementById('seminarConfirm').style.display='none';"
+                    + "\" title=\"Close Page\">Return</button>");
+                            }
 			}else if (submitFlag.equals("verify")){ 
-                                Integer seminarId= Integer.parseInt(request.getParameter("seminarId"));
-                                String email = request.getParameter("email");
-                                Attendee attendee = DAOFactory.getInstanceOfAttendeeDAO().findBySeminarAndEmail(seminarId, email);
+                                Attendee attendee = findAttendee(request ,"seminarId", "email");
                                 PrintWriter out = response.getWriter();
                                 if(attendee != null){
                                     out.print("<div class='registerEdit-Fname'>First Name</div>");
@@ -90,12 +95,12 @@ public class AttendeeServlet extends HttpServlet {
 				attendee.setAttendeeLastName(request.getParameter("attdLName"));
 				attendee.setAttendeeState(request.getParameter("attdState").charAt(0));
 				DAOFactory.getInstanceOfAttendeeDAO().update(attendee);
-                                printConfirm(request, response, "seminarEditConfirm");                 
+                                printConfirm(request, response, "seminarEditConfirm", "seminarRegisterEdit");                 
 			} else if (submitFlag.equals("Delete")) {
 				Attendee attendee = new Attendee();
 				attendee.setAttendeeId(Integer.valueOf(request.getParameter("attdId")));
 				DAOFactory.getInstanceOfAttendeeDAO().delete(attendee);
-                                printConfirm(request, response, "seminarRegisterDelete");
+                                printConfirm(request, response, "seminarRegisterDelete", "seminarRegisterEdit");
 			} else {
 				throw new SQLException();
 			}
@@ -110,14 +115,21 @@ public class AttendeeServlet extends HttpServlet {
 //			request.getRequestDispatcher(basePath).forward(request, response);
 //		}
 	}
-        private void printConfirm(HttpServletRequest request, HttpServletResponse response, String id) throws IOException{
+        private void printConfirm(HttpServletRequest request, HttpServletResponse response, String openPopUp, String closePopUp) throws IOException{
             PrintWriter out = response.getWriter();
                 out.print("<p> <b>First Name: </b>" + request.getParameter("attdFName") + "</p>"); 
                 out.print("<p> <b>Last Name: </b>" + request.getParameter("attdLName") + "</p>");
                 out.print("<p> <b>Email: </b>" + request.getParameter("attdEmail") + "</span></p>");
                 out.print("<p> <b>Phone: </b>" + request.getParameter("attdPhone") + "</p>");
                 out.print("<p> <b>Status: </b>" + request.getParameter("attdState") + "</p>");
-                out.print("<button type='button' onclick=\"document.getElementById('"+id+"').style.display='none';"
-                    + "document.getElementById('seminarRegisterEdit').style.display='none';\" title=\"Close Page\">Return</button>");  
+                out.print("<button type='button' onclick=\"document.getElementById('" + openPopUp + "').style.display='none';"
+                    + "document.getElementById('" + closePopUp + "').style.display='none';\" title=\"Close Page\">Return</button>");  
+        }
+        
+        private Attendee findAttendee(HttpServletRequest request, String seminarId, String email) throws SQLException{
+            Integer semId= Integer.parseInt(request.getParameter(seminarId));
+            String em = request.getParameter(email);
+            Attendee attendee = DAOFactory.getInstanceOfAttendeeDAO().findBySeminarAndEmail(semId, em);
+            return attendee;
         }
 }

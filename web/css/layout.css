@@ -677,15 +677,16 @@ span.psw {
     width: 65%;
 }
 .seminar-container {
-  width: 75%;
-  margin: 3em auto;
-}
-.catalog {
   text-align: center;
   margin: 1em 1%;
-  background-color: #ccc;
 }
-
+.mix {
+  display: none;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  margin: 1em 1%;
+}
 .seminar-image{ grid-area: a;}
 .seminar-date{ grid-area: b;
     border: solid black 1px;

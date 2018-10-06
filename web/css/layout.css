@@ -203,6 +203,7 @@ span.psw {
 
 .center{
     text-align: center;
+    margin: 1em 1%;
 }
 
 input[type=radio]
@@ -612,7 +613,8 @@ input[type=radio]
         'f f f n'
         'g . . .'
         'h y . i'
-        'j j k k';
+        'j j k k'
+        '. . . .';
 }
 
 .registerEdit-Fname{ grid-area: a;}
@@ -628,6 +630,7 @@ input[type=radio]
 .registerEdit-status-Interested{ grid-area:k;}
 .registerEdit-submit{grid-area:l;}
 .registerEdit-delete{grid-area:m;}
+.registerEdit-cancel{grid-area:n;}
 
 .registerEdit-grid{
     display: inline-grid;
@@ -637,11 +640,12 @@ input[type=radio]
     grid-template-areas:   
         'a . b .'
         'c c d d'
-        'e . . g'
-        'f f f h'
+        'e . g g'
+        'f f h h'
         'i . . .'
         'j k . .'
-        'l l m m';
+        'l . n .'
+        '. m m .';
 }
 
 .registerEdit-email-input input , .register-email-input input{
@@ -662,15 +666,24 @@ input[type=radio]
     cursor: pointer;
 }
 
-.registerEdit-delete input, .register-cancel input {
+.registerEdit-delete input, .registerEdit-delete button {
     background-color: red;
     color: white;
     width: 200px;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
+    cursor: pointer;   
+}
+
+.register-cancel input, .registerEdit-cancel input{
+    background-color: #114BE9;
+    color: white;
+    width: 200px;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
     cursor: pointer;
-    
 }
 
 .registered-email{ grid-area: a;}
@@ -699,17 +712,16 @@ input[type=radio]
     cursor: pointer;
     width: 65%;
 }
-.seminar-container {
-  text-align: center;
-  margin: 1em 1%;
-}
-/*.mix {
-  display: none;
-  text-align: center;
-  width: 300px;
-  height: 200px;
-  margin: 1em 1%;
+/*.seminar-container {
+    text-align: center;
+    margin: 1em 1%;
 }*/
+.mix {
+    display:inline-table;
+    width: 300px;
+    margin: 1em 1%;
+}
+
 .seminar-image{ grid-area: a;}
 .seminar-date{ grid-area: b;
     border: solid black 1px;
@@ -728,8 +740,7 @@ input[type=radio]
     margin: 20px;
     text-align: center;
     border: solid black 1px;
-    grid-template-areas: 
-        
+    grid-template-areas:         
         'a a a a'
         'c c c c'
         'b d d e'

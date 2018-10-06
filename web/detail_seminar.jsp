@@ -125,7 +125,7 @@
             <div id="seminarRegisterEdit" class="modal" >
                 <form id="editForm" class="modal-content animate" action="AttendeeServlet" method="POST">
                     <div class="center">
-                        <h1>Seminar Name</h1>
+                        <h1><%=seminar.getSeminarTitle()%> </h1>
                         <table align="center">
                             <tr>
                                 <th><b>Venue:</b></th>
@@ -187,9 +187,7 @@
                 <div class="modal-content animate">
                     <h1>You have been removed from the seminar</h1>
                     <p><b>Seminar Name: </b> <%=seminar.getSeminarTitle()%></p>
-                     <div class="deleteConfirm"></div>
-                    
-                    <!--<button type="button" onclick="document.getElementById('seminarRegisterDelete').style.display='none';document.getElementById('seminarRegisterEdit').style.display='none'" title="Close Page">Return</button>-->
+                     <div class="deleteConfirm"></div>                    
                 </div>        
             </div>
         </div>
@@ -251,14 +249,16 @@
         var submitFlag = $('#hiddenFlag').val();
         var attendeeId = $('#attdId').val();
         if(submitFlag === "Confirm"){
+            var seminarId = $('#seminarId').val();
             var firstName = $('#firstNameEdit').val();
             var lastName = $('#lastNameEdit').val();
+            var targetEmail = $('#email').val();
             var email = $('#emailEdit').val();
             var phone = $('#phoneEdit').val();
             var status = $('.status:checked').val();
             var data = 'submit='+submitFlag+'&attdId='+attendeeId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
-                    '&attdState='+status;
+                    '&attdState='+status+'&seminarId='+seminarId+'&target='+targetEmail;
             $.ajax({
                 url:"AttendeeServlet",
                 type: "POST",

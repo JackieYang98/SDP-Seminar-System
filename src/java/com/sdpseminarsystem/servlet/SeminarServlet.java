@@ -81,16 +81,13 @@ public class SeminarServlet extends HttpServlet {
                     out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+ " " +"</div>");            
                     out.print("<div class='seminar-venue'>"+seminar.getVenue().getVenueName() + " " + 
                             seminar.getVenue().getVenueLocation()+"</div>");
-                    if(user == null){
+                    if(user == null || user.getUserTypeFlag().equals('a')){
                         out.print("<div class='seminar-button'><a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Apply</div>");
-                    }else if (user.getUserTypeFlag() != null){
+                    }else if (user.getUserTypeFlag() != null ){
                         out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Edit</div>");
                     }
                     out.print("</div>");
-                    out.print("</div>");
-                                    System.out.print("hi");
-
-                    
+                    out.print("</div>");                
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

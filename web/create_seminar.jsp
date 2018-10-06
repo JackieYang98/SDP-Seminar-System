@@ -61,11 +61,11 @@
                     </div>
                     <div class="grid-host">Host</div>
                     <div class="grid-host-input">
-                        <select name="seminarHost" id="hostDropdown"></select>
+                        <select name="seminarHost" id="hostDropdown" required></select>
                     </div>
                     <div class="grid-ven-loc">Venue</div>
                     <div class="grid-ven-loc-input">                     
-                        <select name='venueName'  id="venueDropdown" >
+                        <select name='venueName'  id="venueDropdown" required>
                             <option value="" disabled selected>-- Select a host to display venue --</option>
                         </select>
                     </div>                   

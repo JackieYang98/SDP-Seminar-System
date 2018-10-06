@@ -48,8 +48,8 @@
         <%@include file="WEB-INF/header.jsp" %>
       <div id="tabs" class="center">
             <ul>
-               <li> <a href="#edit"> Edit Seminar </a> </li>
-               <li> <a href="#attendee"> View attendees list </a> </li>
+                <li> <a href="#attendee"> View attendees list </a> </li>
+                <li> <a href="#edit"> Edit Seminar </a> </li>    
             </ul>
           <br>
             <div id="edit" >
@@ -129,6 +129,7 @@
                         <th>Last Name</th>
                         <th>Phone Number</th>
                         <th>Status</th>
+                        <th hidden>ID</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -146,14 +147,16 @@
                                         <c:out value="Interested"/>
                                     </c:when>
                                 </c:choose></td>
+                                <td hidden><c:out value="${attendee.attendeeId}"/></td>
+
                             </tr>  
                             </c:forEach>
                     </tbody>
                 </table>
             <div style="text-align: center">
-            <button type="button" onclick="document.getElementById('seminarRegister').style.display='block';return false;" >Register</button>
-            <button type="button" onclick="document.getElementById('editAttendee').style.display='block';return false;" >Edit</button>
-            <button type="button" onclick="document.getElementById('deleteConfirmation').style.display='block';return false;" >Delete</button>
+            <button type="button" onclick="document.getElementById('seminarRegister').style.display='block';" >Register</button>
+            <button id="editB" type="button" onclick="document.getElementById('seminarRegisterEdit').style.display='block'; autoFillDetails();" disabled>Edit</button>
+            <button id="deleteB" type="button" onclick="document.getElementById('deleteConfirmation').style.display='block'; confirmDelete();" disabled>Delete</button>
             <br>
             <button type="button" onclick="document.getElementById('printTags').style.display='block';return false;" >Print Tags</button>
             <button type="button" onclick="document.getElementById('emailAttendee').style.display='block';return false;">Email</button>
@@ -187,43 +190,51 @@
                     <div class="seminarConfirm"></div>
             </div>        
         </div>
-        <div id="editAttendee" class="modal">
-            <form class="modal-content animate" action="#" onSubmit="document.getElementById('editConfirmation').style.display='block';return false" method="POST">
+        <div id="seminarRegisterEdit" class="modal">
+            <form id="editAttendee" class="modal-content animate" action="AttendeeServlet" onsubmit="document.getElementById('seminarEditConfirm').style.display='block';return false;" method="POST">
                 <h1>Edit Attendee</h1>
-                <div class="addAttendee-grid">
-                    <div class="addAttendee-Fname">First Name</div>
-                    <div class="addAttendee-Lname">Last Name</div>    
-                    <div class="addAttendee-Fname-input"><input type="text" name="editFirstName" placeholder="First Name" required></div>
-                    <div class="addAttendee-Lname-input"><input type="text" name="editLastName" placeholder="Last Name" required></div>
-                    <div class="addAttendee-email">Email</div>   
-                    <div class="addAttendee-email-input"><input type="email" id="emailInput" name="regEmail" placeholder="JohnDoe@email.com"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
-                    <div class="addAttendee-status">Status</div>   
-                    <div class="addAttendee-status-input">
-                        <select>
-                            <option value="Going">Going</option>
-                            <option value="Interested">Interested</option>
-                        </select>
-                    </div>    
-                    <div class="addAttendee-submit"><input id="editButton" type="submit" name="attendeeEdit" value="Confirm"> </div>
-                    <div class="addAttendee-cancel"><button type="button" onclick="document.getElementById('editAttendee').style.display='none'"> Cancel</button></div>
+                <div class="registerEdit-grid">
+                    <div class="registerEdit-Fname">First Name</div>
+                    <div class="registerEdit-Lname">Last Name</div>    
+                    <div class="registerEdit-Fname-input"><input id="firstNameText" type="text" name="editFirstName" placeholder="First Name" required></div>
+                    <div class="registerEdit-Lname-input"><input id="lastNameText"  type="text" name="editLastName" placeholder="Last Name" required></div>
+                    <div class="registerEdit-email">Email</div>   
+                    <div class="registerEdit-email-input"><input type="email" id="emailText" name="regEmail" placeholder="Email"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required></div>    
+                    <div class="registerEdit-phone">Phone Number </div>
+                    <div class="registerEdit-phone-input"><input type="text" id="phoneText" name="attdPhone" placeholder="Phone Number" required></div>
+                    <div class="registerEdit-status">Status</div>   
+                    
+                    <div class="registerEdit-status-Going"><input id="going" type="radio" class="state" name="attdState" value="Going" required>Going</div>
+                    <div class="registerEdit-status-Interested"><input id="interested" type="radio" class="state" name="attdState" value="Interested" required>Interested</div>
+                    <input type="hidden" id="attdId">                       
+                    <div class="registerEdit-submit"><input id="editConfirmButton" type="submit" name="attendeeEdit" value="Confirm"> </div>
+                    <div class="registerEdit-cancel"><input type="button" onclick="document.getElementById('seminarRegisterEdit').style.display='none'" value="Cancel"></div>
                 </div>
             </form>
         </div>
-        <div id="editConfirmation" class="modal">
+        <div id="seminarEditConfirm" class="modal">
             <div class="modal-content animate">
                 <h1>Attendee edited</h1>
-                <p> <b>First Name:</b> </p>
-                <p> <b>Last Name:</b> Some name here </p>
-                <button type="button" onclick="document.getElementById('editConfirmation').style.display='none';document.getElementById('editAttendee').style.display='none'" title="Close Page">Return</button>
+                <div class="seminarEditConfirm"></div>
             </div>        
         </div>
         <div id="deleteConfirmation" class="modal">
+            <form id="deleteAttendee" class="modal-content animate" action="AttendeeServlet" method="POST" onsubmit="document.getElementById('seminarRegisterDelete').style.display='block';">
+                <h1>Delete Attendee</h1>
+                <p> <b>First Name:</b> <span id="firstName"></span> </p>
+                <p> <b>Last Name:</b> <span id="lastName"></span> </p>
+                <p> <b>Email: </b> <span id="email"></span> </p>
+                <p> <b>Phone: </b> <span id="phone"></span> </p>
+                <p> <b>Status: </b> <span id="status"></span></p>
+                <input type="submit" id="deleteConfirmButton" value="Delete">
+                <input id="attendeeID" type="hidden">
+                <input type="button" onclick="document.getElementById('deleteConfirmation').style.display='none'" value="Cancel">
+            </form>        
+        </div>
+        <div id="seminarRegisterDelete" class="modal">
             <div class="modal-content animate">
-                <h1>Attendee Deleted</h1>
-                <p> <b>First Name:</b> Some name here </p>
-                <p> <b>Last Name:</b> Some name here </p>
-                <p> <b>Email</b> Some email here </p>
-                <button type="button" onclick="document.getElementById('deleteConfirmation').style.display='none'" title="Close Page">Return</button>
+                <h1>Attendee deleted</h1>
+                <div class="seminarDeleteConfirm"></div>
             </div>        
         </div>
         <div id="printTags" class="modal">
@@ -262,11 +273,30 @@
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
         
+    var id, email, firstName, lastName, phone, status;
     $(document).ready(function(){
         var table = $('#attendee-list').DataTable( {
             select:{
                 items: 'row',
                 style: 'single'
+            }
+        });
+        
+        $('#attendee-list tbody').on( 'click', 'tr', function () {
+            email = table.row( this ).data()[0];
+            firstName =  table.row( this ).data()[1];
+            lastName = table.row( this ).data()[2];
+            phone = table.row( this ).data()[3];
+            status = table.row( this ).data()[4];
+            id = table.row( this ).data()[5];
+            $('#row').val(data);
+            
+            if ( $(this).hasClass('selected') ){
+                $('#editB').prop('disabled', true);
+                $('#deleteB').prop('disabled', true);
+            }else{
+                $('#editB').prop('disabled', false);
+                $('#deleteB').prop('disabled', false);
             }
         });
          
@@ -292,11 +322,7 @@
             }
         });
         
-        $('#attendee-list tbody').on( 'click', 'tr', function () {
-           var data =  table.row( this ).data();
-           $('#row').val(data);
-           
-        });
+        
     });
     
         $("#hostDropdown").change(function(){
@@ -324,7 +350,6 @@
         var data = 'submit='+submitFlag+'&seminarId='+seminarId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
                     '&attdState='+status;
-            alert(data);
         $.ajax({
             url:"AttendeeServlet",
             type: "POST",
@@ -337,7 +362,84 @@
                 }
             }
         });
-    });    
+    });
+    
+    function autoFillDetails(){
+        document.getElementById('attdId').value = id;
+        document.getElementById('emailText').value = email;
+        document.getElementById('firstNameText').value = firstName;
+        document.getElementById('lastNameText').value = lastName;
+        document.getElementById('phoneText').value = phone;
+        if(status === "Going"){
+            $("#going").prop('checked',true);
+        }else if(status === "Interested"){
+            $("#interested").prop('checked',true);
+        }
+    }
+    
+    
+    $("#editAttendee").submit(function(event){
+        event.preventDefault();
+        var submitFlag= $('#editConfirmButton').val();
+        var seminarId = $('#seminarId').val();
+        var attendeeId = $('#attdId').val();
+        var firstName = $('#firstNameText').val();
+        var lastName = $('#lastNameText').val();
+        var email = $('#emailText').val();
+        var phone = $('#phoneText').val();
+        var status = $('.state:checked').val();
+        var data = 'submit='+submitFlag+'&seminarId='+seminarId+'&attdFName='+firstName+'&attdLName='+
+                    lastName+'&attdEmail='+email+'&attdPhone='+phone+
+                    '&attdState='+status+"&attdId="+attendeeId;
+        $.ajax({
+            url:"AttendeeServlet",
+            type: "POST",
+            data: data,
+            success:function(data){
+                if(data !== "null"){
+                    $('.seminarEditConfirm').html(data);
+                }else{
+                    return false;
+                }
+            }
+        });
+    });
+    
+    function confirmDelete(){
+        document.getElementById('email').textContent = email;
+        document.getElementById('firstName').textContent = firstName;
+        document.getElementById('lastName').textContent = lastName;
+        document.getElementById('attendeeID').value = id;
+        document.getElementById('phone').textContent = phone;
+        document.getElementById('status').textContent = status;
+    }
+    
+    $("#deleteAttendee").submit(function(event){
+        event.preventDefault();
+        var submitFlag= $('#deleteConfirmButton').val();       
+        var attendeeId = $('#attendeeID').val();
+        var firstName = document.getElementById('firstName').textContent;
+        var lastName = document.getElementById('lastName').textContent;
+        var email = document.getElementById('email').textContent;
+        var phone = document.getElementById('phone').textContent;
+        var status = document.getElementById('status').textContent;
+        var data = 'submit='+submitFlag+"&attdId="+attendeeId+'&attdFName='+firstName+'&attdLName='+
+                    lastName+'&attdEmail='+email+'&attdPhone='+phone+
+                    '&attdState='+status;
+        alert(data);
+        $.ajax({
+            url:"AttendeeServlet",
+            type: "POST",
+            data: data,
+            success:function(data){
+                if(data !== "null"){
+                    $('.seminarDeleteConfirm').html(data);
+                }else{
+                    return false;
+                }
+            }
+        });
+    });
     </script>
     </body>
 </html>

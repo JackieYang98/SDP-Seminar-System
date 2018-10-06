@@ -23,9 +23,9 @@
         if(user.getUserTypeFlag() == 'a'){
             type = "Admin";
         } else if (user.getUserTypeFlag() == 'h'){
-                    type = "Host";
+            type = "Host";
         } else{
-                    type = "Organiser";
+            type = "Organiser";
         }
     %>
     <div class="navbar">
@@ -75,16 +75,15 @@
                     data: data,
                     success: function(data)
                     {
-                        if(data != "invalid"){
+                        if(data !== "invalid"){
                             window.location = "index.jsp";
                         }else{
                             $("#messageDiv").html('<span class="error" style="color: red">' + "Invalid Username and/or Password" + '</span>');  
                         }
                     },
                     error:function(xhr, ajaxOptions, thrownError){
-                        alert(xhr.status + " " + thrownError + " Please come back soon while the server reload.");
-                        
-                    },                         
+                        alert(xhr.status + " " + thrownError + " Please come back soon while the server reload.");  
+                    }                         
                 });
                 return false;
             });

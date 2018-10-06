@@ -162,13 +162,13 @@
         $('#user-list tbody').on( 'click', 'tr', function () {
             var data =  table.row( this ).data()[0];
             $('#row').val(data);
-            if($('#confirm-button').is(":disabled")){
-                $('#confirm-button').prop('disabled', false);
-                $('#delete-button').prop('disabled', false);
-            }else{
+            if ( $(this).hasClass('selected') ){
                 $('#confirm-button').prop('disabled', true);
                 $('#delete-button').prop('disabled', true);
-        }
+            }else{
+                $('#confirm-button').prop('disabled', false);
+                $('#delete-button').prop('disabled', false);
+            }
         } );
     } );
 </script>

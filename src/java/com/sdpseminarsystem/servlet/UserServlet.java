@@ -59,13 +59,11 @@ public class UserServlet extends HttpServlet {
                             User user = new User();
                             user.setUserTypeFlag(request.getParameter("role").charAt(0));
                             user.setUserId(selectedUser);
-                            System.out.print(user.getUserId() + user.getUserTypeFlag());
                             DAOFactory.getInstanceOfUserDAO().update(user);
 			}
 			else if (submitFlag.equals("delete")) {
                             User selectedUser = new User();
                             selectedUser.setUserId(request.getParameter("row"));
-                            System.out.print(request.getParameter("row"));
                             DAOFactory.getInstanceOfUserDAO().delete(selectedUser);
 			}
 			else {

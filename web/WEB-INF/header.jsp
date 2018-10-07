@@ -57,7 +57,7 @@
                 <label for="password"><b>Password</b></label>
                 <input id="password" type="password" placeholder="UTS Password" name="password" required>
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>
-                <button id="loginButton" type="submit">Login</button>
+                <button type="submit">Login</button>
                 <div id="messageDiv"></div>
             </div>
         </form>

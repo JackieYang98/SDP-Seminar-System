@@ -14,6 +14,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     User current = (User) session.getAttribute("user");
+    if(current == null){
+        //Only for logged in users
+%>
+        <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
+<%
+    }else if(current.getUserTypeFlag() != 'o' || current.getUserTypeFlag() != 'h'){
+        //Only for Organiser or Host User
+%>
+        <%@include file="WEB-INF/errors/unauthorized_action.jsp" %>
+<%  } else { 
+    current = (User) session.getAttribute("user");
     String seminarId = request.getParameter("id");
     Seminar seminar = DAOFactory.getInstanceOfSeminarDAO().findById(Integer.parseInt(seminarId));
     List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
@@ -154,7 +165,7 @@
                     </tbody>
                 </table>
             <div style="text-align: center">
-            <button type="button" onclick="document.getElementById('seminarRegister').style.display='block';" >Register</button>
+            <button type="button" onclick="document.getElementById('seminarRegister').style.display='block';">Register</button>
             <button id="editB" type="button" onclick="document.getElementById('seminarRegisterEdit').style.display='block'; autoFillDetails();" disabled>Edit</button>
             <button id="deleteB" type="button" onclick="document.getElementById('deleteConfirmation').style.display='block'; confirmDelete();" disabled>Delete</button>
             <br>
@@ -226,9 +237,9 @@
                 <p> <b>Email: </b> <span id="email"></span> </p>
                 <p> <b>Phone: </b> <span id="phone"></span> </p>
                 <p> <b>Status: </b> <span id="status"></span></p>
-                <input type="submit" id="deleteConfirmButton" value="Delete">
+                <input class="deleteButton" type="submit" id="deleteConfirmButton" value="Delete">
                 <input id="attendeeID" type="hidden">
-                <input type="button" onclick="document.getElementById('deleteConfirmation').style.display='none'" value="Cancel">
+                <input class="submitButton" type="button" onclick="document.getElementById('deleteConfirmation').style.display='none'" value="Cancel">
             </form>        
         </div>
         <div id="seminarRegisterDelete" class="modal">
@@ -443,3 +454,4 @@
     </script>
     </body>
 </html>
+<% } %>

@@ -70,24 +70,35 @@ public class SeminarServlet extends HttpServlet {
 
     private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user) throws IOException{
         response.setContentType("text/html;charset=UTF-8");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE - MM/dd");
-                    PrintWriter out = response.getWriter();
-                    out.print("<div class='mix'>");
-                    out.print("<div class='seminar-box'>");
-                    out.print("<div class='seminar-image'>");
-                    out.print("<a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"'>");
-                    out.print("<img src='image/building.jpg'></a></div>");                   
-                    out.print("<div class='seminar-name'>"+seminar.getSeminarTitle()+"</div>");
-                    out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+ " " +"</div>");            
-                    out.print("<div class='seminar-venue'>"+seminar.getVenue().getVenueName() + " " + 
-                            seminar.getVenue().getVenueLocation()+"</div>");
-                    if(user == null || user.getUserTypeFlag().equals('a')){
-                        out.print("<div class='seminar-button'><a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Apply</div>");
-                    }else if (user.getUserTypeFlag() != null ){
-                        out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Edit</div>");
-                    }
-                    out.print("</div>");
-                    out.print("</div>");                
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE - MM/dd");
+            PrintWriter out = response.getWriter();
+            out.print("<div class='mix'>");
+            out.print("<div class='seminar-box'>");
+            out.print("<div class='seminar-image'>");
+            out.print("<a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"'>");
+            String venueName = seminar.getVenue().getVenueName();
+            if( venueName.toLowerCase().contains("classroom")){
+                out.print("<img src='image/classroom.jpg'></a></div>");
+            }else if(venueName.toLowerCase().contains("pod")){
+                out.print("<img src='image/pod.jpg'></a></div>");
+            }else if(venueName.toLowerCase().contains("workshop")){
+                out.print("<img src='image/workshop.jpg'></a></div>");
+            }else if(venueName.toLowerCase().contains("computer")){
+                out.print("<img src='image/computer.jpg'></a></div>");
+            }else{
+                out.print("<img src='image/lecture.jpg'></a></div>");
+            }
+            out.print("<div class='seminar-name'>"+seminar.getSeminarTitle()+"</div>");
+            out.print("<div class='seminar-date'>"+dateFormat.format(seminar.getSeminarStartTime())+ " " +"</div>");            
+            out.print("<div class='seminar-venue'>"+ venueName + " " + 
+                    seminar.getVenue().getVenueLocation()+"</div>");
+            if(user == null || user.getUserTypeFlag().equals('a')){
+                out.print("<div class='seminar-button'><a href='detail_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Apply</div>");
+            }else if (user.getUserTypeFlag() != null ){
+                out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id="+seminar.getSeminarId()+"' class='button'>Edit</div>");
+            }
+            out.print("</div>");
+            out.print("</div>");                
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

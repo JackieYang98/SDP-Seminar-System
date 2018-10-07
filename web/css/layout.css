@@ -114,7 +114,10 @@ button {
     cursor: pointer;
     width: 20%;
 }
-
+img {
+    width: 280px;
+    height: 180px;
+}
 button:hover {
     opacity: 0.8;
 }
@@ -210,7 +213,6 @@ input[type=radio]
 {
    /*Double-sized Checkboxes*/ 
     -webkit-transform: scale(2);
-    padding: 10px;
 }
 
 .grid-container > div {
@@ -228,20 +230,6 @@ input[type=radio]
 }
 
 .submitButton{
-    background-color: #114BE9;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-.submitButton:hover{
-    opacity:0.8;
-}
-
-.deleteButton{
     height:50px;
     background-color: #114BE9;
     color: white;
@@ -249,11 +237,26 @@ input[type=radio]
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 50%;
+    width: 20%;
 }
 
-#deleteButton:hover{
-    opacity:0.8;
+.submitButton:hover{
+    opacity:0.6;
+}
+
+.deleteButton{
+    height:50px;
+    background-color: red;
+    padding: 14px 20px;
+    margin: 8px 0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+}
+
+.deleteButton:hover{
+    opacity:0.6;
 }
 .grid-sem-name { grid-area: a;}
 .grid-sem-name-input{ grid-area: b;}

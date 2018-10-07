@@ -8,60 +8,67 @@ import java.util.List;
 import com.sdpseminarsystem.dao.IUserDAO;
 import com.sdpseminarsystem.vo.User;
 
+/**
+ * Proxy class of the DAO User module.
+ * 
+ * @author Leo Lee
+ * @since 1.0
+ * @see com.sdpseminarsystem.vo.User
+ */
 public class UserDAOProxy extends DAOProxy implements IUserDAO {
-	
-	private IUserDAO dao;
-	
-	public UserDAOProxy() throws SQLException {
-		dao = new UserDAOImpl(dbc.getConnection());
-	}
-	
-	@Override
-	public boolean create(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
-		boolean flag = false;
-		if(dao.findById(user.getUserId()) == null)
-			flag = dao.create(user);
-		dbc.close();
-		return flag;
-	}
-	
-	@Override
-	public List<User> findAll() throws SQLException {
-		List<User>list = dao.findAll();
-		dbc.close();
-		return list;
-	}
-	
-	@Override
-	public User findById(String userId) throws SQLException {
-		User user = dao.findById(userId);
-		dbc.close();
-		return user;
-	}
-	
-	@Override
-	public boolean update(User user) throws SQLException {
-		boolean flag = false;
-		if(dao.findById(user.getUserId()) != null)
-			flag = dao.update(user);
-		dbc.close();
-		return flag;
-	}
-	
-	@Override
-	public boolean delete(User user) throws SQLException {
-		boolean flag = false;
-		if(dao.findById(user.getUserId()) != null)
-			flag = dao.delete(user);
-		dbc.close();
-		return flag;
-	}
-	
-	@Override
-	public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
-		boolean flag = false;
-		if(dao.findById(user.getUserId()) != null)
-			flag = dao.verify(user);
-		return flag;
-	}
+    
+    private IUserDAO dao;
+    
+    public UserDAOProxy() throws SQLException {
+        dao = new UserDAOImpl(dbc.getConnection());
+    }
+    
+    @Override
+    public boolean create(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+        boolean flag = false;
+        if (dao.findById(user.getUserId()) == null)
+            flag = dao.create(user);
+        dbc.close();
+        return flag;
+    }
+    
+    @Override
+    public List<User> findAll() throws SQLException {
+        List<User> list = dao.findAll();
+        dbc.close();
+        return list;
+    }
+    
+    @Override
+    public User findById(String userId) throws SQLException {
+        User user = dao.findById(userId);
+        dbc.close();
+        return user;
+    }
+    
+    @Override
+    public boolean update(User user) throws SQLException {
+        boolean flag = false;
+        if (dao.findById(user.getUserId()) != null)
+            flag = dao.update(user);
+        dbc.close();
+        return flag;
+    }
+    
+    @Override
+    public boolean delete(User user) throws SQLException {
+        boolean flag = false;
+        if (dao.findById(user.getUserId()) != null)
+            flag = dao.delete(user);
+        dbc.close();
+        return flag;
+    }
+    
+    @Override
+    public boolean verify(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+        boolean flag = false;
+        if (dao.findById(user.getUserId()) != null)
+            flag = dao.verify(user);
+        return flag;
+    }
 }

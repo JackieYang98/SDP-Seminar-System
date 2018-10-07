@@ -22,19 +22,26 @@
                 padding-left:10px;
                 padding-right: 10px;
             }
-            
         </style>
     </head>
     <body>
         <%@include file="WEB-INF/header.jsp" %>
         <div class="center">
+            <form id="searchForm" method="GET" action="SeminarServlet" onsubmit="return false;">
+                <h1>Upcoming Events: </h1>
             <table>
                 <tr>
-                    <td><h1>Upcoming Events: </h1></td>
-                    <td><input type="text" id="dateSearch" name="Date" placeholder="Pick a date... (Date Month Year)"/> </td>
-                    <td><input type="text" id="inputSearch" placeholder="Search a venue..."></td>
+                    <td>From: <input type="date" id="startDateSearch" required/> </td>
+                    <td>To: <input type="date" id="endDateSearch"/> </td>
+                    <td><input id="searchSubmit" type="submit" value="Search"/> </td>
+                </tr>
+                <tr>
+                    <td>Search by name or venue:</td>
+                    <td><input type="text" id="inputSearch" placeholder="Search by name or venue..."></td>
+                    <td><input type="button" onclick="location.reload();" value="Reset"></td>
                 </tr>
             </table>
+            </form>
             <hr>
            
             <div class="catalog"></div>
@@ -49,70 +56,30 @@
             $(".catalog").html(data); 
         }
         });
-    });
-    
-        //Function to get current date
-        var currentDate = new Date().toISOString().split('T')[0];
-        document.getElementsByName("Date")[0].setAttribute('min', currentDate);
-        $(function() {
-            $(".center").mixItUp();
-            var inputText;
-            var $matching = $();
-            // Delay function
-            var delay = (function(){
-              var timer = 0;
-              return function(callback, ms){
-                clearTimeout (timer);
-                timer = setTimeout(callback, ms);
-              };
-            })();
-            $("#inputSearch").keyup(function(){         //VENUE SEARCHER
-              // Delay function invoked to make sure user stopped typing
-                delay(function(){
-                    inputText = $("#inputSearch").val().toLowerCase();
-                    // Check to see if input field is empty
-                    if ((inputText.length) > 0) {            
-                        $( '.mix').each(function() {
-                            $this = $("this");
-                         // add item to be filtered out if input text matches items inside the eventVenue   
-                            if($(this).children('div.seminar-box').children('div.seminar-venue').text().toLowerCase().match(inputText)) {
-                                $matching = $matching.add(this);
-                            }
-                            else {
-                          // removes any previously matched item
-                            $matching = $matching.not(this);
-                            }
-                        });
-                        $(".center").mixItUp('filter', $matching);
-                    }
-                    else {
-                      // resets the filter to show all item if input is empty
-                      $(".center").mixItUp('filter', 'all');
-                    }
-                }, 200 );
-            });
-            $("#dateSearch").keyup(function(){   //DATE SEARCHER
-                delay(function(){
-                    inputText = $("#dateSearch").val().toLowerCase();
-                    if ((inputText.length) > 0) {            
-                        $( '.mix').each(function() {
-                            $this = $("this");
-                            if($(this).children('div.seminar-box').children('div.seminar-date').text().toLowerCase().match(inputText)) {
-                                $matching = $matching.add(this);
-                            }
-                            else {
-                            $matching = $matching.not(this);
-                            }
-                        });
-                        $(".center").mixItUp('filter', $matching);
-                    }
-                    else {
-                      $(".center").mixItUp('filter', 'all');
-                    }
-                }, 200 );
+        
+        $("#inputSearch").on("keyup", function(){
+            var value = $(this).val().toLowerCase();
+            $(".mix").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-
-
+    });
+    
+    
+    $("#searchForm").submit(function(event){
+        event.preventDefault();
+        var startDate = $('#startDateSearch').val();
+        var endDate = $('#endDateSearch').val();
+        var flag = $('#searchSubmit').val();
+        var data= 'searchDate='+flag+'&startDate='+startDate+'&endDate='+endDate;
+        $.ajax({
+            url:"SeminarServlet",
+            type: "GET",
+            data: data,
+        success:function(data){
+            $(".catalog").html(data); 
+        }
+        });
+    });
     </script>
 </html>

@@ -46,7 +46,7 @@
     <div id="loginForm" class="modal">
         <form id="login-form" class="modal-content animate" action="login" method="POST">
             <div class="imgcontainer">
-                <img src="image/uts_logo.png" alt="logo" class="avatar">
+                <img src="image/uts_logo.png" alt="logo" class="avatar" style="width: 350px; height: 150px;">
                 <span onclick="document.getElementById('loginForm').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">
@@ -57,7 +57,8 @@
                 <label for="password"><b>Password</b></label>
                 <input id="password" type="password" placeholder="UTS Password" name="password" required>
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>
-                <button type="submit">Login</button>
+                <br>
+                <button class="submitButton" type="submit">Login</button>
                 <div id="messageDiv"></div>
             </div>
         </form>

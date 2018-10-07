@@ -19,23 +19,23 @@
 %>
         <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
 <%
-    }else if(current.getUserTypeFlag() != 'o' || current.getUserTypeFlag() != 'h'){
+    }else if(current.getUserTypeFlag() == 'a'){
         //Only for Organiser or Host User
 %>
         <%@include file="WEB-INF/errors/unauthorized_action.jsp" %>
 <%  } else { 
-    current = (User) session.getAttribute("user");
-    String seminarId = request.getParameter("id");
-    Seminar seminar = DAOFactory.getInstanceOfSeminarDAO().findById(Integer.parseInt(seminarId));
-    List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
-    String seminarDate = dateFormat.format(seminar.getSeminarStartTime());
-    String seminarStart = timeFormat.format(seminar.getSeminarStartTime());
-    String seminarEnd = timeFormat.format(seminar.getSeminarEndTime());
-    
-    List<Attendee> attendees = DAOFactory.getInstanceOfAttendeeDAO().findAllBySeminar(Integer.parseInt(seminarId));
-    request.setAttribute("attendees", attendees);
+        current = (User) session.getAttribute("user");
+        String seminarId = request.getParameter("id");
+        Seminar seminar = DAOFactory.getInstanceOfSeminarDAO().findById(Integer.parseInt(seminarId));
+        List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+        String seminarDate = dateFormat.format(seminar.getSeminarStartTime());
+        String seminarStart = timeFormat.format(seminar.getSeminarStartTime());
+        String seminarEnd = timeFormat.format(seminar.getSeminarEndTime());
+
+        List<Attendee> attendees = DAOFactory.getInstanceOfAttendeeDAO().findAllBySeminar(Integer.parseInt(seminarId));
+        request.setAttribute("attendees", attendees);
 %>
 <!DOCTYPE html>
 <html>
@@ -401,7 +401,7 @@
         var status = $('.state:checked').val();
         var data = 'submit='+submitFlag+'&seminarId='+seminarId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
-                    '&attdState='+status+"&attdId="+attendeeId;
+                    '&attdState='+status+'&attdId='+attendeeId+'&target='+email;
         $.ajax({
             url:"AttendeeServlet",
             type: "POST",

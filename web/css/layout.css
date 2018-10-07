@@ -68,6 +68,11 @@ body{
     padding: 0px 0px;
 }
 
+img {
+    width: 280px;
+    height: 180px;
+}
+
 /* Full-width input fields */
 .modal input[type=text], input[type=password] {
     width: 100%;
@@ -105,7 +110,7 @@ a.button{
 }
 
 /* Set a style for all buttons */
-button {
+button{
     background-color: #114BE9;
     color: white;
     padding: 14px 20px;
@@ -114,17 +119,36 @@ button {
     cursor: pointer;
     width: 20%;
 }
-img {
-    width: 280px;
-    height: 180px;
-}
-button:hover {
+
+button:hover{
     opacity: 0.8;
 }
 
 button:disabled{
     color: gainsboro;
     background-color: grey;
+}
+
+.submitButton{
+    height:50px;
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+}
+
+.deleteButton{
+    height:50px;
+    background-color: red;
+    padding: 14px 20px;
+    margin: 8px 0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 20%;
 }
 
 /* Center the image and position the close button */
@@ -229,35 +253,6 @@ input[type=radio]
     font-family: openSansRegular;
 }
 
-.submitButton{
-    height:50px;
-    background-color: #114BE9;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 20%;
-}
-
-.submitButton:hover{
-    opacity:0.6;
-}
-
-.deleteButton{
-    height:50px;
-    background-color: red;
-    padding: 14px 20px;
-    margin: 8px 0;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 20%;
-}
-
-.deleteButton:hover{
-    opacity:0.6;
-}
 .grid-sem-name { grid-area: a;}
 .grid-sem-name-input{ grid-area: b;}
 .grid-speaker{grid-area: c;}

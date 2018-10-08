@@ -77,7 +77,7 @@ public final class NameTag {
     }
     
     private static PdfPCell getPDFCell(String name) {
-        Paragraph para = new Paragraph(name, new Font(FontFamily.TIMES_ROMAN, 20));
+        Paragraph para = new Paragraph(name, new Font(FontFamily.HELVETICA , 40));
         PdfPCell cell = new PdfPCell(para);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);

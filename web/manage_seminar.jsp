@@ -165,12 +165,15 @@
                     </tbody>
                 </table>
             <div style="text-align: center">
+                <button type="button" onclick="document.getElementById('emailAttendee').style.display='block';autoFillEmail();">Email</button>
             <button type="button" onclick="document.getElementById('seminarRegister').style.display='block';">Register</button>
-            <button id="editB" type="button" onclick="document.getElementById('seminarRegisterEdit').style.display='block'; autoFillDetails();" disabled>Edit</button>
-            <button id="deleteB" type="button" onclick="document.getElementById('deleteConfirmation').style.display='block'; confirmDelete();" disabled>Delete</button>
+            <button id="editB" type="button" onclick="document.getElementById('seminarRegisterEdit').style.display='block'; autoFillEdit();" disabled>Edit</button>
+            <button id="deleteB" type="button" onclick="document.getElementById('deleteConfirmation').style.display='block'; autoFillDelete();" disabled>Delete</button>
             <br>
-            <button type="button" onclick="document.getElementById('printTags').style.display='block';return false;" >Print Tags</button>
-            <button type="button" onclick="document.getElementById('emailAttendee').style.display='block';return false;">Email</button>
+            <form action="NameTagServlet" method="POST">
+                    <input type="hidden" name="seminarId" value="<%=seminarId%>">
+                    <button type="submit" title="Close Page">Print Name Tags</button>
+            </form>
             </div>
         </div>
         <div id="seminarRegister" class="modal">
@@ -251,23 +254,27 @@
         <div id="printTags" class="modal">
             <div class="modal-content animate">
                 <h1>Print Tags</h1>
-                <button type="button" onclick="document.getElementById('printTags').style.display='none'" title="Close Page">Return</button>
+                <form action="NameTagServlet" method="POST">
+                    <input type="hidden" name="seminarId" value="<%=seminarId%>">
+                    <button type="submit" title="Close Page">Print</button>
+                </form>
             </div>        
         </div>  
         <div id="emailAttendee" class="modal">
             <div class="modal-content animate">
                 <h1>Send Email</h1>
                 <div class="email-grid">
-                    <div class="email-To">To: </div>
-                    <div class="email-To-input"><input type="text" name="To" required></div>    
+                    <div class="email-to">To: </div>
+                    <div class="email-to-input"><input id="to" type="text" name="To" required></div>    
                     <div class="email-CC">CC: </div>
                     <div class="email-CC-input"><input type="text" name="CC"></div>
-                    <div class="email-Subject">Subject: </div>   
-                    <div class="email-Subject-input"><input type="text" name="subject"></div>    
-                    <div class="email-Message">Message</div>   
-                    <div class="email-Message-input"><textarea name="emailMessage" style="width:830px; height:200px;"></textarea> </div>   
-                    <div class="email-Cancel"><button type="button" onclick="document.getElementById('emailAttendee').style.display='none'" title="Close Page">Cancel</button></div>   
-                    <div class="email-Send"><button type="button" onclick="document.getElementById('emailConfirmation').style.display='block';document.getElementById('emailAttendee').style.display='none'" title="Send Email">Send</button></div>         
+                    <div class="email-subject">Subject: </div>   
+                    <div class="email-subject-input"><input type="text" name="subject"></div>    
+                    <div class="email-message">Message</div>   
+                    <div class="email-message-input"><textarea name="emailMessage" style="width:530px; height:200px;resize: none;"></textarea> </div>   
+                    <div class="email-cancel"><button onclick="document.getElementById('emailAttendee').style.display='none'">Cancel</button></div>   
+                    <div class="email-send"><button onclick="document.getElementById('emailConfirmation').style.display='block';document.getElementById('emailAttendee').style.display='none'"> Send </button></div>         
+                    <div class="email-send-all"><button onclick="fillAllEmail()">All Email</button></div>
                 </div>
             </div>  
         </div>
@@ -280,13 +287,13 @@
     </div>
     <script>
     $("#tabs").tabs();
-    //Function to get current date
-    var currentDate = new Date().toISOString().split('T')[0];
-    document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
+//    //Function to get current date
+//    var currentDate = new Date().toISOString().split('T')[0];
+//    document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
         
-    var id, email, firstName, lastName, phone, status;
+    var table, id, email, firstName, lastName, phone, status;
     $(document).ready(function(){
-        var table = $('#attendee-list').DataTable( {
+        table = $('#attendee-list').DataTable( {
             select:{
                 items: 'row',
                 style: 'single'
@@ -331,9 +338,7 @@
             success:function(data){
                 $("#venueDropdown").html(data);
             }
-        });
-        
-        
+        }); 
     });
     
         $("#hostDropdown").change(function(){
@@ -348,6 +353,22 @@
                 }
             });
         }); 
+    
+    function autoFillEmail(){
+        if(email != null){
+            document.getElementById('to').value= email;
+        }
+    }
+    
+    function fillAllEmail(){
+        var all = table.columns().data()[0];
+        document.getElementById('to').value = all;
+    }
+    
+    $("#emailAttendee").submit(function(event){
+        event.preventDefault();
+        
+    });    
         
     $("#addAttendee").submit(function(event){
         event.preventDefault();
@@ -375,7 +396,7 @@
         });
     });
     
-    function autoFillDetails(){
+    function autoFillEdit(){
         document.getElementById('attdId').value = id;
         document.getElementById('emailText').value = email;
         document.getElementById('firstNameText').value = firstName;
@@ -387,7 +408,6 @@
             $("#interested").prop('checked',true);
         }
     }
-    
     
     $("#editAttendee").submit(function(event){
         event.preventDefault();
@@ -416,7 +436,7 @@
         });
     });
     
-    function confirmDelete(){
+    function autoFillDelete(){
         document.getElementById('email').textContent = email;
         document.getElementById('firstName').textContent = firstName;
         document.getElementById('lastName').textContent = lastName;
@@ -427,7 +447,7 @@
     
     $("#deleteAttendee").submit(function(event){
         event.preventDefault();
-        var submitFlag= $('#deleteConfirmButton').val();       
+        var submitFlag = $('#deleteConfirmButton').val();       
         var attendeeId = $('#attendeeID').val();
         var firstName = document.getElementById('firstName').textContent;
         var lastName = document.getElementById('lastName').textContent;

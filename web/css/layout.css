@@ -407,16 +407,17 @@ input[type=radio]
     width: 200%;
 }
 
-.email-To{ grid-area: a;}
-.email-To-input{ grid-area: b;}
+.email-to{ grid-area: a;}
+.email-to-input{ grid-area: b;}
 .email-CC{ grid-area: c;}
 .email-CC-input{ grid-area: d;}
-.email-Subject{grid-area:e;}
+.email-subject{grid-area:e;}
 .email-subject-input{grid-area:f;}
-.email-Message{ grid-area:g;}
-.email-Message-input{ grid-area:h;}
-.email-Send{grid-area:i;}
-.email-Cancel{grid-area:j}
+.email-message{ grid-area:g;}
+.email-message-input{ grid-area:h;}
+.email-send{grid-area:i;}
+.email-cancel{grid-area:j}
+.email-send-all{grid-area:k;}
 
 .email-grid{
     display: inline-grid;
@@ -429,9 +430,9 @@ input[type=radio]
         'g . . .'
         'h h h h'
         'h h h h'
-        'j . . i';
+        'k . i j';
 }
-.email-Cancel button {
+.email-cancel button, .email-send button, .email-send-all button {
     background-color: #114BE9;
     color: white;
     padding: 14px 20px;
@@ -440,15 +441,7 @@ input[type=radio]
     cursor: pointer;
     width: 100%;
 }
-.email-Send button {
-    background-color: #114BE9;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
+
 .attendee-list{
     width: 50%;
     border: solid 1px #ddd;

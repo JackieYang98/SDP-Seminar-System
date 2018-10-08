@@ -26,7 +26,7 @@ public class DatabaseConnector {
     
     // username and password of database;
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "oUi!k!Cv%5$Hr$v0";
+    private static final String PASSWORD = "password";
     
     private Connection conn = null;
     

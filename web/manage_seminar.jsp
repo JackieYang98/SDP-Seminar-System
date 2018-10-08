@@ -58,11 +58,13 @@
     <body>
         <%@include file="WEB-INF/header.jsp" %>
       <div id="tabs" class="center">
+            <!--The tab to switch between edit seminar and view attendees-->
             <ul>
                 <li> <a href="#attendee"> View attendees list </a> </li>
                 <li> <a href="#edit"> Edit Seminar </a> </li>    
             </ul>
           <br>
+<!--Edit Tab-->
             <div id="edit" >
                 <form action="ManageSeminarServlet" method="POST">  
                     <div class="grid-container">
@@ -130,6 +132,9 @@
                     </div>
                 </form>
         </div>
+                        
+<!--Attendee Tab-->
+        <!--Display all the attendees for a particular seminar-->
         <div id="attendee" style="text-align: center; width: 800px; margin:auto auto;">
             <h1> Attendees </h1>
                 <table id="attendee-list" class="display" style="width:100%;">
@@ -172,10 +177,12 @@
             <br>
             <form action="NameTagServlet" method="POST">
                     <input type="hidden" name="seminarId" value="<%=seminarId%>">
-                    <button type="submit" title="Close Page">Print Name Tags</button>
+                    <button type="submit">Download Name Tags</button>
             </form>
             </div>
         </div>
+                    
+    <!--Registering new attendee to seminar-->
         <div id="seminarRegister" class="modal">
             <form id="addAttendee" class="modal-content animate" name="addAttendeeForm" action="AttendeeServlet"  onsubmit="document.getElementById('seminarConfirm').style.display='block';return false;"method="POST">
                 <h1>Add Attendee</h1>
@@ -204,6 +211,8 @@
                     <div class="seminarConfirm"></div>
             </div>        
         </div>
+                    
+    <!--Edit existing attendee-->
         <div id="seminarRegisterEdit" class="modal">
             <form id="editAttendee" class="modal-content animate" action="AttendeeServlet" onsubmit="document.getElementById('seminarEditConfirm').style.display='block';return false;" method="POST">
                 <h1>Edit Attendee</h1>
@@ -232,6 +241,8 @@
                 <div class="seminarEditConfirm"></div>
             </div>        
         </div>
+        
+    <!--Delete existing attendee-->
         <div id="deleteConfirmation" class="modal">
             <form id="deleteAttendee" class="modal-content animate" action="AttendeeServlet" method="POST" onsubmit="document.getElementById('seminarRegisterDelete').style.display='block';">
                 <h1>Delete Attendee</h1>
@@ -251,6 +262,8 @@
                 <div class="seminarDeleteConfirm"></div>
             </div>        
         </div>
+        
+    <!--Print Name tags all of user by name-->
         <div id="printTags" class="modal">
             <div class="modal-content animate">
                 <h1>Print Tags</h1>
@@ -260,6 +273,8 @@
                 </form>
             </div>        
         </div>  
+                    
+    <!--Email one user or all users-->
         <div id="emailAttendee" class="modal">
             <div class="modal-content animate">
                 <h1>Send Email</h1>
@@ -287,12 +302,11 @@
     </div>
     <script>
     $("#tabs").tabs();
-//    //Function to get current date
-//    var currentDate = new Date().toISOString().split('T')[0];
-//    document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
-        
+    
     var table, id, email, firstName, lastName, phone, status;
+    //Load on page load
     $(document).ready(function(){
+        //Initialize Datatable API
         table = $('#attendee-list').DataTable( {
             select:{
                 items: 'row',
@@ -300,6 +314,9 @@
             }
         });
         
+        /*
+         * When a row of table is clicked, save its details
+         */
         $('#attendee-list tbody').on( 'click', 'tr', function () {
             email = table.row( this ).data()[0];
             firstName =  table.row( this ).data()[1];
@@ -309,6 +326,7 @@
             id = table.row( this ).data()[5];
             $('#row').val(data);
             
+            //If no row is selected, disable buttons
             if ( $(this).hasClass('selected') ){
                 $('#editB').prop('disabled', true);
                 $('#deleteB').prop('disabled', true);
@@ -318,6 +336,7 @@
             }
         });
          
+        //Ajax to get the current host of the seminar into dropdown input 
         var selectedHost = $("#hostDropdown option:selected").val();
         var data = "host="+selectedHost;
         $.ajax({
@@ -329,6 +348,8 @@
             }
         });
         
+        //Ajax to get current venue of the seminar into dropdown input
+        //As well as its siblings with same host parents
         var selectedVenue = $("#venueDropdown option:selected").val();
         data = data+"&venue="+selectedVenue;
         $.ajax({
@@ -341,6 +362,7 @@
         }); 
     });
     
+        //When host is changed, change venue dropdown options
         $("#hostDropdown").change(function(){
         var selectedHost = $("#hostDropdown option:selected").val();
         var data = "host="+selectedHost;
@@ -354,21 +376,28 @@
             });
         }); 
     
+    /*
+     * When row is selected, fill row with email address when Email button click
+     * Otherwise, leave it blank
+     * 
+     * @returns {undefined}
+     */
     function autoFillEmail(){
         if(email != null){
             document.getElementById('to').value= email;
         }
     }
     
+    /*
+     * When user click 'Email all' Retrieve all email of seminars registered,
+     * and put them in 'To' field
+     * 
+     * @returns {undefined}
+     */
     function fillAllEmail(){
         var all = table.columns().data()[0];
         document.getElementById('to').value = all;
-    }
-    
-    $("#emailAttendee").submit(function(event){
-        event.preventDefault();
-        
-    });    
+    }   
         
     $("#addAttendee").submit(function(event){
         event.preventDefault();
@@ -396,6 +425,9 @@
         });
     });
     
+    /**
+     * Fill all the selected user detail into edit user window
+     */
     function autoFillEdit(){
         document.getElementById('attdId').value = id;
         document.getElementById('emailText').value = email;
@@ -409,6 +441,10 @@
         }
     }
     
+    /*
+     * On edit form submit, retrieve currently entered data, and launch Ajax to
+     * AttendeeServlet.
+     */
     $("#editAttendee").submit(function(event){
         event.preventDefault();
         var submitFlag= $('#editConfirmButton').val();
@@ -436,6 +472,10 @@
         });
     });
     
+    /*
+     * When use click on 'Delete' Button, fill all user name to popup for
+     * confirmation purpose.
+     */
     function autoFillDelete(){
         document.getElementById('email').textContent = email;
         document.getElementById('firstName').textContent = firstName;
@@ -445,6 +485,10 @@
         document.getElementById('status').textContent = status;
     }
     
+    /*
+     * When delete form is submitted, retrieve currently selected user, and call
+     * Ajax AttendeeServlet to delete user.
+     */
     $("#deleteAttendee").submit(function(event){
         event.preventDefault();
         var submitFlag = $('#deleteConfirmButton').val();       
@@ -457,7 +501,6 @@
         var data = 'submit='+submitFlag+"&attdId="+attendeeId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
                     '&attdState='+status;
-        alert(data);
         $.ajax({
             url:"AttendeeServlet",
             type: "POST",

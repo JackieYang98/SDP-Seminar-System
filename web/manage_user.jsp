@@ -40,6 +40,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <style>
+            /*Hightlight the current page*/
             #manageuser{
                 text-decoration: underline;
             }
@@ -64,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!--For each user in the database, populate the table-->
+                            <!--For each user in the database, populate the table using JSTL lib-->
                             <c:forEach items="${allUsers}" var="Users">
                             <tr>
                                 <td><c:out value="${Users.userId}"/></td>
@@ -86,11 +87,13 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <!--Add new user and role-->
                     <div class="center">
                     <button type="button" onclick="document.getElementById('addUser').style.display='block'; 
                         return false;">Add</button>
                     </div>
-
+                    
+                    <!--Change/Delete selected user role-->
                     <h1>User Role</h1>
                     <div class="add-role-input">
                         <select class="role-select" name="role">
@@ -108,7 +111,7 @@
                 </div>           
             </form>
             
-            <!--Pop up for add user-->
+            <!--Pop up for add new user-->
             <div class="center">
                 <div id="addUser" class="modal">
                     <form name="addUserForm" class="modal-content animate" action="user" onsubmit="return validateAddUserForm()" method="POST">
@@ -141,7 +144,12 @@
             </div>
         </div>
         
-<script>
+        <script>
+    /*
+     * Check whether which button was selected by admin, Confirm or Delete
+     * 
+     * @param String button the button that was clicked.
+     */
     function updateDelete(button){
         if(confirm("Confirm Action")){
             document.getElementById('confirm-delete').value = button.name;
@@ -151,7 +159,11 @@
         }
     }
 
+    /*
+     * Load these functions on document load
+     */
     $(document).ready(function() {
+        //Initialize DataTable for user datas
         var table = $('#user-list').DataTable( {
             select:{
                 items: 'row',
@@ -159,9 +171,14 @@
             }
         } );
 
+        /*
+         * On any row click, pass data into 'row' ID to pass onto Change role 
+         * into userservlet
+         */
         $('#user-list tbody').on( 'click', 'tr', function () {
             var data =  table.row( this ).data()[0];
             $('#row').val(data);
+            //If any row is selected, enable button, else disable it
             if ( $(this).hasClass('selected') ){
                 $('#confirm-button').prop('disabled', true);
                 $('#delete-button').prop('disabled', true);
@@ -171,7 +188,7 @@
             }
         } );
     } );
-</script>
+        </script>
     </body>
 </html>     
 <%  

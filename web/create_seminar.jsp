@@ -6,9 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
+    //Get the current session, to see if any user is logged in
     User current = (User) session.getAttribute("user");
     if(current == null){
-        //Only for logged in users
+        //No login, only for logged in users
 %>
         <%@include file="WEB-INF/errors/not_logged_in.jsp" %>
 <%
@@ -28,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <title>Create seminar</title>
     <style>
+            /*Hightlight the current page*/
             #createseminar{
                 text-decoration: underline;
             }
@@ -37,14 +39,13 @@
         <%@include file="WEB-INF/header.jsp" %>
         <div class="center">
         <h1 style="padding-left:20px;">Create Seminar</h1>
+        <!--The form to create a seminar-->
             <form action="CreateSeminarServlet" method="POST">
                 <div class="grid-container">
                     <div class="grid-sem-name">Seminar Name</div>
                     <div class="grid-sem-name-input"><input type="text" name="seminarName" placeholder="Name" required style="width:515px; height:40px;"></div>  
-                    
                     <div class="grid-speaker">Speaker</div>
-                    <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>
-                    
+                    <div class="grid-speaker-input"><input class="speakerNameText" type="text" name="speakerName" placeholder="Speaker Name" required></div>                  
                     <div class="grid-bio">Speaker Biography</div>
                     <div class="grid-bio-input"><textarea class="biotext" name="speakerBio" placeholder="About the speaker..." required></textarea></div>
                     <div onclick='hide("speaker2")' class="grid-speaker2" style="cursor: pointer; text-decoration: underline; ">Speaker 2 (Click to Toggle)</div>
@@ -77,19 +78,16 @@
                     <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
                     <div class="grid-sem-desc">Seminar Description</div>
                     <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>  
-
+                    <!--submit organiser id as hidden field to know which organiser create this seminar-->
                     <input type="hidden" value="<%=current.getUserId()%>" name="organiser">
                     <div class="grid-submit"><input class="submitButton" type="submit" name="seminarSubmit" value="Create Seminar"></div>
                 </div>
             </form>
         </div>
         <script>
-            
+    //Load all this function on document load        
     $(document).ready(function(){
-    //Function to get current date
-    var currentDate = new Date().toISOString().split('T')[0];
-    document.getElementsByName("seminarDate")[0].setAttribute('min', currentDate);
-    
+        //On create_seminar.jsp load, retrieve all the host details
         $.ajax({
             url:"CreateSeminarServlet",
             type: "GET",
@@ -99,6 +97,7 @@
         });
     });
 
+    //On host selection, select corresponding venue
     $("#hostDropdown").change(function(){
         var selectedHost = $("#hostDropdown option:selected").val();
         var data = "host="+selectedHost;

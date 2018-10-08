@@ -27,24 +27,11 @@
         <script src="scripts/script.js"></script>
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <title>Seminar Details</title>
-        <style>
-            th, td{
-                padding-left:30px;
-                padding-right: 30px;
-            }
-            input[type=radio],input.radio {
-              float: left;
-              clear: none;
-              margin: 2px 0 0 2px;
-            }
-            .register-registered{
-                text-decoration: underline;
-            }
-        </style>
     </head>
     <body>
         <%@include file="WEB-INF/header.jsp" %>
         <div class="center">
+            <!--Display the seminar details-->
             <h1> <%=seminar.getSeminarTitle()%> </h1>
             <div class="detail-seminar-grid">
                 <div class="detail-seminar-venue"><b>Venue:</b> <%=seminar.getVenue().getVenueName() %></div>
@@ -67,6 +54,8 @@
                 <div class="detail-seminar-descV"><textarea name="detailSemDesc" readonly><%=seminar.getSeminarDescription()%> </textarea> </div>
                 <div class="detail-seminar-register"><button type="button" onclick="document.getElementById('seminarRegister').style.display='block';">Register</button> </div>
             </div>
+                
+            <!--Register button click, display this register pop up-->
             <div id="seminarRegister" class="modal" >
                 <form id="mainForm" class="modal-content animate" name="detailRegAttendeeForm" action="AttendeeServlet" onsubmit="document.getElementById('seminarConfirm').style.display='block';return false;" method="POST">
                     <div class="center">
@@ -105,23 +94,27 @@
                     </div>
                 </form>
             </div>
+           
+            <!--When user click 'Already registered?' pop up-->
             <div id="seminarRegistered" class="modal">
                 <div align="center">
                     <form name="detailRegisteredEmailForm" id="findUserForm" class="modal-content animate" action="AttendeeServlet" method="POST">
                         <h1>Enter your email</h1>
                         <br> <br>
-                        
                         <div class="registered-grid">
                             <div class="registered-email">Email: </div>
                             <div class="registered-email-input"><input type="email" id="email" name="regEmail" placeholder="Your email address"  pattern=".+@([\w-]+\.)+[\w-]{2,4}$" required> </div>
                             <input id="flag" type="hidden" name="submit" value="verify">
                             <input id="seminarId" type="hidden" name="seminarId" value="<%=seminarId%>">
                             <div class="registered-submit"><input id="findUserButton" type="submit" class="registerButton" value="Confirm"> </div>
+                            <div class="registered-cancel"><input type="button" class="registerButton" onclick="document.getElementById('seminarRegistered').style.display='none'" value="Cancel"></div>
                             <div id="registeredDiv" class="registered-error"></div>
                         </div>
-                    </form>
-                </div> 
-             </div>
+                    </form>     
+                </div>
+            </div>
+                            
+            <!--Pop up to edit the detail of attendee-->
             <div id="seminarRegisterEdit" class="modal" >
                 <form id="editForm" class="modal-content animate" action="AttendeeServlet" method="POST">
                     <div class="center">
@@ -144,6 +137,7 @@
                 </form>
             </div>
             
+            <!--Attendee Registering for seminar-->
             <div id="seminarConfirm" class="modal">
                 <div class="modal-content animate" align="center">
                     <p><b>Your registration for the following seminar has been confirmed.</b></p>
@@ -161,9 +155,9 @@
                     </table>
                         <div class="seminarConfirm"></div>                    
                 </div> 
-            </div>
-                        
-                        
+            </div>                  
+                      
+            <!--Confirm attendee has successfully edit personal details-->          
             <div id="seminarEditConfirm" class="modal">
                 <div class="modal-content animate" align="center">
                     <p><b>Your edit for the following seminar has been confirmed.</b></p>
@@ -183,6 +177,8 @@
                         
                 </div> 
             </div>
+                        
+            <!--Confirm attendee has been removed from the seminar-->
             <div id="seminarRegisterDelete" class="modal">
                 <div class="modal-content animate">
                     <h1>You have been removed from the seminar</h1>
@@ -193,6 +189,10 @@
         </div>
     </body>
     <script>
+    /*
+     * On Mainform submit, retrieve all attendee details, and launch AttendeeServlet
+     * to create new attendee
+     */
     $("#mainForm").submit(function(event){
         event.preventDefault();
         var submitFlag = $('#submit').val();
@@ -205,6 +205,10 @@
         var data = 'submit='+submitFlag+'&seminarId='+seminarId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
                     '&attdState='+status;
+        /*
+         * Ajax to dynamically load data confirmation to attendee, after success
+         * register.
+         */
         $.ajax({
             url:"AttendeeServlet",
             type: "POST",
@@ -219,6 +223,9 @@
         });
     });
     
+    /*
+     * Form to check if attendee email has already been registerd with seminars
+     */
     $("#findUserForm").submit(function(event){
         event.preventDefault();
         var submitFlag = $('#flag').val();
@@ -227,6 +234,10 @@
         var seminarId = $('#seminarId').val();
         var data = 'submit='+submitFlag+'&email='+email+'&flag='+flag+'&seminarId='+seminarId;
         
+        /*
+         * Ajax that return attendee data upon successful verification of attendee
+         * existent in the seminar, it opens edit pop up
+         */
         $.ajax({
             url:"AttendeeServlet",
             type: "POST",
@@ -244,10 +255,15 @@
         });
     });
  
+    /*
+     * Edit form allows attendee to edit/delete their details, and submit to another 
+     * ajax so user can double check the details
+     */
     $("#editForm").submit(function(event){
         event.preventDefault();
         var submitFlag = $('#hiddenFlag').val();
         var attendeeId = $('#attdId').val();
+        //If attendee click on Confirm button to edit details
         if(submitFlag === "Confirm"){
             var seminarId = $('#seminarId').val();
             var firstName = $('#firstNameEdit').val();
@@ -259,6 +275,9 @@
             var data = 'submit='+submitFlag+'&attdId='+attendeeId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
                     '&attdState='+status+'&seminarId='+seminarId+'&target='+targetEmail;
+            /*
+             * Ajax calls AttendeeServlet to update with new details
+             */
             $.ajax({
                 url:"AttendeeServlet",
                 type: "POST",
@@ -271,6 +290,7 @@
                     }
                 }
             });
+            //Attendee click to delete data
         }else if(submitFlag === "Delete"){
             var firstName = $('#firstNameEdit').val();
             var lastName = $('#lastNameEdit').val();
@@ -280,6 +300,9 @@
             var data = 'submit='+submitFlag+'&attdId='+attendeeId+'&attdFName='+firstName+'&attdLName='+
                     lastName+'&attdEmail='+email+'&attdPhone='+phone+
                     '&attdState='+status;
+            /*
+             * Ajax calls AttendeeServlet to delete the personal data
+             */
             $.ajax({
                 url:"AttendeeServlet",
                 type: "POST",

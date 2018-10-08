@@ -125,7 +125,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
     @Override
     public boolean update(Seminar seminar) throws SQLException {
         String sql = "update seminars set VenueId = ?, SeminarTitle = ?, SeminarDescription = ?,"
-                + "SeminarDate = ?, SeminarLastMins = ?) where SeminarId = ?;";
+                + "SeminarDate = ?, SeminarLastMins = ? where SeminarId = ?;";
         stmt = conn.prepareStatement(sql);
         stmt.setInt(1, seminar.getVenue().getVenueId());
         stmt.setString(2, seminar.getSeminarTitle());

@@ -238,6 +238,22 @@ input[type=radio]
    /*Double-sized Checkboxes*/ 
     -webkit-transform: scale(2);
 }
+/*
+input[type=radio],input.radio {
+              float: left;
+              clear: none;
+              margin: 2px 0 0 2px;
+            }*/
+
+.search-table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-table tr,td{
+    padding-left:10px;
+    padding-right: 10px;
+}
 
 .grid-container > div {
     text-align: left;
@@ -588,7 +604,10 @@ input[type=radio]
 .register-status{ grid-area:g;}
 .register-status-going{ grid-area:h;}
 .register-status-interested{ grid-area:y;}
-.register-registered{grid-area:i;}
+.register-registered{
+    grid-area:i;
+    text-decoration: underline;
+}
 .register-submit{grid-area:j;}
 .register-cancel{grid-area:k}
 
@@ -681,6 +700,7 @@ input[type=radio]
 .registered-email-input{ grid-area: b;}
 .registered-submit{ grid-area: c;}
 .registered-error{grid-area:d;}
+.registered-cancel{grid-area:e;}
 .registered-grid{
     display: inline-grid;
     grid-gap: 15px;
@@ -688,7 +708,7 @@ input[type=radio]
     grid-template-areas:   
         'a b b b'
         '. d d .'
-        '. c . .';
+        'c c e e';
 }
 .registered-email-input input{
     width: 100%;

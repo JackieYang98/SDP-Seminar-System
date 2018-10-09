@@ -24,17 +24,7 @@ public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
         String sql = "select * from venues;";
         stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
-        Venue venue = null;
-        List<Venue> list = new ArrayList<Venue>();
-        while (rs.next()) {
-            venue = new Venue();
-            venue.setVenueId(rs.getInt("VenueId"));
-            venue.setVenueName(rs.getString("VenueName"));
-            venue.setVenueLocation(rs.getString("VenueLocation"));
-            venue.setVenueCapacity(rs.getInt("VenueCapacity"));
-            list.add(venue);
-        }
-        return list;
+        return getVenueList(rs);
     }
     
     @Override
@@ -43,15 +33,7 @@ public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
         stmt = conn.prepareStatement(sql);
         stmt.setInt(1, venueId);
         ResultSet rs = stmt.executeQuery();
-        Venue venue = null;
-        if (rs.next()) {
-            venue = new Venue();
-            venue.setVenueId(rs.getInt("VenueId"));
-            venue.setVenueName(rs.getString("VenueName"));
-            venue.setVenueLocation(rs.getString("VenueLocation"));
-            venue.setVenueCapacity(rs.getInt("VenueCapacity"));
-        }
-        return venue;
+        return getVenue(rs);
     }
     
     @Override
@@ -60,10 +42,13 @@ public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
         stmt = conn.prepareStatement(sql);
         stmt.setInt(1, hostId);
         ResultSet rs = stmt.executeQuery();
-        Venue venue = null;
+        return getVenueList(rs);
+    }
+    
+    private List<Venue> getVenueList(ResultSet rs) throws SQLException {
         List<Venue> list = new ArrayList<Venue>();
         while (rs.next()) {
-            venue = new Venue();
+            Venue venue = new Venue();
             venue.setVenueId(rs.getInt("VenueId"));
             venue.setVenueName(rs.getString("VenueName"));
             venue.setVenueLocation(rs.getString("VenueLocation"));
@@ -73,4 +58,11 @@ public class VenueDAOImpl extends DAOImpl implements IVenueDAO {
         return list;
     }
     
+    private Venue getVenue(ResultSet rs) throws SQLException {
+        List<Venue> list = getVenueList(rs);
+        if (list.size() > 0)
+            return list.get(0);
+        else
+            return null;
+    }
 }

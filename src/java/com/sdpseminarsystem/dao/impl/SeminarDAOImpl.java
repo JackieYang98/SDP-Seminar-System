@@ -31,7 +31,6 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
         stmt.setString(4, seminar.getSeminarDescription());
         stmt.setTimestamp(5, new java.sql.Timestamp(seminar.getSeminarStartTime().getTime()));
         stmt.setInt(6, seminar.getSeminarLastMins());
-        System.out.println("LastMIN: " + seminar.getSeminarLastMins());
         int update = stmt.executeUpdate();
         if (update > 0)
             return getLastInsertId();
@@ -42,21 +41,27 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
     @Override
     public List<Seminar> findAll() throws SQLException {
         String sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId;";
-        return selectBySqlStmt(sql);
+        stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        return getSeminarList(rs);
     }
     
     @Override
     public List<Seminar> findAllSortByDate() throws SQLException {
         String sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId "
                 + "order by SeminarDate;";
-        return selectBySqlStmt(sql);
+        stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        return getSeminarList(rs);
     }
     
     @Override
     public List<Seminar> findAllSortByVenue() throws SQLException {
         String sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId "
                 + "order by seminars.VenueId;";
-        return selectBySqlStmt(sql);
+        stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        return getSeminarList(rs);
     }
     
     @Override
@@ -66,19 +71,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
         stmt = conn.prepareStatement(sql);
         stmt.setInt(1, seminarId);
         ResultSet rs = stmt.executeQuery();
-        Seminar seminar = null;
-        if (rs.next()) {
-            seminar = new Seminar();
-            seminar.setSeminarId(rs.getInt("SeminarId"));
-            seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("seminars.VenueId")));
-            seminar.setUserOrganiser(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserOrganiserId")));
-            seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
-            seminar.setSeminarTitle(rs.getString("SeminarTitle"));
-            seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-            seminar.setSeminarStartTime(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
-            seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
-        }
-        return seminar;
+        return getSeminar(rs);
     }
     
     @Override
@@ -93,33 +86,7 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, user.getUserId());
         ResultSet rs = stmt.executeQuery();
-        Seminar seminar = null;
-        List<Seminar> list = new ArrayList<Seminar>();
-        while (rs.next()) {
-            seminar = new Seminar();
-            seminar.setSeminarId(rs.getInt("SeminarId"));
-            seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("seminars.VenueId")));
-            seminar.setUserOrganiser(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserOrganiserId")));
-            seminar.setUserHost(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserHostId")));
-            seminar.setSeminarTitle(rs.getString("SeminarTitle"));
-            seminar.setSeminarDescription(rs.getString("SeminarDescription"));
-            seminar.setSeminarStartTime(new java.util.Date(rs.getTimestamp("SeminarDate").getTime()));
-            seminar.setSeminarLastMins(rs.getInt("SeminarLastMins"));
-            list.add(seminar);
-        }
-        return list;
-    }
-    
-    @Override
-    public boolean delete(Seminar seminar) throws SQLException {
-        String sql = "delete from seminars where SeminarId = ?;";
-        stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, seminar.getSeminarId());
-        int update = stmt.executeUpdate();
-        if (update > 0)
-            return true;
-        else
-            return false;
+        return getSeminarList(rs);
     }
     
     @Override
@@ -140,6 +107,18 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
             return false;
     }
     
+    @Override
+    public boolean delete(Seminar seminar) throws SQLException {
+        String sql = "delete from seminars where SeminarId = ?;";
+        stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, seminar.getSeminarId());
+        int update = stmt.executeUpdate();
+        if (update > 0)
+            return true;
+        else
+            return false;
+    }
+    
     private int getLastInsertId() throws SQLException {
         String sql = "select last_insert_id();";
         stmt = conn.prepareStatement(sql);
@@ -148,13 +127,10 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
         return rs.getInt(1);
     }
     
-    private List<Seminar> selectBySqlStmt(String sqlStmt) throws SQLException {
-        stmt = conn.prepareStatement(sqlStmt);
-        ResultSet rs = stmt.executeQuery();
-        Seminar seminar = null;
+    private List<Seminar> getSeminarList(ResultSet rs) throws SQLException {
         List<Seminar> list = new ArrayList<Seminar>();
         while (rs.next()) {
-            seminar = new Seminar();
+            Seminar seminar = new Seminar();
             seminar.setSeminarId(rs.getInt("SeminarId"));
             seminar.setVenue(DAOFactory.getInstanceOfVenueDAO().findById(rs.getInt("seminars.VenueId")));
             seminar.setUserOrganiser(DAOFactory.getInstanceOfUserDAO().findById(rs.getString("UserOrganiserId")));
@@ -166,5 +142,13 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
             list.add(seminar);
         }
         return list;
+    }
+    
+    private Seminar getSeminar(ResultSet rs) throws SQLException {
+        List<Seminar> list = getSeminarList(rs);
+        if (list.size() > 0)
+            return list.get(0);
+        else
+            return null;
     }
 }

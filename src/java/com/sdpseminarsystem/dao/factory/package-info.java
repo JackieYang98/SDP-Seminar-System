@@ -1,8 +1,8 @@
 /**
  * Provides the classes of factory producing DAO implementations.
  * <p>
- * Business objects Business objects get DAO implementation objects through
- * factory classes to access and change persistent data form the database.
+ * Business objects get DAO implementation objects through factory classes to
+ * access and change persistent data form the database.
  * 
  * @since 1.0
  * @see com.sdpseminarsystem.dao

@@ -18,6 +18,7 @@
     List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MM/dd/yyyy");
     SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+    Integer attendeeNumber = DAOFactory.getInstanceOfAttendeeDAO().findAllBySeminar(Integer.parseInt(seminarId)).size();
 %>
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,9 @@
             <h1> <%=seminar.getSeminarTitle()%> </h1>
             <div class="detail-seminar-grid">
                 <div class="detail-seminar-venue"><b>Venue:</b> <%=seminar.getVenue().getVenueName() %></div>
-                <div class="detail-seminar-location"><b>Location:</b> <%=seminar.getVenue().getVenueLocation() %> <b> Capacity: </b><%=seminar.getVenue().getVenueCapacity() %></div>
+                <div class="detail-seminar-location"><b>Location: </b><%=seminar.getVenue().getVenueLocation() %> </div>
+                <div class="detail-seminar-capacity"><b>Capacity: </b><%=seminar.getVenue().getVenueCapacity() %></div>
+                <div class="detail-seminar-number"><b>Attendee Registered: </b><%=attendeeNumber %> </div>
                 <div class="detail-seminar-date"><b>Date:</b> <%=dateFormat.format(seminar.getSeminarStartTime()) %></div>
                 <div class="detail-seminar-start"><b>Start:</b> <%=timeFormat.format(seminar.getSeminarStartTime())%></div>
                 <div class="detail-seminar-end"><b>End:</b> <%=timeFormat.format(seminar.getSeminarEndTime())%></div>

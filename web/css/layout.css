@@ -129,6 +129,17 @@ button:disabled{
     background-color: grey;
 }
 
+.submitB{
+    height:50px;
+    background-color: #114BE9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
 .submitButton{
     height:50px;
     background-color: #114BE9;
@@ -556,6 +567,8 @@ input[type=radio],input.radio {
 .detail-seminar-speakerT{ grid-area:m;}
 .detail-seminar-speakerT-bio{ grid-area:n;}
 .detail-seminar-register{grid-area:o;}
+.detail-seminar-capacity{grid-area:p;}
+.detail-seminar-number{grid-area:q;}
 
 .detail-seminar-grid{
     display: inline-grid;
@@ -563,7 +576,7 @@ input[type=radio],input.radio {
     padding-left: 30px;
     text-align: left;
     grid-template-areas:   
-        'a a . .'
+        'a a p q'
         'b b . .'
         'c d e .'
         'f f . .'

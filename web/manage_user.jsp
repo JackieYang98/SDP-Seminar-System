@@ -50,7 +50,7 @@
         <%@include file="WEB-INF/header.jsp" %>
         <div class="manage-page">
         
-            <form action="user" method="POST">
+            <form action="UserServlet" method="POST">
                 <div class="container">
                     <h1>User List</h1>
                     <div id="events"></div>
@@ -114,7 +114,7 @@
             <!--Pop up for add new user-->
             <div class="center">
                 <div id="addUser" class="modal">
-                    <form name="addUserForm" class="modal-content animate" action="user" onsubmit="return validateAddUserForm()" method="POST">
+                    <form name="addUserForm" class="modal-content animate" action="UserServlet" onsubmit="return validateAddUserForm()" method="POST">
                         <h2>Add User</h2>
                             <div id="add-grid" class="container">
                                 <div class="add-id">UTS ID</div>
@@ -135,9 +135,9 @@
                                         <option value="host">Host</option>
                                     </select>
                                 </div>
-                                <div class="add-submit"><input class="submitButton" type="submit" name="addUser" value="Add"></div>
+                                <div class="add-submit"><input class="submitB" type="submit" name="addUser" value="Add"></div>
                                 <input type="hidden" name="submit" value="create">
-                                <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input class="submitButton" type="button" name="addUser" value="Cancel"></div>
+                                <div class="add-cancel" onclick="document.getElementById('addUser').style.display='none'"><input class="submitB" type="button" name="addUser" value="Cancel"></div>
                             </div>
                     </form>
                 </div>

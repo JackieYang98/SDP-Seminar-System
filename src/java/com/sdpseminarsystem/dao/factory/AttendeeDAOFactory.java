@@ -5,15 +5,24 @@ import java.sql.SQLException;
 import com.sdpseminarsystem.dao.IAttendeeDAO;
 import com.sdpseminarsystem.dao.impl.AttendeeDAOProxy;
 
-public class AttendeeDAOFactory {
-	public static IAttendeeDAO getInstance() {
-		IAttendeeDAO dao = null;
-		try {
-			dao = new AttendeeDAOProxy();
-		} catch (SQLException e) {
-			// TODO auto-generated catch block
-			e.printStackTrace();
-		}
-		return dao;
-	}
+/**
+ * Provides method to get an instance of {@code IAttendeeDAO}
+ * 
+ * @author Leo Lee
+ * @see com.sdpseminarsystem.dao.IAttendeeDAO
+ * @since 1.0
+ */
+public final class AttendeeDAOFactory {
+    
+    private AttendeeDAOFactory() {}
+    
+    /**
+     * Gets an instance of {@code IAttendeeDAO}
+     * 
+     * @return an instance of {@code IAttendeeDAO}
+     * @throws SQLException if a database access error occurs.
+     */
+    public static IAttendeeDAO getInstance() throws SQLException {
+        return new AttendeeDAOProxy();
+    }
 }

@@ -5,15 +5,24 @@ import java.sql.SQLException;
 import com.sdpseminarsystem.dao.IUserDAO;
 import com.sdpseminarsystem.dao.impl.UserDAOProxy;
 
-public class UserDAOFactory {
-	public static IUserDAO getInstance() {
-		IUserDAO dao = null;
-		try {
-			dao = new UserDAOProxy();
-		} catch (SQLException e) {
-			// TODO auto-generated catch block
-			e.printStackTrace();
-		}
-		return dao;
-	}
+/**
+ * Provides method to get an instance of {@code IUserDAO}
+ * 
+ * @author Leo Lee
+ * @see com.sdpseminarsystem.dao.IUserDAO
+ * @since 1.0
+ */
+public final class UserDAOFactory {
+    
+    private UserDAOFactory() {}
+    
+    /**
+     * Gets an instance of {@code IUserDAO}
+     * 
+     * @return an instance of {@code IUserDAO}
+     * @throws SQLException if a database access error occurs.
+     */
+    public static IUserDAO getInstance() throws SQLException {
+        return new UserDAOProxy();
+    }
 }

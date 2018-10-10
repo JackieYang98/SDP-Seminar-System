@@ -4,6 +4,7 @@
     Author     : jingl
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     //Get the current session, to see if any user is logged in
@@ -73,7 +74,7 @@
                     <div class="grid-sem-date">Seminar Date</div>
                     <div class="grid-start">Start Time</div>
                     <div class="grid-end">End Time</div>
-                    <div class="grid-sem-date-input"><input type="date" name="seminarDate"  required style="width: 150px; height:40px;"></div>
+                    <div class="grid-sem-date-input"><input id="date" type="date" name="seminarDate" required style="width: 150px; height:40px;"></div>
                     <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
                     <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
                     <div class="grid-sem-desc">Seminar Description</div>
@@ -95,6 +96,19 @@
             $("#hostDropdown").html(data); 
         }
         });
+        
+        //Display Only Date till today in date picker //
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+           month = '0' + month.toString();
+        if(day < 10)
+           day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#date').attr('min', maxDate);
     });
 
     //On host selection, select corresponding venue

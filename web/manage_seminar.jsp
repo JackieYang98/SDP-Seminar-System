@@ -127,8 +127,8 @@
                         <h1>Are you sure you want to delete this seminar?</h1>
                         <p> <b>Seminar Name: </b> <%=seminar.getSeminarTitle() %></p>
                         <input type="hidden" name="seminarId" value="<%=seminar.getSeminarId()%>">
-                        <button type="submit" name="submit" value="Delete">Delete</button>
-                        <button type="button" onclick="document.getElementById('deleteSeminar').style.display='none'">Cancel</button>
+                        <button class="deleteButton" type="submit" name="submit" value="Delete">Delete</button>
+                        <button class="submitB" type="button" onclick="document.getElementById('deleteSeminar').style.display='none'">Cancel</button>
                     </div>
                 </form>
         </div>

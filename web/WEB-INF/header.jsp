@@ -52,8 +52,8 @@
             <div class="container">
                 <h1>Log in</h1>
                 <label for="username"><b>Username</b></label>
-                <input id="username" type="text" placeholder="Staff or student number" name="username" required                 
-                       pattern="^[0-9]{0,8}$" autofocus>
+                <input id="username" type="text" placeholder="Staff or student number" name="username" title="8 Digits ID"         
+                       pattern="^[0-9]{0,8}$" required autofocus>
                 <label for="password"><b>Password</b></label>
                 <input id="password" type="password" placeholder="UTS Password" name="password" required>
                 <a href="https://email.itd.uts.edu.au/webapps/myaccount/passwordreset/">Forget your Password?<br></a>

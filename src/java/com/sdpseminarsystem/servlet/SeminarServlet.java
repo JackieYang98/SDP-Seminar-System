@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sdpseminarsystem.dao.factory.DAOFactory;
 import com.sdpseminarsystem.vo.Seminar;
+import com.sdpseminarsystem.vo.Speaker;
 import com.sdpseminarsystem.vo.User;
 
 /**
@@ -122,10 +123,11 @@ public class SeminarServlet extends HttpServlet {
         }
     }
     
-    private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user) throws IOException {
+    private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user) throws IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE - MM/dd");
         PrintWriter out = response.getWriter();
+        List<Speaker> speakers = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(seminar.getSeminarId());
         out.print("<div class='mix'>");
         out.print("<div class='seminar-box'>");
         out.print("<div class='seminar-image'>");
@@ -142,7 +144,11 @@ public class SeminarServlet extends HttpServlet {
         } else {
             out.print("<img src='image/lecture.jpg'></a></div>");
         }
-        out.print("<div class='seminar-name'>" + seminar.getSeminarTitle() + "</div>");
+        out.print("<div class='seminar-name'><b>" + seminar.getSeminarTitle() + "</b></div>");
+
+        out.print("<div class='seminar-speaker'> Speakers: " + speakers.get(0).getSpeakerName() 
+                + "<br>" + speakers.get(1).getSpeakerName() 
+                + "<br>" + speakers.get(2).getSpeakerName() + "</div>");
         out.print("<div class='seminar-date'>" + dateFormat.format(seminar.getSeminarStartTime()) + " " + "</div>");
         out.print("<div class='seminar-venue'>" + venueName + " " + seminar.getVenue().getVenueLocation() + "</div>");
         if (user == null || user.getUserTypeFlag().equals('a')) {
@@ -152,6 +158,9 @@ public class SeminarServlet extends HttpServlet {
             out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id=" + seminar.getSeminarId()
                     + "' class='button'>Edit</div>");
         }
+        
+//        out.print("<div class='seminar-extra'>"
+//        out.print("</div>");
         out.print("</div>");
         out.print("</div>");
     }

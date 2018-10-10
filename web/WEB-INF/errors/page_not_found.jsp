@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
-        <!--<meta http-equiv="refresh" content="5; url=/SDP-Seminar-System/" />-->
+        <meta http-equiv="refresh" content="5; url=/SDP-Seminar-System/" />
         <title>Log-in Required</title>
     </head>
         <body>

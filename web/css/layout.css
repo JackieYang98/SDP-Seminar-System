@@ -745,18 +745,30 @@ input[type=radio],input.radio {
     width: 300px;
     margin: 1em 1%;
 }
+/*.mix:hover .seminar-extra{
+    display:block;
+}*/
 
 .seminar-image{ grid-area: a;}
-.seminar-date{ grid-area: b;
+.seminar-date{ 
+    grid-area: b;
     border: solid black 1px;
 }
 .seminar-name{ grid-area: c;}
-.seminar-venue{ grid-area: d;
+.seminar-venue{ 
+    grid-area: d;
     border: solid black 1px;
 }
-.seminar-button{ grid-area:e;
+.seminar-button{ 
+    grid-area:e;
     border: solid black 1px;
 }
+
+/*.seminar-speakers{grid-area:f;}*/
+.seminar-speaker{grid-area:g;
+border: solid black 1px;}
+
+
 .seminar-box{
     display: inline-grid;
     width: 280px;
@@ -767,6 +779,8 @@ input[type=radio],input.radio {
     grid-template-areas:         
         'a a a a'
         'c c c c'
+        'g g g g'
         'b d d e'
-        '. d d .';
+        'b d d e'
+        ;
 }

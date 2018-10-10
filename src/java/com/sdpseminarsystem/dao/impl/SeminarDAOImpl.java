@@ -78,9 +78,11 @@ public class SeminarDAOImpl extends DAOImpl implements ISeminarDAO {
     public List<Seminar> findByUser(User user) throws SQLException {
         String sql;
         if (user.getUserTypeFlag() == 'o')
-            sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId and UserOrganiserId = ?;";
+            sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId and UserOrganiserId = ?"
+                    + "order by SeminarDate;";
         else if (user.getUserTypeFlag() == 'h')
-            sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId and UserHostId = ?;";
+            sql = "select * from seminars inner join venues where seminars.VenueId = venues.VenueId and UserHostId = ?"
+                    + "order by SeminarDate;";
         else
             return findAll();
         stmt = conn.prepareStatement(sql);

@@ -28,15 +28,15 @@
                     <td>From: <input type="date" id="startDateSearch" 
                                      required/> </td>
                     <td>To: <input type="date" id="endDateSearch"/> </td>
-                    <td><input id="searchSubmit" type="submit" 
+                    <td><input class="submitB" id="searchSubmit" type="submit" 
                                value="Search"/> </td>
                 </tr>
                 <tr>
-                    <td>Search by name or venue:</td>
-                    <td><input type="text" id="inputSearch" 
-                               placeholder="Search by name or venue..."></td>
-                    <td><input type="button" onclick="location.reload();" 
-                               value="Reset"></td>
+                    <td>Search for seminar:</td>
+                    <td><input  type="text" id="inputSearch" 
+                               placeholder="Name or venue..."/></td>
+                    <td><input class="submitB" type="button" onclick="location.reload();" 
+                               value="Reset"/></td>
                 </tr>
             </table>
             </form>

@@ -102,7 +102,9 @@ public class SeminarServlet extends HttpServlet {
                 if (user == null) {
                     List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findAllSortByDate();
                     for (Seminar seminar : seminars) {
-                        printSeminarBox(response, seminar, user);
+                        Date today = new Date();
+                        if(seminar.getSeminarStartTime().after(today))
+                            printSeminarBox(response, seminar, user);
                     }
                 } else if (user.getUserTypeFlag() == 'h' || user.getUserTypeFlag() == 'o') {
                     List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findByUser(user);
@@ -145,10 +147,16 @@ public class SeminarServlet extends HttpServlet {
             out.print("<img src='image/lecture.jpg'></a></div>");
         }
         out.print("<div class='seminar-name'><b>" + seminar.getSeminarTitle() + "</b></div>");
-
-        out.print("<div class='seminar-speaker'> Speakers: " + speakers.get(0).getSpeakerName() 
+        
+        User organiser = seminar.getUserOrganiser();
+        out.print("<div class='seminar-organiser-header'> Organiser: </div>");
+        out.print("<div class='seminar-organiser'>" + organiser.getUserFirstName() + "  " + organiser.getUserLastName() + "</div>");
+        
+        out.print("<div class='seminar-speaker-header'> Speakers:</div>");
+        out.print("<div class='seminar-speaker'>" + speakers.get(0).getSpeakerName() 
                 + "<br>" + speakers.get(1).getSpeakerName() 
                 + "<br>" + speakers.get(2).getSpeakerName() + "</div>");
+        
         out.print("<div class='seminar-date'>" + dateFormat.format(seminar.getSeminarStartTime()) + " " + "</div>");
         out.print("<div class='seminar-venue'>" + venueName + " " + seminar.getVenue().getVenueLocation() + "</div>");
         if (user == null || user.getUserTypeFlag().equals('a')) {
@@ -158,9 +166,7 @@ public class SeminarServlet extends HttpServlet {
             out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id=" + seminar.getSeminarId()
                     + "' class='button'>Edit</div>");
         }
-        
-//        out.print("<div class='seminar-extra'>"
-//        out.print("</div>");
+
         out.print("</div>");
         out.print("</div>");
     }

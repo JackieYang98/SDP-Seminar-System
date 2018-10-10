@@ -11,13 +11,14 @@
 <%@page import="com.sdpseminarsystem.vo.Speaker"%>
 <%@page import="com.sdpseminarsystem.vo.Seminar"%>
 <%@page import="com.sdpseminarsystem.dao.factory.DAOFactory"%>
+<%@page import="java.util.Locale" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     String seminarId = request.getParameter("id");
     Seminar seminar = DAOFactory.getInstanceOfSeminarDAO().findById(Integer.parseInt(seminarId));
     List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
-    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MM/dd/yyyy");
-    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MM/dd/yyyy", Locale.UK);
+    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.UK);
     Integer attendeeNumber = DAOFactory.getInstanceOfAttendeeDAO().findAllBySeminar(Integer.parseInt(seminarId)).size();
 %>
 <!DOCTYPE html>

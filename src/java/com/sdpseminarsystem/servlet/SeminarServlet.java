@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -74,7 +75,7 @@ public class SeminarServlet extends HttpServlet {
         if (request.getParameter("searchDate") != null) {
             try {
                 List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findAllSortByDate();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
                 Date startDate = formatter.parse(request.getParameter("startDate"));
                 if (request.getParameter("endDate").equals("")) {
                     for (Seminar seminar : seminars) {
@@ -103,7 +104,7 @@ public class SeminarServlet extends HttpServlet {
                     List<Seminar> seminars = DAOFactory.getInstanceOfSeminarDAO().findAllSortByDate();
                     for (Seminar seminar : seminars) {
                         Date today = new Date();
-                        if(seminar.getSeminarStartTime().after(today))
+                        if (seminar.getSeminarStartTime().after(today))
                             printSeminarBox(response, seminar, user);
                     }
                 } else if (user.getUserTypeFlag() == 'h' || user.getUserTypeFlag() == 'o') {
@@ -125,9 +126,10 @@ public class SeminarServlet extends HttpServlet {
         }
     }
     
-    private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user) throws IOException, SQLException {
+    private void printSeminarBox(HttpServletResponse response, Seminar seminar, User user)
+            throws IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE - MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE - MM/dd", Locale.UK);
         PrintWriter out = response.getWriter();
         List<Speaker> speakers = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(seminar.getSeminarId());
         out.print("<div class='mix'>");
@@ -150,12 +152,12 @@ public class SeminarServlet extends HttpServlet {
         
         User organiser = seminar.getUserOrganiser();
         out.print("<div class='seminar-organiser-header'> Organiser: </div>");
-        out.print("<div class='seminar-organiser'>" + organiser.getUserFirstName() + "  " + organiser.getUserLastName() + "</div>");
+        out.print("<div class='seminar-organiser'>" + organiser.getUserFirstName() + "  " + organiser.getUserLastName()
+                + "</div>");
         
         out.print("<div class='seminar-speaker-header'> Speakers:</div>");
-        out.print("<div class='seminar-speaker'>" + speakers.get(0).getSpeakerName() 
-                + "<br>" + speakers.get(1).getSpeakerName() 
-                + "<br>" + speakers.get(2).getSpeakerName() + "</div>");
+        out.print("<div class='seminar-speaker'>" + speakers.get(0).getSpeakerName() + "<br>"
+                + speakers.get(1).getSpeakerName() + "<br>" + speakers.get(2).getSpeakerName() + "</div>");
         
         out.print("<div class='seminar-date'>" + dateFormat.format(seminar.getSeminarStartTime()) + " " + "</div>");
         out.print("<div class='seminar-venue'>" + venueName + " " + seminar.getVenue().getVenueLocation() + "</div>");
@@ -166,7 +168,7 @@ public class SeminarServlet extends HttpServlet {
             out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id=" + seminar.getSeminarId()
                     + "' class='button'>Edit</div>");
         }
-
+        
         out.print("</div>");
         out.print("</div>");
     }

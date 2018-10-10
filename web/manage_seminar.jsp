@@ -10,6 +10,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.sdpseminarsystem.vo.Seminar"%>
 <%@page import="com.sdpseminarsystem.dao.factory.DAOFactory"%>
+<%@page import="java.util.Locale" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
@@ -28,8 +29,8 @@
         String seminarId = request.getParameter("id");
         Seminar seminar = DAOFactory.getInstanceOfSeminarDAO().findById(Integer.parseInt(seminarId));
         List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm", Locale.UK);
         String seminarDate = dateFormat.format(seminar.getSeminarStartTime());
         String seminarStart = timeFormat.format(seminar.getSeminarStartTime());
         String seminarEnd = timeFormat.format(seminar.getSeminarEndTime());
@@ -156,10 +157,10 @@
                                 <td><c:out value="${attendee.attendeeLastName}"/></td>
                                 <td><c:out value="${attendee.attendeePhone}"/></td>
                                 <td><c:choose>
-                                    <c:when test="${attendee.attendeeState == 'G'}">
+                                    <c:when test="${attendee.attendeeState.toString() == 'G'}">
                                         <c:out value="Going"/>
                                     </c:when>
-                                    <c:when test="${attendee.attendeeState == 'I'}">
+                                    <c:when test="${attendee.attendeeState.toString() == 'I'}">
                                         <c:out value="Interested"/>
                                     </c:when>
                                 </c:choose></td>

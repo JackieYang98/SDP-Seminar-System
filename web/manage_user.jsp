@@ -73,13 +73,13 @@
                                 <td><c:out value="${Users.userLastName}"/></td>
                                 <td><c:out value="${Users.userEmail}"/></td>
                                 <td><c:choose>
-                                    <c:when test="${Users.userTypeFlag == 'a'}">
+                                    <c:when test="${Users.userTypeFlag.toString() == 'a'}">
                                         <c:out value="Administrator"/>
                                     </c:when>
-                                    <c:when test="${Users.userTypeFlag == 'o'}">
+                                    <c:when test="${Users.userTypeFlag.toString() == 'o'}">
                                         <c:out value="Organiser"/>
                                     </c:when>
-                                    <c:when test="${Users.userTypeFlag == 'h'}">
+                                    <c:when test="${Users.userTypeFlag.toString() == 'h'}">
                                         <c:out value="Host"/>
                                     </c:when>
                                 </c:choose></td>

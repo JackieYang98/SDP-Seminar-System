@@ -178,7 +178,7 @@
             <br>
             <form action="NameTagServlet" method="POST">
                     <input type="hidden" name="seminarId" value="<%=seminarId%>">
-                    <button type="submit">Download Name Tags</button>
+                    <button id="printTags" type="submit">Download Name Tags</button>
             </form>
             </div>
         </div>
@@ -302,80 +302,87 @@
         </div>
     </div>
     <script>
-    $("#tabs").tabs();
+$("#tabs").tabs();
     
-    var table, id, email, firstName, lastName, phone, status;
+var table, id, email, firstName, lastName, phone, status;
     //Load on page load
-    $(document).ready(function(){
-        //Initialize Datatable API
-        table = $('#attendee-list').DataTable( {
-            select:{
-                items: 'row',
-                style: 'single'
-            }
-        });
-        
-        /*
-         * When a row of table is clicked, save its details
-         */
-        $('#attendee-list tbody').on( 'click', 'tr', function () {
-            email = table.row( this ).data()[0];
-            firstName =  table.row( this ).data()[1];
-            lastName = table.row( this ).data()[2];
-            phone = table.row( this ).data()[3];
-            status = table.row( this ).data()[4];
-            id = table.row( this ).data()[5];
-            $('#row').val(data);
-            
-            //If no row is selected, disable buttons
-            if ( $(this).hasClass('selected') ){
-                $('#editB').prop('disabled', true);
-                $('#deleteB').prop('disabled', true);
-            }else{
-                $('#editB').prop('disabled', false);
-                $('#deleteB').prop('disabled', false);
-            }
-        });
-         
-        //Ajax to get the current host of the seminar into dropdown input 
-        var selectedHost = $("#hostDropdown option:selected").val();
-        var data = "host="+selectedHost;
+$(document).ready(function(){
+    //Initialize Datatable API
+    table = $('#attendee-list').DataTable( {
+        select:{
+            items: 'row',
+            style: 'single',
+        }
+    });
+    
+    
+    if (! table.data().any()){
+        $('#printTags').prop('disabled', true);
+    }else{
+        $('#printTags').prop('disabled', false);   
+    }
+    
+    /*
+     * When a row of table is clicked, save its details
+     */
+    $('#attendee-list tbody').on( 'click', 'tr', function () {
+        email = table.row( this ).data()[0];
+        firstName =  table.row( this ).data()[1];
+        lastName = table.row( this ).data()[2];
+        phone = table.row( this ).data()[3];
+        status = table.row( this ).data()[4];
+        id = table.row( this ).data()[5];
+        $('#row').val(data);
+
+        //If no row is selected, disable buttons
+        if ( $(this).hasClass('selected') ){
+            $('#editB').prop('disabled', true);
+            $('#deleteB').prop('disabled', true);
+        }else{
+            $('#editB').prop('disabled', false);
+            $('#deleteB').prop('disabled', false);
+        }
+    });
+
+    //Ajax to get the current host of the seminar into dropdown input 
+    var selectedHost = $("#hostDropdown option:selected").val();
+    var data = "host="+selectedHost;
+    $.ajax({
+        url:"ManageSeminarServlet",
+        type: "GET",
+        data: data,
+        success:function(data){
+            $("#hostDropdown").html(data); 
+        }
+    });
+
+    //Ajax to get current venue of the seminar into dropdown input
+    //As well as its siblings with same host parents
+    var selectedVenue = $("#venueDropdown option:selected").val();
+    data = data+"&venue="+selectedVenue;
+    $.ajax({
+        url:"ManageSeminarServlet",
+        type: "GET",
+        data: data,
+        success:function(data){
+            $("#venueDropdown").html(data);
+        }
+    }); 
+});
+    
+    //When host is changed, change venue dropdown options
+    $("#hostDropdown").change(function(){
+    var selectedHost = $("#hostDropdown option:selected").val();
+    var data = "host="+selectedHost;
         $.ajax({
-            url:"ManageSeminarServlet",
-            type: "GET",
-            data: data,
-            success:function(data){
-                $("#hostDropdown").html(data); 
-            }
-        });
-        
-        //Ajax to get current venue of the seminar into dropdown input
-        //As well as its siblings with same host parents
-        var selectedVenue = $("#venueDropdown option:selected").val();
-        data = data+"&venue="+selectedVenue;
-        $.ajax({
-            url:"ManageSeminarServlet",
+            url:"CreateSeminarServlet",
             type: "GET",
             data: data,
             success:function(data){
                 $("#venueDropdown").html(data);
             }
-        }); 
-    });
-    
-        //When host is changed, change venue dropdown options
-        $("#hostDropdown").change(function(){
-        var selectedHost = $("#hostDropdown option:selected").val();
-        var data = "host="+selectedHost;
-            $.ajax({
-                url:"CreateSeminarServlet",
-                type: "GET",
-                data: data,
-                success:function(data){
-                    $("#venueDropdown").html(data);
-                }
-            });
-        }); 
+        });
+    }); 
     
     /*
      * When row is selected, fill row with email address when Email button click

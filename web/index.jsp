@@ -34,14 +34,13 @@
                                value="Reset"/></td>
                 </tr>
                 <tr>
-                    <td colspan="4">Or</td>
+                    <td colspan="4"><b>or</b></td>
                 </tr>
              
                 <tr>
                     <td>Search for seminar:</td>
                     <td colspan="3"><input  type="text" id="inputSearch" 
                                placeholder="Name, Organiser, Host, or venue..."/></td>
-                   
                 </tr>
             </table>
             </form>

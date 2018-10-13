@@ -40,7 +40,7 @@
                 <%if(user.getUserTypeFlag()!='a'){%>
                     <a id="createseminar" href="/SDP-Seminar-System/create_seminar.jsp">Create Seminar</a>
                 <%}%>
-                <a id="login" style="width:auto" ><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></a>
+                <a id="login"><b><%=user.getUserFirstName() + " " + user.getUserLastName()%> as <%=type%></b></a>
                 <a id="logout" href="LogoutServlet"><img src="image/logout.png" style="width:25px;height: 25px;"></a>
             </div>
     </div> 

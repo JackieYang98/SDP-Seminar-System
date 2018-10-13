@@ -6,7 +6,7 @@
 $(document).ready(function(){    
     closeModal('loginForm');
     closeModal('seminarRegister');
-    closeModal('seminarRegistered')
+    closeModal('seminarRegistered');
   
  });  
  
@@ -19,7 +19,7 @@ $(document).ready(function(){
     var modal = document.getElementById(id);
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target === modal) {
             modal.style.display = "none";
         }
     };

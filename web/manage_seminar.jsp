@@ -129,7 +129,7 @@
                         <p> <b>Seminar Name: </b> <%=seminar.getSeminarTitle() %></p>
                         <input type="hidden" name="seminarId" value="<%=seminar.getSeminarId()%>">
                         <button class="deleteButton" type="submit" name="submit" value="Delete">Delete</button>
-                        <button class="submitB" type="button" onclick="document.getElementById('deleteSeminar').style.display='none'">Cancel</button>
+                        <button type="button" onclick="document.getElementById('deleteSeminar').style.display='none'">Cancel</button>
                     </div>
                 </form>
         </div>

@@ -46,7 +46,7 @@
     <div id="loginForm" class="modal">
         <form id="login-form" class="modal-content animate" action="LoginServlet" method="POST">
             <div class="imgcontainer">
-                <img src="image/uts_logo.png" alt="logo" class="avatar" style="width: 350px; height: 150px;">
+                <img id="uts-login-logo" src="image/uts_logo.png" alt="logo" class="avatar">
                 <span onclick="document.getElementById('loginForm').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">

@@ -55,17 +55,21 @@ body{
     color: black;
 }
 
-.loginForm{
-    position: relative;
+.userfeatures{
+    margin-top: 50px;
+    float: right;
+    padding: 0px 0px;
+}
+
+#loginForm{
     margin-left: auto;
     margin-right: auto;
     width:100%;
 }
 
-.userfeatures{
-    margin-top: 50px;
-    float: right;
-    padding: 0px 0px;
+#uts-login-logo{
+    width: 60%;
+    height: 50%;
 }
 
 img {
@@ -198,7 +202,7 @@ span.psw {
     padding-top: 60px;
 }
 
-/* Modal Content/Box */
+/* Modal Content Box */
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
@@ -248,12 +252,6 @@ input[type=radio]
    /*Double-sized Checkboxes*/ 
     -webkit-transform: scale(2);
 }
-/*
-input[type=radio],input.radio {
-              float: left;
-              clear: none;
-              margin: 2px 0 0 2px;
-            }*/
 
 .search-table{
    margin:auto;
@@ -268,6 +266,10 @@ input[type=radio],input.radio {
     height:30px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.search-table input[type=text]{
+    width: 350px; 
 }
 
 .grid-container > div {

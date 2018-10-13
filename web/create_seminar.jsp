@@ -75,8 +75,8 @@
                     <div class="grid-start">Start Time</div>
                     <div class="grid-end">End Time</div>
                     <div class="grid-sem-date-input"><input id="date" type="date" name="seminarDate" required style="width: 150px; height:40px;"></div>
-                    <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
-                    <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
+                    <div class="grid-start-input"><input id="startTime" type="time" name="seminarStart" required style="width: 150px; height:40px;"></div>
+                    <div class="grid-end-input"><input id="endTime" type="time" name="seminarEnd" required style="width: 150px; height:40px;"></div>
                     <div class="grid-sem-desc">Seminar Description</div>
                     <div class="grid-sem-desc-input"><textarea class="desctext" name="seminarDescription" placeholder="About the seminar..." required></textarea></div>  
                     <!--submit organiser id as hidden field to know which organiser create this seminar-->
@@ -124,6 +124,38 @@
                 $("#venueDropdown").html(data);
             }
         });
+    });
+    
+    function minFromMidnight(tm){
+        var ampm= tm.substr(-2)
+        var clk = tm.substr(0, 5);
+        var m  = parseInt(clk.match(/\d+$/)[0], 10);
+        var h  = parseInt(clk.match(/^\d+/)[0], 10);
+        h += (ampm.match(/pm/i))? 12: 0;
+        return h*60+m;
+    }
+    
+    
+    $("#endTime").change(function(){
+        var startTime = $('#startTime').val();
+        var endTime = $('#endTime').val();
+        var st = minFromMidnight(startTime);
+        var et = minFromMidnight(endTime);
+        if(st>et){
+            alert("End time must be greater than start time");
+            $('#endTime').val('');
+        }
+    });
+    
+    $('#startTime').change(function(){
+        var startTime = $('#startTime').val();
+        var endTime = $('#endTime').val();
+        var st = minFromMidnight(startTime);
+        var et = minFromMidnight(endTime);
+        if(st>et){
+            alert("End time must be greater than start time");
+            $('#startTime').val('');
+        }
     });
     
         </script>

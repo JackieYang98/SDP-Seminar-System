@@ -30,13 +30,18 @@
                     <td>To: <input type="date" id="endDateSearch"/> </td>
                     <td><input class="submitB" id="searchSubmit" type="submit" 
                                value="Search"/> </td>
-                </tr>
-                <tr>
-                    <td>Search for seminar:</td>
-                    <td><input  type="text" id="inputSearch" 
-                               placeholder="Name or venue..."/></td>
                     <td><input class="submitB" type="button" onclick="location.reload();" 
                                value="Reset"/></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Or</td>
+                </tr>
+             
+                <tr>
+                    <td>Search for seminar:</td>
+                    <td colspan="3"><input  type="text" id="inputSearch" 
+                               placeholder="Name, Organiser, Host, or venue..."/></td>
+                   
                 </tr>
             </table>
             </form>

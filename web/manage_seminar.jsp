@@ -66,7 +66,7 @@
             </ul>
           <br>
 <!--Edit Tab-->
-            <div id="edit" >
+            <div id="edit">
                 <form action="ManageSeminarServlet" method="POST">  
                     <div class="grid-container">
                     <div class="grid-sem-name">Seminar Name</div>
@@ -109,8 +109,8 @@
                     <div class="grid-start">Start Time</div>
                     <div class="grid-end">End Time</div>
                     <div class="grid-sem-date-input"><input type="date" name="seminarDate" required style="width: 150px; height:40px;" value="<%=seminarDate %>"></div>
-                    <div class="grid-start-input"><input type="time" name="seminarStart" required style="width: 150px; height:40px;" value="<%=seminarStart %>"></div>
-                    <div class="grid-end-input"><input type="time" name="seminarEnd" required style="width: 150px; height:40px;" value="<%=seminarEnd %>"></div>
+                    <div class="grid-start-input"><input id="startTime" type="time" name="seminarStart" required style="width: 150px; height:40px;" value="<%=seminarStart %>"></div>
+                    <div class="grid-end-input"><input id="endTime" type="time" name="seminarEnd" required style="width: 150px; height:40px;" value="<%=seminarEnd %>"></div>
                     
 
                     <div class="grid-sem-desc">Seminar Description</div>
@@ -315,7 +315,9 @@ $(document).ready(function(){
         }
     });
     
-    
+    /*
+     * When there is at least 1 attendee, enable print name tag button
+     */
     if (! table.data().any()){
         $('#printTags').prop('disabled', true);
     }else{

@@ -12,6 +12,7 @@
                 <h1><img id="logo" src="image/uts.png" alt="UTS Logo"></h1>
             </a>
             <div class="userfeatures">
+                <a id="faq" href="/SDP-Seminar-System/faq.jsp">FAQ</a>
                 <a id="browse" href="/SDP-Seminar-System/index.jsp">Browse</a>
                 <a id="login" href="#" onclick="document.getElementById('loginForm').style.display='block';return false;" style="width:auto" >Login</a>            
             </div>
@@ -33,6 +34,7 @@
                 <h1><img id="logo" src="image/uts.png" alt="UTS Logo"></h1>
             </a>
             <div class="userfeatures">
+                <a id="faq" href="/SDP-Seminar-System/faq.jsp">FAQ</a>
                 <a id="browse" href="/SDP-Seminar-System/index.jsp">Browse</a>
                 <%if(user.getUserTypeFlag()=='a'){%><a id="manageuser" href="/SDP-Seminar-System/manage_user.jsp">Manage User</a><%}%>
                 <%if(user.getUserTypeFlag()!='a'){%>
@@ -50,7 +52,7 @@
                 <span onclick="document.getElementById('loginForm').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">
-                <h1>Log in</h1>
+                <h1>Log in <span style="font-size:20px; color: red;"> (You do not need to login to attend seminar!)</span></h1>
                 <label for="username"><b>Username</b></label>
                 <input id="username" type="text" placeholder="Staff or student number" name="username" title="8 Digits ID"         
                        pattern="^[0-9]{0,8}$" required autofocus>

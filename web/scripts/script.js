@@ -8,6 +8,28 @@ $(document).ready(function(){
     closeModal('seminarRegister');
     closeModal('seminarRegistered');
   
+  
+    $("#endTime").change(function(){
+      var startTime = $('#startTime').val();
+      var endTime = $('#endTime').val();
+      var st = minFromMidnight(startTime);
+      var et = minFromMidnight(endTime);
+      if(st>et){
+          alert("End time must be greater than start time");
+          $('#endTime').val('');
+      }
+  });
+
+    $('#startTime').change(function(){
+      var startTime = $('#startTime').val();
+      var endTime = $('#endTime').val();
+      var st = minFromMidnight(startTime);
+      var et = minFromMidnight(endTime);
+      if(st>et){
+          alert("End time must be greater than start time");
+          $('#startTime').val('');
+      }
+    });
  });  
  
  /*
@@ -25,33 +47,6 @@ $(document).ready(function(){
     };
 }
    
-//$(".user-list tbody tr").click(function(){
-//   $(this).addClass('selected').siblings().removeClass('selected');    
-//   var value=$(this).find('td:first').html();  
-//});    
-///*
-//* Responsive table code, 
-//* add scroll interface to table
-//*/    
-//    // Change the selector if needed
-//    var $table = $('table.user-list'),
-//        $bodyCells = $table.find('tbody tr:first').children(),
-//        colWidth;
-//
-//    // Adjust the width of thead cells when window resizes
-//    $(window).resize(function() {
-//        // Get the tbody columns width array
-//        colWidth = $bodyCells.map(function() {
-//            return $(this).width();
-//        }).get();
-//
-//        // Set the width of thead columns
-//        $table.find('thead tr').children().each(function(i, v) {
-//            $(v).width(colWidth[i]);
-//        });    
-//    }).resize(); // Trigger resize handler
-//});
-
 function hide(speaker){
     var x = document.getElementById(speaker);
     if (x.style.display === "none") {
@@ -89,4 +84,15 @@ function validateAddUserForm(){
         alert("Please enter valid password associated with ID");
         return false;
     }
+}
+
+
+
+function minFromMidnight(tm){
+        var ampm= tm.substr(-2);
+        var clk = tm.substr(0, 5);
+        var m  = parseInt(clk.match(/\d+$/)[0], 10);
+        var h  = parseInt(clk.match(/^\d+/)[0], 10);
+        h += (ampm.match(/pm/i))? 12: 0;
+        return h*60+m;
 }

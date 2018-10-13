@@ -163,7 +163,7 @@ public class SeminarServlet extends HttpServlet {
         out.print("<div class='seminar-venue'>" + venueName + " " + seminar.getVenue().getVenueLocation() + "</div>");
         if (user == null || user.getUserTypeFlag().equals('a')) {
             out.print("<div class='seminar-button'><a href='detail_seminar.jsp?id=" + seminar.getSeminarId()
-                    + "' class='button'>Apply</div>");
+                    + "' class='button'>Enter</div>");
         } else if (user.getUserTypeFlag() != null) {
             out.print("<div class='seminar-button'><a href='manage_seminar.jsp?id=" + seminar.getSeminarId()
                     + "' class='button'>Edit</div>");

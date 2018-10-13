@@ -126,37 +126,30 @@
         });
     });
     
-    function minFromMidnight(tm){
-        var ampm= tm.substr(-2)
-        var clk = tm.substr(0, 5);
-        var m  = parseInt(clk.match(/\d+$/)[0], 10);
-        var h  = parseInt(clk.match(/^\d+/)[0], 10);
-        h += (ampm.match(/pm/i))? 12: 0;
-        return h*60+m;
-    }
     
     
-    $("#endTime").change(function(){
-        var startTime = $('#startTime').val();
-        var endTime = $('#endTime').val();
-        var st = minFromMidnight(startTime);
-        var et = minFromMidnight(endTime);
-        if(st>et){
-            alert("End time must be greater than start time");
-            $('#endTime').val('');
-        }
-    });
     
-    $('#startTime').change(function(){
-        var startTime = $('#startTime').val();
-        var endTime = $('#endTime').val();
-        var st = minFromMidnight(startTime);
-        var et = minFromMidnight(endTime);
-        if(st>et){
-            alert("End time must be greater than start time");
-            $('#startTime').val('');
-        }
-    });
+//    $("#endTime").change(function(){
+//        var startTime = $('#startTime').val();
+//        var endTime = $('#endTime').val();
+//        var st = minFromMidnight(startTime);
+//        var et = minFromMidnight(endTime);
+//        if(st>et){
+//            alert("End time must be greater than start time");
+//            $('#endTime').val('');
+//        }
+//    });
+//    
+//    $('#startTime').change(function(){
+//        var startTime = $('#startTime').val();
+//        var endTime = $('#endTime').val();
+//        var st = minFromMidnight(startTime);
+//        var et = minFromMidnight(endTime);
+//        if(st>et){
+//            alert("End time must be greater than start time");
+//            $('#startTime').val('');
+//        }
+//    });
     
         </script>
     </body>

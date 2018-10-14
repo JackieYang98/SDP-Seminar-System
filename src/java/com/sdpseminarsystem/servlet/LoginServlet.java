@@ -76,6 +76,12 @@ public class LoginServlet extends HttpServlet {
         doGet(request, response);
     }
     
+    /**
+     * When SQL fails to authenticate user credential
+     * 
+     * @param response
+     * @throws IOException 
+     */
     private void failLogin(HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");

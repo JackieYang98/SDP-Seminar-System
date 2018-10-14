@@ -48,7 +48,7 @@
                You will see 'Already Registered? Click here', simply enter the 
                email you registered with to edit all your details, including
                deleting your details.</p>
-            
+            <br>
             <h2>Any more question, please contact us at:</h2>
             <h3>General enquiries:</h3>
             <p>Telephone: +61 2 9514 2000</p>

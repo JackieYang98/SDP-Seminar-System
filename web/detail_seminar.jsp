@@ -91,7 +91,7 @@
                             <div class="register-status-interested"><input class="status" type="radio" name="status" value="Interested"/> Interested</div>
                             <input type="hidden" id="submit" name="submit" value="create">
                             <input type="hidden" id="seminarId" name="seminarId" value="<%=seminarId%>" >
-                            <div class="register-registered"><label onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered? Click here</label></div>  
+                            <div class="register-registered"><label style="cursor: pointer" onclick="document.getElementById('seminarRegistered').style.display='block';document.getElementById('seminarRegister').style.display='none'"> Already registered? Click here</label></div>  
                             <div class="register-submit"><input type="submit" id="confirmButton" value="Confirm"></div>                           
                             <div class="register-cancel"><input type="button" onclick="document.getElementById('seminarRegister').style.display='none'" value="Close"></div>                            
                         </div>
@@ -193,6 +193,12 @@
         </div>
     </body>
     <script>
+    
+    $(document).ready(function(){ 
+        //Allow pop up to be close by clicking outside the modal
+        closeModal('seminarRegister','seminarRegistered','seminarRegisterEdit'); 
+    });
+        
     /*
      * On Mainform submit, retrieve all attendee details, and launch AttendeeServlet
      * to create new attendee
@@ -315,7 +321,6 @@
                     if(data !== "null"){
                         $('.deleteConfirm').html(data);
                     }else{
-                        
                         return false;
                     }
                 }

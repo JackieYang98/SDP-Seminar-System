@@ -9,7 +9,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <% 
     User current = (User) session.getAttribute("user");
     if(current == null){
@@ -23,8 +22,9 @@
         <%@include file="WEB-INF/errors/unauthorized_action.jsp" %>
 <%  
     }else {
-        //Retrieve all the list of the user
+        //Retrieve the list of all the users
         List<User> allUsers = UserDAOFactory.getInstance().findAll();
+        //Set the attribute so it can be retrieved by the JSTL tag
         request.setAttribute("allUsers", allUsers);
 %>
 <!DOCTYPE html>
@@ -146,20 +146,6 @@
         
         <script>
     /*
-     * Check whether which button was selected by admin, Confirm or Delete
-     * 
-     * @param String button the button that was clicked.
-     */
-    function updateDelete(button){
-        if(confirm("Confirm Action")){
-            document.getElementById('confirm-delete').value = button.name;
-            return true;
-        } else{
-            return false;
-        }
-    }
-
-    /*
      * Load these functions on document load
      */
     $(document).ready(function() {
@@ -186,8 +172,26 @@
                 $('#confirm-button').prop('disabled', false);
                 $('#delete-button').prop('disabled', false);
             }
-        } );
-    } );
+        });
+        
+        //Allow pop up to be close by clicking outside the modal
+        closeModal('addUser');
+    });
+    
+    /*
+     * Check whether which button was selected by admin, Confirm or Delete
+     * 
+     * @param String button the button that was clicked.
+     */
+    function updateDelete(button){
+        //Show confirmation alert
+        if(confirm("Confirm Action")){
+            document.getElementById('confirm-delete').value = button.name;
+            return true;
+        } else{
+            return false;
+        }
+    }
         </script>
     </body>
 </html>     

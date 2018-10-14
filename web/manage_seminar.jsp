@@ -25,17 +25,26 @@
 %>
         <%@include file="WEB-INF/errors/unauthorized_action.jsp" %>
 <%  } else { 
+        //Get the curretnly logged in user and the user type
         current = (User) session.getAttribute("user");
+        //Get the selected seminar item
         String seminarId = request.getParameter("id");
-        Seminar seminar = DAOFactory.getInstanceOfSeminarDAO().findById(Integer.parseInt(seminarId));
-        List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO().findAllBySeminar(Integer.parseInt(seminarId));
+        Seminar seminar = DAOFactory.getInstanceOfSeminarDAO()
+                            .findById(Integer.parseInt(seminarId));
+        //Get all the speaker(s) of the selected seminar
+        List<Speaker> speaker = DAOFactory.getInstanceOfSpeakerDAO()
+                            .findAllBySeminar(Integer.parseInt(seminarId));
+        //Convert the date and time into human readable format
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm", Locale.UK);
         String seminarDate = dateFormat.format(seminar.getSeminarStartTime());
         String seminarStart = timeFormat.format(seminar.getSeminarStartTime());
         String seminarEnd = timeFormat.format(seminar.getSeminarEndTime());
 
-        List<Attendee> attendees = DAOFactory.getInstanceOfAttendeeDAO().findAllBySeminar(Integer.parseInt(seminarId));
+        //Get all the attendee of the selected seminars
+        List<Attendee> attendees = DAOFactory.getInstanceOfAttendeeDAO()
+                                .findAllBySeminar(Integer.parseInt(seminarId));
+        //Set the attribute so it can be retrieved by the JSTL tag
         request.setAttribute("attendees", attendees);
 %>
 <!DOCTYPE html>
@@ -65,7 +74,7 @@
                 <li> <a href="#edit"> Edit Seminar </a> </li>    
             </ul>
           <br>
-<!--Edit Tab-->
+    <!--Edit Tab-->
             <div id="edit">
                 <form action="ManageSeminarServlet" method="POST">  
                     <div class="grid-container">
@@ -123,18 +132,20 @@
                 </form>
         </div>
         <div id="deleteSeminar" class="modal">
-                <form class="modal-content animate" action="ManageSeminarServlet" method="POST">
-                    <div class="container">
-                        <h1>Are you sure you want to delete this seminar?</h1>
-                        <p> <b>Seminar Name: </b> <%=seminar.getSeminarTitle() %></p>
-                        <input type="hidden" name="seminarId" value="<%=seminar.getSeminarId()%>">
-                        <button class="deleteButton" type="submit" name="submit" value="Delete">Delete</button>
-                        <button type="button" onclick="document.getElementById('deleteSeminar').style.display='none'">Cancel</button>
-                    </div>
-                </form>
+            <form class="modal-content animate" action="ManageSeminarServlet" method="POST">
+                <div class="center">
+                    <h1>Are you sure you want to delete this seminar?</h1>
+                    <p> <b>Seminar Name: </b> <%=seminar.getSeminarTitle() %></p>
+                    <input type="hidden" name="seminarId" value="<%=seminar.getSeminarId()%>">
+
+                    <button class="deleteButton" type="submit" name="submit" value="Delete">Delete</button>
+                    <button class="submitButton" type="button" onclick="document.getElementById('deleteSeminar').style.display='none'">Cancel</button>
+
+                </div>
+            </form>
         </div>
                         
-<!--Attendee Tab-->
+    <!--Attendee Tab-->
         <!--Display all the attendees for a particular seminar-->
         <div id="attendee" style="text-align: center; width: 800px; margin:auto auto;">
             <h1> Attendees </h1>
@@ -150,6 +161,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <!--JSTL tag to retrieve all attendee-->
                     <c:forEach items="${attendees}" var="attendee">
                             <tr>
                                 <td><c:out value="${attendee.attendeeEmail}"/></td>
@@ -246,7 +258,7 @@
     <!--Delete existing attendee-->
         <div id="deleteConfirmation" class="modal">
             <form id="deleteAttendee" class="modal-content animate" action="AttendeeServlet" method="POST" onsubmit="document.getElementById('seminarRegisterDelete').style.display='block';">
-                <h1>Delete Attendee</h1>
+                <h1>Delete Attendee ?</h1>
                 <p> <b>First Name:</b> <span id="firstName"></span> </p>
                 <p> <b>Last Name:</b> <span id="lastName"></span> </p>
                 <p> <b>Email: </b> <span id="email"></span> </p>
@@ -263,17 +275,6 @@
                 <div class="seminarDeleteConfirm"></div>
             </div>        
         </div>
-        
-    <!--Print Name tags all of user by name-->
-        <div id="printTags" class="modal">
-            <div class="modal-content animate">
-                <h1>Print Tags</h1>
-                <form action="NameTagServlet" method="POST">
-                    <input type="hidden" name="seminarId" value="<%=seminarId%>">
-                    <button type="submit" title="Close Page">Print</button>
-                </form>
-            </div>        
-        </div>  
                     
     <!--Email one user or all users-->
         <div id="emailAttendee" class="modal">
@@ -302,75 +303,80 @@
         </div>
     </div>
     <script>
-$("#tabs").tabs();
-    
-var table, id, email, firstName, lastName, phone, status;
+    //Create two tabs, edit seminar and attendee list tab
+    $("#tabs").tabs();
+
+    var table, id, email, firstName, lastName, phone, status;
     //Load on page load
-$(document).ready(function(){
-    //Initialize Datatable API
-    table = $('#attendee-list').DataTable( {
-        select:{
-            items: 'row',
-            style: 'single',
-        }
-    });
-    
-    /*
-     * When there is at least 1 attendee, enable print name tag button
-     */
-    if (! table.data().any()){
-        $('#printTags').prop('disabled', true);
-    }else{
-        $('#printTags').prop('disabled', false);   
-    }
-    
-    /*
-     * When a row of table is clicked, save its details
-     */
-    $('#attendee-list tbody').on( 'click', 'tr', function () {
-        email = table.row( this ).data()[0];
-        firstName =  table.row( this ).data()[1];
-        lastName = table.row( this ).data()[2];
-        phone = table.row( this ).data()[3];
-        status = table.row( this ).data()[4];
-        id = table.row( this ).data()[5];
-        $('#row').val(data);
+    $(document).ready(function(){
+        //Initialize Datatable API
+        table = $('#attendee-list').DataTable( {
+            select:{
+                items: 'row',
+                style: 'single',
+            }
+        });
 
-        //If no row is selected, disable buttons
-        if ( $(this).hasClass('selected') ){
-            $('#editB').prop('disabled', true);
-            $('#deleteB').prop('disabled', true);
+        /*
+         * When there is at least 1 attendee, enable print name tag button
+         */
+        if (! table.data().any()){
+            $('#printTags').prop('disabled', true);
         }else{
-            $('#editB').prop('disabled', false);
-            $('#deleteB').prop('disabled', false);
+            $('#printTags').prop('disabled', false);   
         }
-    });
 
-    //Ajax to get the current host of the seminar into dropdown input 
-    var selectedHost = $("#hostDropdown option:selected").val();
-    var data = "host="+selectedHost;
-    $.ajax({
-        url:"ManageSeminarServlet",
-        type: "GET",
-        data: data,
-        success:function(data){
-            $("#hostDropdown").html(data); 
-        }
-    });
+        /*
+         * When a row of table is clicked, save its details
+         */
+        $('#attendee-list tbody').on( 'click', 'tr', function () {
+            email = table.row( this ).data()[0];
+            firstName =  table.row( this ).data()[1];
+            lastName = table.row( this ).data()[2];
+            phone = table.row( this ).data()[3];
+            status = table.row( this ).data()[4];
+            id = table.row( this ).data()[5];
+            $('#row').val(data);
 
-    //Ajax to get current venue of the seminar into dropdown input
-    //As well as its siblings with same host parents
-    var selectedVenue = $("#venueDropdown option:selected").val();
-    data = data+"&venue="+selectedVenue;
-    $.ajax({
-        url:"ManageSeminarServlet",
-        type: "GET",
-        data: data,
-        success:function(data){
-            $("#venueDropdown").html(data);
-        }
-    }); 
-});
+            //If no row is selected, disable buttons
+            if ( $(this).hasClass('selected') ){
+                $('#editB').prop('disabled', true);
+                $('#deleteB').prop('disabled', true);
+            }else{
+                $('#editB').prop('disabled', false);
+                $('#deleteB').prop('disabled', false);
+            }
+        });
+
+        //Ajax to get the current host of the seminar into dropdown input 
+        var selectedHost = $("#hostDropdown option:selected").val();
+        var data = "host="+selectedHost;
+        $.ajax({
+            url:"ManageSeminarServlet",
+            type: "GET",
+            data: data,
+            success:function(data){
+                $("#hostDropdown").html(data); 
+            }
+        });
+
+        //Ajax to get current venue of the seminar into dropdown input
+        //As well as its siblings with same host parents
+        var selectedVenue = $("#venueDropdown option:selected").val();
+        data = data+"&venue="+selectedVenue;
+        $.ajax({
+            url:"ManageSeminarServlet",
+            type: "GET",
+            data: data,
+            success:function(data){
+                $("#venueDropdown").html(data);
+            }
+        });
+        
+        //Allow pop up to be close by clicking outside the modal
+        closeModal('deleteSeminar','emailAttendee','seminarRegister',
+        'seminarRegisterEdit','deleteConfirmation');  
+    });
     
     //When host is changed, change venue dropdown options
     $("#hostDropdown").change(function(){
@@ -389,8 +395,6 @@ $(document).ready(function(){
     /*
      * When row is selected, fill row with email address when Email button click
      * Otherwise, leave it blank
-     * 
-     * @returns {undefined}
      */
     function autoFillEmail(){
         if(email != null){
@@ -401,8 +405,6 @@ $(document).ready(function(){
     /*
      * When user click 'Email all' Retrieve all email of seminars registered,
      * and put them in 'To' field
-     * 
-     * @returns {undefined}
      */
     function fillAllEmail(){
         var all = table.columns().data()[0];
@@ -462,11 +464,11 @@ $(document).ready(function(){
         var attendeeId = $('#attdId').val();
         var firstName = $('#firstNameText').val();
         var lastName = $('#lastNameText').val();
-        var email = $('#emailText').val();
+        var emailInput = $('#emailText').val();
         var phone = $('#phoneText').val();
         var status = $('.state:checked').val();
         var data = 'submit='+submitFlag+'&seminarId='+seminarId+'&attdFName='+firstName+'&attdLName='+
-                    lastName+'&attdEmail='+email+'&attdPhone='+phone+
+                    lastName+'&attdEmail='+emailInput+'&attdPhone='+phone+
                     '&attdState='+status+'&attdId='+attendeeId+'&target='+email;
         $.ajax({
             url:"AttendeeServlet",

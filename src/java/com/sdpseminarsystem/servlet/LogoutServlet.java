@@ -72,6 +72,7 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
+        //Invalidate user session
         request.getSession().invalidate();
     }
 }

@@ -97,7 +97,7 @@
         }
         });
         
-        //Display Only Date till today in date picker //
+        //Display Only Date till today in date picker
         var dtToday = new Date();
         var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
         var day = dtToday.getDate();
@@ -125,32 +125,6 @@
             }
         });
     });
-    
-    
-    
-    
-//    $("#endTime").change(function(){
-//        var startTime = $('#startTime').val();
-//        var endTime = $('#endTime').val();
-//        var st = minFromMidnight(startTime);
-//        var et = minFromMidnight(endTime);
-//        if(st>et){
-//            alert("End time must be greater than start time");
-//            $('#endTime').val('');
-//        }
-//    });
-//    
-//    $('#startTime').change(function(){
-//        var startTime = $('#startTime').val();
-//        var endTime = $('#endTime').val();
-//        var st = minFromMidnight(startTime);
-//        var et = minFromMidnight(endTime);
-//        if(st>et){
-//            alert("End time must be greater than start time");
-//            $('#startTime').val('');
-//        }
-//    });
-    
         </script>
     </body>
 </html>

@@ -6,7 +6,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +52,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             String submitFlag = request.getParameter("submit");
-            //If the request is to create new user
+            // If the request is to create new user
             if (submitFlag.equals("create")) {
                 User user = new User();
                 user.setUserId(request.getParameter("userid"));
@@ -62,20 +61,20 @@ public class UserServlet extends HttpServlet {
                 user.setUserLastName(request.getParameter("lName"));
                 user.setUserPassword(request.getParameter("password"));
                 user.setUserTypeFlag(request.getParameter("role").charAt(0));
-                //Create a new user in users table
+                // Create a new user in users table
                 DAOFactory.getInstanceOfUserDAO().create(user);
-            //If the request is to update the user's role
+                // If the request is to update the user's role
             } else if (submitFlag.equals("update")) {
                 User user = new User();
                 user.setUserId(request.getParameter("row"));
                 user.setUserTypeFlag(request.getParameter("role").charAt(0));
-                //Update user in the users table
+                // Update user in the users table
                 DAOFactory.getInstanceOfUserDAO().update(user);
-            //If the request is to delete the user
+                // If the request is to delete the user
             } else if (submitFlag.equals("delete")) {
                 User user = new User();
                 user.setUserId(request.getParameter("row"));
-                //Delete user completely from the users table
+                // Delete user completely from the users table
                 DAOFactory.getInstanceOfUserDAO().delete(user);
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
@@ -83,7 +82,7 @@ public class UserServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            //Refresh page to see newly updated table
+            // Refresh page to see newly updated table
             doGet(request, response);
         }
     }

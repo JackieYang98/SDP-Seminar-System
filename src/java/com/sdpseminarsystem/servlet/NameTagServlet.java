@@ -100,6 +100,9 @@ public class NameTagServlet extends HttpServlet {
             servletOutputStream.flush();
             servletOutputStream.close();
             bufferedInputStream.close();
+            
+            // delete file
+            file.delete();
         } catch (SQLException | DocumentException | IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

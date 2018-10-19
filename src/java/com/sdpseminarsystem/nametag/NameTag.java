@@ -51,33 +51,45 @@ public final class NameTag {
      */
     public static void makeFile(String filePath, List<Attendee> attendees)
             throws DocumentException, FileNotFoundException {
+        // make a file base on filePath
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         
+        // get Document and PdfWriter instances
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(filePath));
         
+        // create a table
         PdfPTable table = new PdfPTable(2);
-        table.setWidthPercentage(100);
+        table.setWidthPercentage(110);
         table.setWidths(new float[] { 1, 1 });
         
+        // add cell into table for each attendee
         for (Attendee attendee : attendees) {
             String name = attendee.getAttendeeFirstName() + " " + attendee.getAttendeeLastName();
             table.addCell(getPDFCell(name));
         }
+        // add a blank cell to make table complete if number of attendees is odd
         if (attendees.size() % 2 == 1) {
             PdfPCell blankCell = new PdfPCell();
             blankCell.setBorder(PdfPCell.NO_BORDER);
             table.addCell(blankCell);
         }
         
+        // add table into document
         document.open();
         document.add(table);
         document.close();
     }
     
+    /**
+     * Make a rounded border cell of particular name contained
+     * 
+     * @param name name needed to be contained inside this cell
+     * @return rounded border cell
+     */
     private static PdfPCell getPDFCell(String name) {
-        Paragraph para = new Paragraph(name, new Font(FontFamily.HELVETICA , 40));
+        Paragraph para = new Paragraph(name, new Font(FontFamily.HELVETICA, 30));
         PdfPCell cell = new PdfPCell(para);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);

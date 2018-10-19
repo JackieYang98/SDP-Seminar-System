@@ -19,8 +19,7 @@ public class RoundedBorder implements PdfPCellEvent {
     @Override
     public void cellLayout(PdfPCell cell, Rectangle position, PdfContentByte[] canvases) {
         PdfContentByte cb = canvases[PdfPTable.BACKGROUNDCANVAS];
-        cb.roundRectangle(position.getLeft(), position.getBottom(), position.getWidth() - 5, position.getHeight() - 5,
-                10);
+        cb.roundRectangle(position.getLeft(), position.getBottom(), position.getWidth() - 6, position.getHeight(), 8);
         cb.stroke();
     }
     
